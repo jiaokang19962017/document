@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>无标题文档</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+<!--<input type="button" id="btn" value="click"/>-->
+<div style=" width:800px; height:800px; position:relative; border:10px solid black; left:50px; top:50px">sfdfsdfsdf
+    <div style="width:400px; height:400px; background:#093; position:absolute; left:50px; top:50px; opacity:1;">
+        dfsdfsdfdsfsdf
+        <div id="son"
+             style="width:200px; height:200px; background:#F00; position:absolute; left:50px; top:50px; border:#999 5px dashed;">
+        </div>
+    </div>
+
+</div>>
+</body>>
+</html>
+<script type="text/javascript">
+    var oDiv = document.getElementById('son');
+    var oDrag = new Drag(oDiv);
+    oDrag.rangeRB = {x: 800, y: 800};
+    //拖拽运动
+    //使用前提：obj是绝对定位的DOM元素
+    //--------------------------------------------------------------------------------
+    function Drag(obj, hiddenX, hiddenY, rangeLT, rangeRB) {
+        this.dragObj = obj;
+        this.hiddenX = hiddenX;
+        this.hiddenY = hiddenY;
+        !rangeLT ? this.rangeLT = {x: 0, y: 0} : this.rangeLT = rangeLT;
+        !rangeRB ? this.rangeRB = {x: Infinity, y: Infinity} : this.rangeRB = rangeRB;
+        var _This = this;
+        this.dragObj.onmousedown = function (e) {
+            var oe = e || event;
+            var disX = _This.hiddenX ? null : oe.clientX - this.offsetLeft;
+            var disY = _This.hiddenY ? null : oe.clientY - this.offsetTop;
+            var _this = this;
+            document.onmousemove = function (e) {
+
+                var oe = e || event;
+                if (disX) {
+                    var disXX = oe.clientX - disX;
+                    if (disXX < _This.rangeLT.x) {
+                        disXX = _This.rangeLT.x;
+                    }
+                    if (disXX > _This.rangeRB.x - _this.offsetWidth) {
+                        disXX = _This.rangeRB.x - _this.offsetWidth;
+                    }
+                    _this.style['left'] = disXX + 'px';
+                }
+                if (disY) {
+                    var disYY = oe.clientY - disY;
+                    if (disYY<_This.rangeLT.y) {
+                        disYY = _This.rangeLT.y;
+                    }
+                    if (disYY > _This.rangeRB.y - _this.offsetHeight) {
+                        disYY = _This.rangeRB.y - _this.offsetHeight;
+                    }
+                    _this.style['top'] = disYY + 'px';
+                }
+                return false;
+            };
+
+            document.onmouseup = function () {
+                document.onmousemove = null;
+                this.onmousedown = null;
+            };
+            return false;
+        };
+    }
+</script>

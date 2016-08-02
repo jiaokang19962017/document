@@ -1,0 +1,15 @@
+1)react-native 是用来开发三端的:PC,android,IOS
+2)react-native 结构标签只有:View Text这两个
+3)react-native  环境搭建
+english:https://facebook.github.io/react-native/docs/getting-started.html
+中文:http://reactnative.cn/docs/0.24/getting-started.html
+4)react-native 核心思想
+    组件:Facebook用Object-c已经封好的组件 和 我们自己封装的组件
+    render:通过状态渲染出不同的效果
+5)react-native中常用组件有哪些:
+    Image 对图片的操作
+    StyleSheet操作样式
+    Text操作文本--类似于html中的span/p等
+    View--类似于html中的div
+6) react-native 获取数据用fetch--具体看PPT;
+7)用http://www.biaonimeia.com/ 配合react-native切图;里面的单位默认是pt,完全符合app的开发;

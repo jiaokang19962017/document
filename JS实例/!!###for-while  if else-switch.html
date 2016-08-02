@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        ul {
+            list-style: none;
+        }
+
+        li {
+            height: 30px;
+            border: 1px solid #08BECE;
+            margin: 10px;
+            text-align: center;
+            line-height: 30px;
+        }
+
+        .bcRed {
+            background-color: #0fb200;
+        }
+
+        .bcYell {
+            background-color: aquamarine;
+        }
+
+        .bcBlue {
+            background-color: red;
+        }
+
+        .a {
+            background-color: brown;
+        }
+    </style>
+</head>
+<body>
+<ul id="list">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+    <li>6</li>
+    <li>7</li>
+    <li>8</li>
+</ul>
+</body>
+</html>
+<script type="text/javascript">
+    var oList = document.getElementById("list");
+    var oLis = oList.getElementsByTagName("li");
+
+    for (var i = 0; i < oLis.length; i++) {
+        var n = i % 3;
+        if (n == 0) {
+            oLis[i].className = "bcRed";
+        } else if (n == 1) {
+            oLis[i].className = "bcYell";
+        } else {
+            oLis[i].className = "bcBlue";
+        }
+
+//    var i = 0;
+//    while (i < oLis.length) {
+//        var n = i % 3;
+//        switch (n) {
+//            case 0:
+//                oLis[i].className = "bcRed";
+//                break;
+//            case 1:
+//                oLis[i].className = "bcYell";
+//                break;
+//            default:
+//                oLis[i].className = "bcBlue";
+//        }
+//        i++;
+        oLis[i].x = oLis[i].className;
+        oLis[i].onmousemove = function () {
+            this.className = 'a'
+        };
+        oLis[i].onmouseout = function () {
+            this.className = this.x
+        }
+
+    }
+
+</script>

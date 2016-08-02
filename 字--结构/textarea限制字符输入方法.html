@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<textarea rows="10" cols="20" onKeyUp="check(this);"></textarea>
+<div class="count">您还可以输入20字</div>
+</body>
+</html>
+<script type="text/javascript">
+    function check(obj){
+
+        var Maxchar=20;
+        if(obj.value.length>Maxchar){ //如果超出
+
+            obj.value=obj.value.substring(0,Maxchar); //截取0到Maxchar的字符串
+        }
+        var curr=Maxchar-obj.value.length;
+        document.getElementsByClassName("count")[0].innerHTML="您还可以输入"+curr.toString()+"字"
+        //classname获取到的是个集合
+
+    }
+
+</script>

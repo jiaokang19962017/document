@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+
+<script type="text/javascript">
+    //1、有效数字的正则  正数、负数、零、小数
+    //  有可能没有小数 一但有的话需要.后面至少跟一个数字
+    //var reg = /^[+-]?(\d|([1-9]\d+))(\.\d+)?$/;
+
+    //2、手机号码(简单版)
+    //var reg = /^1\d{10}$/;
+
+    //3、年龄介于18-65
+    //->18/19
+    //->20-59
+    //->60-65
+    //var reg = /^((18|19)|([2-5]\d)|(6[0-5]))$/;
+
+    //4、用户昵称 可以是数字、字母、下划线，数字和下划线不能作为开头
+    //var reg = /^[a-zA-Z]+\w+$/;
+
+    //5、真实姓名 二到四位汉字
+    //var reg = /^[\u4e00-\u9fa5]{2,4}$/;
+
+    //6、密码 6-16(简单)
+    //var reg = /^(\w|!|@|\*|\+|-|\.|,|~|:){6,16}$/;
+
+    //7、邮箱
+    //var reg = /^\w+((-\w+)|(\.\w+))*@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
+
+    //8、身份证
+    //->13(省) 0828(市和县) 1990(年) 12(月) 04(日) 06 1(奇数男 偶数女) 7(数字或者X)
+    var reg = /^([1-9]\d)(\d{4})(\d{4})(\d{2})(\d{2})\d{2}(\d)(?:\d|X)$/;
+    console.dir(reg.exec("130828199012040617"));
+    console.log("130828199012040617".match(reg));
+
+
+    var str = "128003";//->"壹贰捌零零"
+    var ary = ["零", "壹", "贰", "叁", "肆", "伍", "陆", "柒", "捌", "玖"];
+    var reg = /\d/g;
+    str = str.replace(reg, function () {
+        //第一次执行：arguments[0] ->"1" 本次捕获的内容  return ary[1]
+        //第二次执行:arguments[0] ->"2" 本次捕获的内容 return ary[2]
+        return ary[arguments[0]];
+    });
+    console.log(str);//->"壹贰捌零零叁"
+
+           //----------------------------
+    var ary = ["冀彦瑞", "18", "china", "javascript"];
+    var str = "my name is {0}，my age is {1}，i com from {2}，i can do {3}~~";
+    //->"my name is 冀彦瑞，my age is 18，i com from china，i can do javascript~~";
+
+    var reg = /\{(\d)\}/g;
+    str = str.replace(reg, function () {
+        //第一次->["{0}", "0", 11, "my name is {0}，my age is {1}，i com from {2}，i can do {3}~~"]  ->return ary[0]
+        //第二次->["{1}", "1", 25, "my name is {0}，my age is {1}，i com from {2}，i can do {3}~~"] ->return ary[1]
+        return ary[arguments[1]];
+    });
+    console.log(str);
+</script>
+</body>
+</html>
+</script>

@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=100%,height=100%,initial-scale=1"/>
+
+    <title>Page from Hr </title>
+    <style>
+
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        img {
+            border: 0;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        #hr {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            overflow: hidden;
+            background: #fff;
+        }
+
+        .page {
+            width: 100%;
+            height: 100%;
+            background: #06f;
+            font-size: 60px;
+            color: #fff;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        #btn {
+            padding: 10px;
+            position: fixed;
+            top: 45%;
+            left: 10px;
+        }
+
+        #btn span {
+            display: block;
+            width: 10px;
+            height: 10px;
+            border: 1px solid #fff;
+            border-radius: 5px;
+            margin: 5px auto;
+        }
+
+        #btn .active {
+            background: #fff;
+        }
+
+
+    </style>
+
+
+    <!--<script type="text/javascript" src="http://sandbox.runjs.cn/uploads/rs/416/yeoefx0s/Module.js"></script>-->
+</head>
+<body>
+<div id="hr">
+    <div class="page">1</div>
+    <div class="page">2</div>
+    <div class="page">3</div>
+    <div class="page">4</div>
+    <div class="page">5</div>
+    <div class="page">6</div>
+    <div class="page">7</div>
+    <div class="page">8</div>
+</div>
+<div id='btn'>
+    <span class='active'></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+
+
+</div>
+
+</body>
+
+<script type='text/javascript' src='../../js/Module.js'></script>
+<script>
+    var oPages = document.querySelectorAll('.page');
+    var oBtn = document.getElementById('btn');
+    var oBtns = oBtn.children;
+    var oHr = document.getElementById('hr');
+    var iTarget = oPages[0].offsetHeight;
+    oHr.style.height = oPages.length * iTarget + 'px';
+    var iNow = 0;
+    var target = true;
+    for (var i = 0; i < oPages.length; i++) {
+        oPages[i].style.height = iTarget + 'px';
+    }
+    function ScrollPage(e) {
+        if (!target)return;
+        target = false;
+        var ev = e || event;
+        var code = e.type == 'DOMMouseScroll' ? e.detail : ev.wheelDelta;
+        switch (code) {
+            case 120:
+            case -3:
+                if (iNow > 0)iNow--;
+                break;
+            case 3:
+            case -120:
+                if (iNow < oPages.length - 1)iNow++;
+                break;
+        }
+        setBtn();
+        Module.Animation({
+            obj: oHr,
+            json: {top: -iTarget * iNow},
+            time: 300,
+            callback: function () {
+                target = true;
+
+
+            }
+        })
+
+    }
+
+    function setBtn() {
+        for (var i = 0; i < oBtns.length; i++) {
+            oBtns[i].className = '';
+        }
+        oBtns[iNow].className = 'active';
+    }
+
+    Module.bind(document, 'mousewheel', ScrollPage);
+    Module.bind(document, 'DOMMouseScroll', ScrollPage);
+
+</script>
+
+
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+        }
+        ul{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        a{
+            text-decoration: none;
+            color: inherit;
+        }
+        h2{
+            margin: 0;
+            font-size: 100%;
+        }
+        .box{
+            position: relative;
+            width: 500px;
+            margin: 0 auto;
+        }
+        .listWrapOut{
+            width: 480px;
+            overflow: hidden;
+        }
+        .listWrap{
+            overflow: auto;
+            height: 280px;
+            background-color: #ccc;
+            width: 500px;
+
+        }
+        .list{
+            height: 1088px;
+        }
+        .in{
+            height: 200px;
+            font-size: 50px;
+            text-align: center;
+            border-bottom:2px solid black;
+        }
+        .in-tit{
+            height: 50px;
+            line-height: 50px;
+            border-bottom: 1px solid white;
+        }
+        .in-txt{
+            text-align: left;
+            font-size: 20px;
+            line-height: 30px;
+            height: 30px;
+            text-indent: 10px;
+        }
+        .conList{
+            position: absolute;
+            top: 20px;
+            left: 510px;
+            width: 52px;
+        }
+        .con{
+            display: inline-block;
+            vertical-align: middle;
+            width: 50px;
+            height: 50px;
+            background-color: pink;
+            text-align: center;
+            line-height: 50px;
+            border-radius: 50%;
+        }
+    </style>
+<body>
+<div class="box" id="box">
+    <div class="listWrapOut">
+        <div class="listWrap">
+            <ul class="list">
+                <li class="in" id="a">
+                    <h2 class="in-tit">A</h2>
+                    <div class="in-txt">A.1</div>
+                    <div class="in-txt">A.2</div>
+                    <div class="in-txt">A.3</div>
+                    <div class="in-txt">A.4</div>
+                    <div class="in-txt">A.5</div>
+                </li>
+                <li class="in" id="b">
+                    <h2 class="in-tit">B</h2>
+                    <div class="in-txt">B.1</div>
+                    <div class="in-txt">B.2</div>
+                    <div class="in-txt">B.3</div>
+                    <div class="in-txt">B.4</div>
+                    <div class="in-txt">B.5</div>
+                </li>
+                <li class="in" id="c">
+                    <h2 class="in-tit">C</h2>
+                    <div class="in-txt">C.1</div>
+                    <div class="in-txt">C.2</div>
+                    <div class="in-txt">C.3</div>
+                    <div class="in-txt">C.4</div>
+                    <div class="in-txt">C.5</div>
+                </li>
+                <li class="in" id="d">
+                    <h2 class="in-tit">D</h2>
+                    <div class="in-txt">D.1</div>
+                    <div class="in-txt">D.2</div>
+                    <div class="in-txt">D.3</div>
+                    <div class="in-txt">D.4</div>
+                    <div class="in-txt">D.5</div>
+                </li>
+                <li class="in" id="e">
+                    <h2 class="in-tit">E</h2>
+                    <div class="in-txt">E.1</div>
+                    <div class="in-txt">E.2</div>
+                    <div class="in-txt">E.3</div>
+                    <div class="in-txt">E.4</div>
+                    <div class="in-txt">E.5</div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <nav class="conList">
+        <a href="#a" class="con">A</a>
+        <a href="#b" class="con">B</a>
+        <a href="#c" class="con">C</a>
+        <a href="#d" class="con">D</a>
+        <a href="#e" class="con">E</a>
+    </nav>
+</div>
+<script>
+
+</script>
+</body>
+</html>

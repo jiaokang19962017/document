@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>链式操作 QQ分类</title>
+    <style>
+        body, h1, h2, h3, h4, h5, p, dl, dd, ul, ol, form, input, textarea, th, td, select {
+            margin: 0;
+            padding: 0;
+        }
+
+        em {
+            font-style: normal;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        img {
+            border: none;
+            vertical-align: top;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        input, textarea {
+            outline: none;
+        }
+
+        textarea {
+            resize: none;
+            overflow: auto;
+        }
+
+        body {
+            font-size: 12px;
+            font-family: "微软雅黑";
+        }
+
+        .box {
+            width: 500px;
+            margin: 100px auto;
+        }
+
+        .box a {
+            color: #000
+        }
+
+        .menu {
+            width: 100px;
+            border: 1px solid #999;
+        }
+
+        .box .level1 > a {
+            display: block;
+            width: 100px;
+            font-size: 14px;
+            border-bottom: 1px solid #999;
+            text-align: center;
+            line-height: 26px;
+            background: #c1c1c1;
+        }
+
+        .box .level1Last > a {
+            border-bottom: none
+        }
+
+        .level2 {
+            text-align: center;
+            font-size: 12px;
+            line-height: 24px;
+        }
+
+        .level2 li a {
+            display: block;
+        }
+
+        .level2 li:hover {
+            background: #E4E4E4
+        }
+
+        .active {
+        }
+    </style>
+    <script src="../../js/jquery-1.9.1.js"></script>
+    <script>
+        $(function () {
+
+            $('.level2').hide();
+            $('.level1 > a').click(function () {
+
+                $(this).addClass('active').next().toggle()
+                        .parent().siblings().children('a').removeClass('active')
+                        .next().hide();
+
+            })
+        })
+
+    </script>
+</head>
+<body>
+<div class="box">
+    <ul class="menu">
+        <li class="level1">
+            <a href="#">我的好友</a>
+            <ul class="level2">
+                <li><a href="#">江南</a></li>
+                <li><a href="#">烟雨</a></li>
+                <li><a href="#">杏花</a></li>
+                <li><a href="#">细雨</a></li>
+            </ul>
+        </li>
+
+        <li class="level1">
+            <a href="#">我的家人</a>
+            <ul class="level2">
+                <li><a href="#">塞北</a></li>
+                <li><a href="#">西风</a></li>
+                <li><a href="#">烈马</a></li>
+                <li><a href="#">黄沙</a></li>
+            </ul>
+        </li>
+
+        <li class="level1 level1Last">
+            <a href="#">黑名单</a>
+            <ul class="level2">
+                <li><a href="#">AA</a></li>
+                <li><a href="#">BB</a></li>
+                <li><a href="#">CC</a></li>
+                <li><a href="#">DD</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+</body>
+</html>
+<a onclick="change();return false" class="teachers_left"></a>
+<a onclick="change();return false" class="teachers_right"></a>

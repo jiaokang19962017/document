@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+    <meta name="renderer" content="webkit"/>
+    <meta name="keywords" content="#"/>
+    <meta name="Description" content="#"/>
+    <script src="http://fygift.com/script/jquery-1.8.3.min.js"></script>
+    <!--[if lt IE 9]>
+    <script src="../script/html5.js"></script><![endif]-->
+    <title></title>
+    <style type="text/css">
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .pl80 {
+            padding-left: 80px !important;
+        }
+
+        .user-center .lmf-box {
+            padding: 0 0 40px 0;
+        }
+
+        .user-center .lmf-box .title {
+            text-indent: 10px;
+            height: 38px;
+            font: normal 14px/38px "microsoft yahei";
+            color: #333;
+            background: #fafafa;
+            border-bottom: 1px solid #e0e0e0;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .user-center .lmf-box .table-list {
+            width: 94%;
+            font: normal 12px/22px "microsoft yahei";
+            color: #666;
+            margin-top: 20px;
+        }
+
+        .user-center .lmf-box .table-list .txtbold {
+            font: normal 18px/22px "microsoft yahei";
+            color: #333;
+        }
+
+        .user-center .lmf-box .table-list td {
+            padding: 10px 0;
+        }
+
+        .user-center .lmf-box .table-list select.common {
+            width: 200px;
+            height: 30px;
+            border: 1px solid #cbcbcb;
+        }
+
+        .user-center .lmf-box .table-list input.common {
+            width: 200px;
+            height: 28px;
+            border: 1px solid #cbcbcb;
+        }
+
+        .user-center .lmf-box .table-list textarea.common {
+            max-width: 628px;
+            resize: none;
+            width: 628px;
+            height: 80px;
+            border: 1px solid #cbcbcb;
+            text-indent: 10px;
+        }
+
+        .user-center .lmf-box .table-list .textarea-pop {
+            width: 650px;
+        }
+    </style>
+</head>
+<body>
+<div class="w1200">
+    <div class="w1200 user-center clearfix">
+        <div class="cont">
+            <div class="lmf-box">
+                <table class="table-list">
+                    <colgroup>
+                        <col style="width: 100px;"/>
+                        <col/>
+                    </colgroup>
+                    <tr>
+                        <td class="tr">退货说明：</td>
+                        <td>
+                            <textarea class="common js-change-length" placeholder="请输入退货原因"></textarea>
+
+                            <p class="tr textarea-pop orange js-show-length">还可以输入<i class="js-num">200</i>个字</p>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    change_length_fun = function (obj, num) {
+        $(obj).on('keyup', function () {
+            var len = $(obj).val();
+            console.log(num - len.length)
+            $(obj).siblings(".js-show-length").find(".js-num").text(num - len.length);
+            if (len.length >= num) {
+                $(obj).siblings(".js-show-length").find(".js-num").text(0);
+                $(obj).val(len.substring(0, num));
+            }
+        });
+        /* 界面结构布局要求
+         <textarea class="common js-change-length" placeholder="请输入退货原因"></textarea>
+         <p class="tr textarea-pop orange js-show-length">还可以输入<i class="js-num">200</i>个字</p>
+         */
+    }
+    change_length_fun(".js-change-length", 200)
+</script>
+</body>
+</html>

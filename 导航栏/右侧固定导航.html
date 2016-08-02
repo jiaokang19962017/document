@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>表单</title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta content="telephone=no" name="format-detection" />
+
+    <!--   <link href="Style/bootstrap.css" rel="stylesheet" />  -->
+    <style>
+        .mui-mbar a
+        {
+            /*font-size:12px;*/
+            color: #0a6bb7;
+            text-decoration: none;
+        }
+
+        .mui-mbar a:visited
+        {
+            color: #0a6bb7;
+            text-decoration: none;
+        }
+        .mui-mbar a:hover
+        {
+            /*font-size:12px;*/
+            color: red;
+            text-decoration: none;
+        }
+
+        .mui-mbar ul, li
+        {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            padding-left:5px;
+
+        }
+        .mui-mbar{width:32px; height:368px; position: absolute;z-index: 100000020;top:100px;right: 0;background-color: #1073C3;color:#fff;-webkit-transform: translate3d(0,0,0);font-family: "Helvetica Neue", Helvetica, Microsoft Yahei, Hiragino Sans GB, WenQuanYi Micro Hei, sans-serif;
+            font-size: 14px; }
+        .mui-msg{text-align:center;padding:10px; cursor: pointer; position: relative; line-height: 18px; font-weight: bold; }
+
+        .text-left{text-align:left;}
+        /*  .mui{position:absolute; left:-220px; top:0; width:200px; height: auto; background:#FAFAFA;color:#999;display:none;padding:10px; cursor: default;
+          border-top-left-radius:5px;
+          border-bottom-left-radius: 5px;
+          -moz-box-shadow:0 1px 3px rgba(0, 0, 0, 0.16);
+          -webkit-box-shadow:0 1px 3px rgba(0, 0, 0, 0.16);
+          box-shadow:0 1px 3px rgba(0, 0, 0, 0.16)}*/
+        .mui{position:absolute; left:-239px;*left:-219px; top:0; width:218px; height: auto; background:#fff;color:#0a6bb7;display:none; cursor: default;
+            border:1px solid #1073C3;
+            border-top-left-radius:5px;
+            border-bottom-left-radius: 5px;
+            padding:10px;
+            *padding:0;
+            z-index: -100;
+            /*  -moz-box-shadow:0 1px 3px rgba(0, 0, 0, 0.16);
+              -webkit-box-shadow:0 1px 3px rgba(0, 0, 0, 0.16);
+              box-shadow:0 1px 3px rgba(0, 0, 0, 0.16)*/}
+        .mui-title{
+            font-size: 14px;
+            text-align:left;
+            *padding:10px;
+            line-height: 30px;font-weight: bold;
+            border-bottom: solid 1px #529CCF;
+            margin-bottom: 5px;
+            margin-top: -5px;
+        }
+        .mui-content{
+            list-style: none;
+            *padding:10px;
+            font-weight: normal;
+            line-height: 28px;
+        }
+        .mui-content li
+        {
+            width:220px;
+            *width:200px;
+            word-break:keep-all;
+            white-space:nowrap;
+            overflow:hidden;
+            text-overflow:ellipsis;
+            line-height:22px;
+            height:22px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .muiFirst
+        {
+            background-color:#FFD200;
+        }
+        .muiActive
+        {
+            background-color:#37C300;
+        }
+    </style>
+</head>
+<body>
+<div id="mui" class="mui-mbar" data-mui="mui" >
+    <div id="first" class="muiFirst mui-msg " >
+        <div>
+            在线客服
+        </div>
+        <div class="mui">
+            <div class="mui-title">◆ 在线客服</div>
+            <ul class="mui-content text-left">
+                <li><a href="javascript:;">内容列表</a></li>
+                <li><a href="javascript:;">内容列表</a></li>
+                <li><a href="javascript:;">内容列表</a></li>
+                <li style=" font-size:11px; text-align:right;"><a href="javascript:;">更多&gt;&gt;</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="mui-msg">
+        <div>
+            标准规范
+        </div>
+
+        <div class="mui">
+            <div class="mui-title">◆ 内容标题</div>
+            <ul class="mui-content text-left">
+                <li><a href="javascript:;">内容列表</a></li>
+                <li><a href="javascript:;">内容列表</a></li>
+                <li><a href="javascript:;">内容列表</a></li>
+                <li style=" font-size:11px; text-align:right;"><a href="javascript:;">更多&gt;&gt;</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="mui-msg">
+        <div>
+            知识案例
+        </div>
+
+        <div class="mui">
+            <div class="mui-title">◆ 内容标题</div>
+            <ul class="mui-content text-left">
+                <li><a href="javascript:;">内容列表</a></li>
+                <li><a href="javascript:;">内容列表</a></li>
+                <li><a href="javascript:;">内容列表</a></li>
+                <li style=" font-size:11px; text-align:right;"><a href="javascript:;">更多&gt;&gt;</a></li>
+            </ul>
+            <div class="mui-title">◆ 内容标题</div>
+            <ul class="mui-content text-left">
+                <li><a href="javascript:;">内容列表</a></li>
+                <li><a href="javascript:;">内容列表</a></li>
+                <li><a href="javascript:;">内容列表</a></li>
+                <li style=" font-size:11px; text-align:right;"><a href="javascript:;">更多&gt;&gt;</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="mui-msg"  >
+        <div>
+            法律法规
+        </div>
+
+        <div class="mui">
+            <div class="mui-title">◆ 内容标题</div>
+            <ul class="mui-content text-left">
+                <li><a href="javascript:;">内容列表</a></li>
+                <li><a href="javascript:;">内容列表</a></li>
+                <li><a href="javascript:;">内容列表</a></li>
+                <li  style=" font-size:11px; text-align:right;  "><a href="javascript:;">更多&gt;&gt;</a></li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+<script>
+    var RightSideNavigator = function (element) {
+        this.mui=document.getElementById(element);
+        this.initialize();
+    };
+    RightSideNavigator.prototype={
+        constructor: RightSideNavigator ,
+        initialize:function(){
+            this.initHandlers();
+        },
+        initHandlers:function(){
+            var element=this.mui,This=this;
+            for (var i = 0; i < element.children.length; i++) {
+                var sub = element.children[i];
+                if(sub.tagName=="DIV"){
+                    sub.onclick=function(){
+                        This.categoryClick(this);
+                    };
+                    sub.onmouseover=function  (ev) {
+                        var oEvent=ev||event;
+                        var fromObj= oEvent.fromElement||oEvent.relatedTarget;
+                        if( !This.isChild(this,fromObj) )return;
+                        This.activateCategory(this);
+                    };
+                    sub.onmouseout=function(ev){
+                        var oEvent=ev||event;
+                        var toObj=oEvent.toElement||oEvent.relatedTarget;
+                        if(  !This.isChild(this,toObj) )return;
+                        This.deActivateCategory(this);
+                    }
+                }
+            };
+
+        },
+        categoryClick: function (aCtive) {
+            var sub = this.mui.children;
+            for (var i = 0; i < sub.length; i++) {
+                sub[i].children[1].style.display="none";
+            };
+            if (aCtive.children[1].className.indexOf("mui") < 0){
+                return
+            }else{
+                aCtive.children[1].style.display="block";
+            }
+        },
+        activateCategory: function(aCtive){
+            aCtive.className="muiActive mui-msg";
+        },
+        deActivateCategory: function(aCtive){
+            aCtive.className="mui-msg";
+            if(aCtive.className.indexOf("muiFirst ") < 0 && aCtive.className.indexOf("muiActive")>=0 ){
+                aCtive.className="mui-msg";
+            } else if(aCtive.id=="first"){
+                aCtive.className="muiFirst mui-msg";
+            }
+            if(aCtive.children[1].style.display=="block"){
+                aCtive.children[1].style.display="none";
+            }
+        },
+        isChild:function (oParent,obj)
+        {
+            while(obj)
+            {
+                if(obj==oParent)
+                {
+                    return false;
+                }
+
+                obj=obj.parentNode;
+            };
+            return true;
+        }
+    }
+
+    window.onload=function(){
+        new RightSideNavigator("mui");
+    }
+</script>
+</body>
+</html>

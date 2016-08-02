@@ -1,0 +1,229 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="gb2312">
+    <title>jQuery人性化表单标签提示</title>
+    <script type="text/javascript" src="../js/jquery-1.9.1.js"></script>
+    <script type="text/javascript">
+        !function ($) {
+            var defaults = {
+                position: "top",
+                animationTime: 500,
+                easing: "ease-in-out",
+                offset: 20,
+                hidePlaceholderOnFocus: true
+            };
+            $.fn.animateLabel = function (settings, btn) {
+                var position = btn.data("position") || settings.position,
+                        posx = 0,
+                        posy = 0;
+                $(this).css({
+                    "left": "auto",
+                    "right": "auto",
+                    "position": "absolute",
+                    "-webkit-transition": "all " + settings.animationTime + "ms " + settings.easing,
+                    "-moz-transition": "all " + settings.animationTime + "ms " + settings.easing,
+                    "-ms-transition": "all " + settings.animationTime + "ms " + settings.easing,
+                    "transition": "all " + settings.animationTime + "ms " + settings.easing
+                });
+                switch (position) {
+                    case 'top':
+                        posx = 0;
+                        posy = ($(this).height() + settings.offset) * -1;
+                        $(this).css({
+                            "top": "0",
+                            "opacity": "1",
+                            "-webkit-transform": "translate3d(" + posx + ", " + posy + "px, 0)",
+                            "-moz-transform": "translate3d(" + posx + ", " + posy + "px, 0)",
+                            "-ms-transform": "translate3d(" + posx + ", " + posy + "px, 0)",
+                            "transform": "translate3d(" + posx + ", " + posy + "px, 0)"
+                        });
+                        break;
+                    case 'bottom':
+                        posx = 0;
+                        posy = ($(this).height() + settings.offset);
+                        $(this).css({
+                            "bottom": "0",
+                            "opacity": "1",
+                            "-webkit-transform": "translate3d(" + posx + ", " + posy + "px, 0)",
+                            "-moz-transform": "translate3d(" + posx + ", " + posy + "px, 0)",
+                            "-ms-transform": "translate3d(" + posx + ", " + posy + "px, 0)",
+                            "transform": "translate3d(" + posx + ", " + posy + "px, 0)"
+                        });
+                        break;
+                    case 'left':
+                        posx = ($(this).width() + settings.offset) * -1;
+                        posy = 0;
+                        $(this).css({
+                            "left": 0,
+                            "top": 0,
+                            "opacity": "1",
+                            "-webkit-transform": "translate3d(" + posx + "px, " + posy + "px, 0)",
+                            "-moz-transform": "translate3d(" + posx + "px, " + posy + "px, 0)",
+                            "-ms-transform": "translate3d(" + posx + "px, " + posy + "px, 0)",
+                            "transform": "translate3d(" + posx + "px, " + posy + "px, 0)"
+                        });
+                        break;
+                    case 'right':
+                        posx = $(this).width() + settings.offset;
+                        posy = 0;
+                        $(this).css({
+                            "right": 0,
+                            "top": 0,
+                            "opacity": "1",
+                            "-webkit-transform": "translate3d(" + posx + "px, " + posy + "px, 0)",
+                            "-moz-transform": "translate3d(" + posx + "px, " + posy + "px, 0)",
+                            "-ms-transform": "translate3d(" + posx + "px, " + posy + "px, 0)",
+                            "transform": "translate3d(" + posx + "px, " + posy + "px, 0)"
+                        });
+                        break;
+                }
+            }
+            $.fn.removeAnimate = function (settings, btn) {
+                var position = btn.data("position") || settings.position,
+                        posx = 0,
+                        posy = 0;
+                $(this).css({
+                    "top": "0",
+                    "opacity": "0",
+                    "-webkit-transform": "translate3d(" + posx + ", " + posy + "px, 0)",
+                    "-moz-transform": "translate3d(" + posx + ", " + posy + "px, 0)",
+                    "-ms-transform": "translate3d(" + posx + ", " + posy + "px, 0)",
+                    "transform": "translate3d(" + posx + ", " + posy + "px, 0)"
+                });
+            }
+            $.fn.label_better = function (options) {
+                var settings = $.extend({}, defaults, options),
+                        el = $(this),
+                        triggerIn = "focus",
+                        triggerOut = "blur";
+                if (settings.easing == "bounce") settings.easing = "cubic-bezier(0.175, 0.885, 0.420, 1.310)"
+                el.each(function (index, value) {
+                    var btn = $(this),
+                            position = btn.data("position") || settings.position;
+                    btn.wrapAll("<div class='lb_wrap' style='position:relative; display: inline;'></div>")
+                    if (btn.val().length > 0) {
+                        var text = btn.data("new-placeholder") || btn.attr("placeholder");
+                        $("<div class='lb_label " + position + "'>" + text + "</div>").css("opacity", "0").insertAfter(btn).animateLabel(settings, btn);
+                    }
+                    btn.bind(triggerIn, function () {
+                        if (btn.val().length < 1) {
+                            var text = btn.data("new-placeholder") || btn.attr("placeholder"),
+                                    position = btn.data("position") || settings.position;
+                            $("<div class='lb_label " + position + "'>" + text + "</div>").css("opacity", "0").insertAfter(btn).animateLabel(settings, btn);
+                        }
+                        if (settings.hidePlaceholderOnFocus == true) {
+                            btn.data("default-placeholder", btn.attr("placeholder"))
+                            btn.attr("placeholder", "")
+                        }
+                        btn.parent().find(".lb_label").addClass("active");
+                    }).bind(triggerOut, function () {
+                        if (btn.val().length < 1) {
+                            btn.parent().find(".lb_label").bind("transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd", function () {
+                                $(this).remove();
+                            }).removeAnimate(settings, btn)
+                        }
+                        if (settings.hidePlaceholderOnFocus == true) {
+                            btn.attr("placeholder", btn.data("default-placeholder"))
+                            btn.data("default-placeholder", "")
+                        }
+                        btn.parent().find(".lb_label").removeClass("active");
+                    });
+                });
+            }
+        }(window.jQuery);
+    </script>
+    <style>
+
+        body{
+            width: 100%;
+            height: 100%;
+            background: #646462;
+        }
+        .wrapper{
+            width: 100%;
+            height: 500px;
+            margin: 300px auto;
+        }
+        .page-container{
+            width: 1100px;
+            margin: 0 auto;
+        }
+        .bl_form {
+
+            margin: 150px 0;
+        }
+
+        .bl_form input {
+            padding-top: 15px;
+
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 25px;
+            font-size: 16px;
+            outline: none;
+        }
+           /*lb_wrap以下的css代码必须加*/
+        .lb_wrap .lb_label.top, .lb_wrap .lb_label.bottom {
+            left: 35px !important;
+        }
+        /*
+        当然，也可以通过以下方式来让ie6识别：
+
+            .testClass{
+            color:blue !important;
+            }
+            .testClass{
+            color:red;
+            }
+
+            通过以上方式也是可以让ie6显示成蓝色的。
+
+            以上实例说明使用!important的css定义是拥有最高的优先级的。只是在ie6下出了一点小的bug，注意书写方式一般可以轻松避开的。
+        */
+
+        .lb_wrap .lb_label.left {
+            left: 0;
+        }
+
+        .lb_label {
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .lb_label.active {
+            color:#0099FF;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            $(".label_better").label_better({
+                easing: "bounce"
+            });
+        });
+    </script>
+</head>
+<body>
+<div class="wrapper">
+    <div class="main">
+
+        <div class="page-container">
+            <form class="bl_form">
+                <input type="text" class="label_better" data-new-placeholder="姓名" placeholder="请输入姓名">
+                <input type="email" class="label_better" data-new-placeholder="邮箱"
+                       placeholder="请输入邮箱">
+                <input type="password" value="11" class="label_better" data-new-placeholder="密码"
+                       placeholder="密码">
+                <input type="password" value="11" class="label_better" data-new-placeholder="确认密码"
+                       placeholder="Confirm Password">
+            </form>
+        </div>
+    </div>
+
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html><!--左右滑动-->
+<html>
+<head>
+    <title></title>
+    <style type="text/css">
+        .img {
+            width: 310px;
+            height: 100px;
+            margin: 20px;
+            float: left
+        }
+
+        .img1 {
+            overflow: hidden
+        }
+
+        .img1 div {
+            width: 620px;
+            float: left;
+            transition: 0.5s
+        }
+
+        .img1 div img {
+            float: left
+        }
+
+        .img1:hover div {
+            margin-left: -310px
+        }
+
+        .img2 {
+            overflow: hidden
+        }
+
+        .img2 img {
+            transition: 0.5s
+        }
+
+        .img2:hover img:nth-child(1) {
+            margin-top: -100px
+        }
+
+        .img3 {
+            position: relative
+        }
+
+        .img3 img {
+            position: absolute;
+            left: 0;
+            top: 0;
+            transition: 1s
+        }
+
+        .img3 img:nth-child(2) {
+            opacity: 0
+        }
+
+        .img3:hover img:nth-child(1) {
+            opacity: 0
+        }
+
+        .img3:hover img:nth-child(2) {
+            opacity: 1
+        }
+
+        .img4 {
+            overflow: hidden
+        }
+
+        .img4 img {
+            transition: 0.5s
+        }
+
+        .img4:hover img:nth-child(1) {
+            margin-top: -100px;
+            opacity: 0
+        }
+    </style>
+
+</head>
+<body>
+<div class="img img1">
+    <div>
+        <img src="http://sandbox.runjs.cn/uploads/rs/155/azqeh6bj/1.png">
+        <img src="http://sandbox.runjs.cn/uploads/rs/155/azqeh6bj/2.png">
+    </div>
+</div>
+
+<!--上下滑动-->
+<div class="img img2">
+    <img src="http://sandbox.runjs.cn/uploads/rs/155/azqeh6bj/1.png">
+    <img src="http://sandbox.runjs.cn/uploads/rs/155/azqeh6bj/2.png">
+</div>
+
+<!--淡入淡出-->
+<div class="img img3">
+    <img src="http://sandbox.runjs.cn/uploads/rs/155/azqeh6bj/1.png">
+    <img src="http://sandbox.runjs.cn/uploads/rs/155/azqeh6bj/2.png">
+</div>
+
+<!--上下滑动 + 淡入淡出-->
+<div class="img img4">
+    <img src="http://sandbox.runjs.cn/uploads/rs/155/azqeh6bj/1.png">
+    <img src="http://sandbox.runjs.cn/uploads/rs/155/azqeh6bj/2.png">
+</div>
+
+</body>
+</html>
+
+
+
+
+

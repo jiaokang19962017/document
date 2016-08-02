@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #oTab {
+            border: 1px solid #828282;
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            border-radius: 10px;
+            /*box-shadow: 0 0 5px rgba(0, 0, 0, 6);*/
+            -webkit-box-shadow: 0 0 5px 5px rgba(0, 0, 0, 6);
+            cursor: pointer;
+
+        }
+
+        #oTab table {
+            /*border: 2px solid #EED2EE;*/
+            width: 80%;
+            border-collapse: collapse;
+            margin: 300px auto;
+            font-weight: bolder;
+
+
+        }
+
+        #oTab thead {
+            background: #D15FEE;
+            border-radius: 10px;
+            margin: 10px 0;
+
+        }
+
+        #oTab thead th {
+            border-radius: 20px;
+            margin: 10px 0;
+            height: 80px;
+
+        }
+
+        #oTab table tr td {
+            height: 60px;
+            line-height: 60px;
+            /*border: 1px solid yellow;*/
+            text-align: center;
+            border-radius: 20px;
+        }
+
+        #oTab table thead {
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+        }
+
+        #oTab table tbody tr:nth-child(even) {
+            background: pink;
+        }
+
+        #oTab table tbody tr:nth-child(odd) {
+            background: #FFE4C4;
+        }
+    </style>
+</head>
+<body>
+<div id="oTab">
+    <table>
+        <thead>
+        <tr>
+            <th>姓名</th>
+            <th>作业</th>
+            <th>成绩</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>moto</td>
+            <td>x</td>
+            <td>4</td>
+        </tr>
+        <tr>
+            <td>nokin</td>
+            <td>y</td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td>sumsang</td>
+            <td>n</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>HTC</td>
+            <td>n</td>
+            <td>3</td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+</body>
+</html>
+<script type="text/javascript">
+    function listToArray(likeArray){
+        try{
+            return [].slice.call(likeArray,0);
+        }catch(e){
+            var ary = [];
+            for(var i = 0;i<likeArray.length;i++){
+                ary[ary.length] = likeArray[i];
+            }
+            return ary;
+        }
+    }
+    var oTab = document.getElementById("oTab");
+    var oThead = oTab.getElementsByTagName("thead")[0];
+    var oTbody = oTab.getElementsByTagName("tbody")[0];
+    var rows = oTbody.rows;//获得的是行的集合
+    function tableSort(n){
+        //把元素集合转换成数组
+        var ary  = listToArray(rows);
+        //console.log(ary);
+        ary.sort(function(a,b){
+            //a表示前一行(tr) b表示后一行(tr)
+            //a.cells表示一行里的列的集合
+            var prev = a.cells[n].innerHTML;
+            var next = b.cells[n].innerHTML;
+            if(isNaN(prev)){//判断下是否是有效数字
+                return prev.localeCompare(next);
+            }
+            return prev - next;
+        });
+        //console.log(ary);
+        //把排序完后的tr添加到oTbody中
+        for(var i = 0 ;i<ary.length;i++){
+            oTbody.appendChild(ary[i]);//如果页面上已经存在了,就不会再添加,而是移动
+        }
+    }
+
+    var hRows = oThead.rows[0];//获得tHead标签下的第一行
+    var cells = hRows.cells;
+    for(var i = 0;i<cells.length;i++){
+        cells[i].index = i;
+        cells[i].onclick = function(){
+            tableSort(this.index);//把点击的th的索引传给tableSort
+        }
+    }
+</script>

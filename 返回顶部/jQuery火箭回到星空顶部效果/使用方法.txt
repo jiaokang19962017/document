@@ -1,0 +1,21 @@
+jQuery火箭回到星空顶部效果，顶部为固定导航效果，可根据需求使用，兼容主流浏览器，懒人图库推荐下载！
+
+使用方法：
+1、在head区域引入样式表文件lrtk.css
+2、在head区域引入jquery.min.js
+3、在你的网页中加入<!-- 代码 开始 --><!-- 代码 结束 -->注释区域代码即可
+4、JS配置见注释：
+<script type="text/javascript">
+$(function(){	
+	$(window).scroll(function() {		
+		if($(window).scrollTop() >= 100){ //向下滚动像素大于这个值时，即出现小火箭~
+			$('.actGotop').fadeIn(300); //火箭淡入的时间，越小出现的越快~
+		}else{    
+			$('.actGotop').fadeOut(300); //火箭淡出的时间，越小消失的越快~
+		}  
+	});
+	$('.actGotop').click(function(){$('html,body').animate({scrollTop: '0px'}, 800);}); //火箭动画停留时间，越小消失的越快~
+});
+</script>
+
+*更多代码请访问：懒人图库 www.lanrentuku.com/js/

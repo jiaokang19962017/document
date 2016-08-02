@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../jQuer验证插件/css/validationEngine.jquery.css"/>
+    <style type="text/css">
+        input{
+            display:block;
+            margin: 10px;
+
+        }
+        .ba{
+            border: 1px solid #009933;
+        }
+        .bb{
+            border: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+<div>
+   <form id="a">
+
+        名：
+       <input type="text" name="firstname" class="validate[required],custom[chinese]">
+       <input type="text" name="data" class="validate[required, custom[date]]">
+       <input type="text" name="sss" class="validate[required,custom[email]]">
+       <br />
+       姓：
+       <input type="text" name="lastname" class="validate[required]">
+       xingm
+       <input type="text" name="user" class="validate[required]">
+       <br />
+       密码：
+       <input type="password" name="password" class="validate[required,minSize[6],custom[number]]">
+       <br/>
+       手机:
+       <input type="text" class="validate[required],custom[phone]"/>
+
+        email:
+       <!--<input type="email" name="email" id="email" data-validation-engine="validate[required,custom[email]]"-->
+              <!--data-errormessage-value-missing="E-mail 不能为空"-->
+              <!--data-errormessage-custom-error="E-mail 格式应为：someone@nowhere.com"-->
+              <!--data-errormessage="通用的错误提示信息">-->
+
+       <textarea class="validate[minSize[6]]">
+
+        </textarea>
+       </form>
+</div>
+</body>
+</html>
+<script type="text/javascript" src="./js/jquery.js"></script>
+<script type="text/javascript" src="../jQuer验证插件/js/jquery.validationEngine-zh_CN.js"></script>
+<script type="text/javascript" src="../jQuer验证插件/js/jquery.validationEngine.js"></script>
+<script type="text/javascript">
+    $('#a').validationEngine().css({border:'2px solid #000'});
+    $('#a').validationEngine();
+
+    // 自定义参数调用
+    $('#a').validationEngine('attach', {
+        promptPosition: 'bottomLeft:170,-10',
+        scroll: false,
+        addPromptClass:'formError-text',
+        autoPositionUpdate:true,
+        autoHidePrompt:true,
+        autoHideDelay:9000,
+        fadeDuration:.2,
+        maxErrorsPerField:1,
+        addSuccessCssClassToField:'ba',
+        addFailureCssClassToField:'bb'
+
+
+    });
+</script>

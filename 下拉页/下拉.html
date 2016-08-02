@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+            font-family: "\5FAE\8F6F\96C5\9ED1", Helvetica, sans-serif;
+        }
+        a {
+            text-decoration: none;
+            /*去除A标签下划线*/
+            color: #2f3238;
+        }
+        ul li{
+            list-style: none;
+        }
+
+        .box{
+            width: 100px;
+            margin: 100px auto;
+            text-decoration: none;
+        }
+        .box .menu{
+            width: 100px;
+            border: 1px solid #2f3238;
+        }
+        .level1>a{
+            text-align: center;
+            height: 30px;
+            line-height: 30px;
+            border: 1px solid #2f3238;
+            display: block;
+            background: #269abc;
+        }
+        .level2 a{
+            text-align: center;
+            display: block;
+            height: 20px;
+            line-height: 20px;
+            padding: 10px 0;
+            /*display: none;*/
+        }
+        .level2 li:hover {
+            background: #E4E4E4
+        }
+        .active {
+        }
+    </style>
+
+</head>
+<body>
+<div class="box">
+    <ul class="menu">
+        <li class="level1">
+            <a href="javascript:;">dakai</a>
+            <ul class="level2">
+                <li><a href="#">12</a></li>
+                <li><a href="#">23</a></li>
+                <li><a href="#">34</a></li>
+                <li><a href="#">45</a></li>
+            </ul>
+        </li>
+
+        <li class="level1">
+            <a href="javascript:;">dakai</a>
+            <ul class="level2">
+                <li><a href="#">12</a></li>
+                <li><a href="#">23</a></li>
+                <li><a href="#">34</a></li>
+                <li><a href="#">45</a></li>
+            </ul>
+        </li>
+
+        <li class="level1">
+            <a href="javascript:;">dakai</a>
+            <ul class="level2">
+                <li><a href="#">12</a></li>
+                <li><a href="#">23</a></li>
+                <li><a href="#">34</a></li>
+                <li><a href="#">45</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+</body>
+</html>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript">
+
+    $(function () {
+        $('.level2').hide();
+        $('.level1 > a').click(function(){
+            $(this).next().toggle(700).parent().siblings().children("ul").hide(700);
+        })
+    })
+
+
+
+
+
+
+</script>

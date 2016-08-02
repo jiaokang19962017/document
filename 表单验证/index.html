@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: "Microsoft YaHei", "Helvetica", "sans-serif";
+        }
+
+        #box {
+            margin: 0 auto;
+        }
+
+        #box input {
+            display: block;
+            margin: 10px;
+            width: 300px;
+            height: 50px;
+        }
+        span{
+            position: absolute;
+            left: 400px;
+            top: 10px;
+            color: red;
+            height: 20px;
+            line-height: 20px;
+            display: none;
+
+
+        }
+        span p{
+            font-size: 16px;
+            display: inline;
+            text-align: center;
+            line-height: 20px;
+
+
+
+        }
+
+    </style>
+</head>
+<body>
+<div id="box">
+    <form id="fo">
+        <input type="text" value="" class="a"/>
+        <span> <p>*  您输入的姓名不正确</p></span>
+        <input type="text" value="" class="b"/>
+        <input type="text" value="" class="c"/>
+    </form>
+    <input type="button" value="提交" id="on"/>
+</div>
+</body>
+</html>
+<script type="text/javascript" src="jquery.js"></script>
+<!--<script type="text/javascript" src="jquery-ui-1.8.16.custom.min.js"></script>-->
+<script type="text/javascript">
+
+    $(function () {
+        var arr = {};
+        var on = $("#on");
+        var inSubmit = true;
+        on.on("click", function () {
+            var a = $(".a"),
+                    b = $(".b"),
+                    c = $(".c");
+            if ($.trim(a.val()) == "") {
+                var a1=$('.a').val()
+                var reg=/[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/;
+                a1.blur(function(){
+                    if(!reg.test(a1)){
+                        var errMsg = "<span class='emailtip'>邮箱不合法</span>";
+                        $(this).append(errMsg);
+                    }
+
+                });
+                inSubmit = false;
+                alert("1没有填写");
+                return;
+            } else {
+                inSubmit = true;
+            }
+            ;
+            if ($.trim(b.val()) == "") {
+                inSubmit = false;
+                alert("2没有填写");
+                return;
+            } else {
+                inSubmit = true;
+            }
+            if ($.trim(c.val()) == "") {
+                inSubmit = false;
+                alert("3没有填写");
+                return;
+            } else {
+                inSubmit = true;
+            }
+
+            if ($.trim(a.val()) == "" || $.trim(b.val()) == "" || $.trim(c.val()) == "") {
+                inSubmit = false;
+                alert("填写不完整");
+                return;
+            } else {
+                inSubmit = true;
+            }
+
+//            arr.one = $.trim(a.val());
+//            arr.tow = $.trim(b.val());
+//            arr.three = $.trim(c.val());
+
+            arr :{
+                one = $.trim(a.val()),
+                        tow = $.trim(b.val()),
+                        three = $.trim(c.val())
+            }
+
+
+            $.ajax({
+                url: "aaa.json",
+                type: "get",
+                data: arr,
+                success: function (data) {
+                    if (data.code == 1) {
+                        alert("成功")
+                    } else {
+                        alert("失败")
+                    }
+                }
+
+            })
+        });
+    })
+    $(function(){
+        var name=$('.a').val();
+        var reg=/[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/;
+        name.on('mouseout',function(){
+            if(!reg.test(name)){
+                $('span').css('display','block')
+            }
+
+        })
+
+    })
+
+</script>

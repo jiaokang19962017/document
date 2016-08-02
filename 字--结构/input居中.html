@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+
+
+
+        #div{
+            width: 300px;
+            height: 50px;
+            border: 1px solid #2f3238;
+            display: table-cell;
+            vertical-align: middle;
+            font-size: 30px;
+            outline:none
+
+
+        }
+        #div::-webkit-input-placeholder {
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+<input type="text" name="mingzi" placeholder="姓名" id="div" class="placeholder"/>
+<input type="text" onFocus="this.value='不是知道'"/>
+<input type="text" onMouseOver="this.value='不是知道'"/>
+</body>
+</html>
+<script type="text/javascript">
+    var ary=[1,2,3,4,5,12,3,4,2,3,4,23]
+    var obj={};
+    for(var i=0;i<ary.length;i++){
+        var cur=ary[i]
+        if (obj[cur]==cur) {
+            ary.splice(i,1)
+            i--;
+        }else{
+            obj[cur]=cur
+        }
+    }
+    obj=null;
+    console.log(ary)
+</script>

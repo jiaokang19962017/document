@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>Document</title>
+
+    <style type="text/css">
+        body{
+            margin:0;
+        }
+        .page{
+            font-size: 50px;
+            text-align: center;
+        }
+        #page1{
+            background: #26A9E1;
+        }
+        #page2{
+            background: #6DAD9F;
+        }
+        #page3{
+            background: #FF613D;
+        }
+        #page4{
+            background: #7F42BA;
+        }
+        #page5{
+            background: #ADE2DF;
+        }
+    </style>
+    <script src="js/jquery-1.9.1.js"></script>
+    <!--<script type="text/javascript" src="http://sandbox.runjs.cn/uploads/rs/115/kh0bvccu/wheel.js"></script>-->
+</head>
+<body>
+
+<div class="page" id="page1">
+    page1
+</div>
+
+<div class="page" id="page2">
+    page2
+</div>
+
+<div class="page" id="page3">
+    page3
+</div>
+
+<div class="page" id="page4">
+    page4
+</div>
+
+
+<script type="text/javascript">
+    var current = 1;
+    var moveFlag = true;
+    var h = window.innerHeight;
+    $(".page").css({
+        "height":h+"px",
+        "line-height":h+"px"
+    });
+    $("body").onmousewheel(function(n){
+        if(!moveFlag){
+            return;
+        }
+        if(n>0){
+            goPre();
+        }
+        else{
+            goNext();
+        }
+    });
+    function goPre(){
+        if(current==1){
+            return ;
+        }
+        current--;
+        go(current);
+    }
+    function goNext(){
+        if(current==$(".page").length){
+            return ;
+        }
+        current++;
+        go(current);
+    }
+    function go(num){
+        moveFlag = false;
+        var tt = $(".page").eq(num-1).offset().top;
+        var nows = $(window).scrollTop();
+        var step = 10;
+        if(nows>tt){
+            times = (nows - tt)/step;
+        }
+        else{
+            times = (tt - nows)/step;
+        }
+        run(times,1,function(i){
+            if(nows>tt){
+                $(window).scrollTop(nows*1-i*step);
+            }
+            else{
+                $(window).scrollTop(nows*1+i*step);
+            }
+        },function(){
+            $(window).scrollTop(tt);
+            moveFlag = true;
+        });
+    }
+
+    function run(times,period,callback,lastCallback){
+        var i = 0;
+        var timer = setInterval(function(){
+            i++;
+            callback(i);
+            if(i>=times){
+                clearInterval(timer);
+                lastCallback();
+            }
+        },period);
+    }
+
+
+
+</script>
+
+</body>
+</html>

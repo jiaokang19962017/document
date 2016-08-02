@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        #div1 {
+            background: palegreen;
+            color: black;
+            padding: 10px;
+            border: 1px dashed #ccc;
+            font-size: 30px;
+            text-align: center;
+
+        }
+
+        #span1 {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div id="div1">距离下课还有<span id="span1">00:00:00</span></div>
+</body>
+</html>
+<script>
+    var oSpan = document.getElementById("span1");
+    function getCountTime() {
+        var now = new Date();//以当前时间为基准创建的时间对象
+        var cur = new Date("2016/2/28 18:00:00");//以参数时间为基准创建的时间对象
+        //1.创建这两个时间对象相差多少毫秒数
+        var spanTime = cur.getTime() - now.getTime();
+        console.log(spanTime);
+        //1小时 = 60*60*1000 毫秒
+        //1分钟 = 60*1000  毫秒
+        //1秒 = 1000 毫秒
+
+        //2.相差的毫秒数里有多少小时
+        var hour = Math.floor(spanTime / (60 * 60 * 1000));
+
+        spanTime = spanTime - hour * 60 * 60 * 1000;//除了小时毫秒数外剩余有多少毫秒数
+        //3.剩余的毫秒数里有多少分钟
+        var minute = Math.floor(spanTime / (60 * 1000));
+
+        spanTime = spanTime - minute * 60 * 1000;//除了分钟毫秒数外剩余有多少毫秒数
+
+        //4.剩余的毫秒数里有多少秒
+        var second = Math.floor(spanTime / 1000);
+
+        oSpan.innerHTML = addZero(hour) + ":" + addZero(minute) + ":" + addZero(second);
+    }
+
+    function addZero(num) {
+        return num > 9 ? num : "0" + num;
+    }
+    getCountTime();
+    window.setInterval(getCountTime,1000);
+
+</script>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script type="text/javascript">
+    //去掉一个最高分,去掉一个最低分,求平均分
+    //sort方法是数组的方法,arguments是一个类数组的对象
+
+//    function avgFn(){
+//        var total=[];
+//        for(var i=0;i<arguments.length;i++){
+//            var cur=arguments[i];
+//            total[total.length]=cur
+//
+//        }
+//        total.sort(function(a,b){
+//            return a-b;
+//        })
+//        total.shift();
+//        total.length--;
+//
+//        return eval(total.join("+"))/total.length.toFixed(2);
+//
+//    }
+//    var ary=avgFn(12,3,45,77,8,43,3,9);
+//    console.log(ary)
+
+
+
+
+    avgFn(12,3,45,77,8,43,3,9)
+    function avgFn(){
+        var total=[].slice.call(arguments,0);
+        total.sort(function(a,b){
+            return a-b;
+        })
+        total.shift();
+        total.length--;
+
+        return eval(total.join("+"))/total.length.toFixed(2);
+
+    }
+    var ary=avgFn(12,3,45,77,8,43,3,9);
+    console.log(ary)
+
+
+
+</script>

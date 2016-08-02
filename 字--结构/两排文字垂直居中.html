@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        .main-height {
+            background:#6D84B4;
+            height: 200px;
+            display: -webkit-box !important;
+            /*垂直排列*/
+            -webkit-box-orient: vertical;
+            /*垂直排列：垂直居中   | 水平排列：水平居中*/
+            -webkit-box-pack: center;
+            /*垂直排列：水平居中  | 水平排列：垂直居中*/
+            -webkit-box-align: center;
+        }
+        .main-height h1, .main-height p{
+            margin:0px;
+            padding:0px;
+
+        }
+
+        /*
+
+
+            仅chrome支持
+        */
+    </style>
+</head>
+<body>
+<div class="main-height">
+    <h1>Am I centered yet?</h1>
+    <p>Center me, please!</p>
+</div>
+</body>
+</html>

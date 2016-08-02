@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        .panoramic1 {
+            width: 150px;
+            height: 150px;
+            background: url("http://www.w3cplus.com/sites/default/files/blogs/2015/1507/naxos-greece-big.jpg");
+            background-size: auto 100%;
+            animation: panoramic1 10s linear infinite alternate;
+        }
+        @keyframes panoramic1 {
+            to {
+                background-position: 100% 0;
+            }
+        }
+        /*~~~~~2*/
+        .panoramic2 {
+            width: 150px;
+            height: 150px;
+            background: url("http://www.w3cplus.com/sites/default/files/blogs/2015/1507/naxos-greece-big.jpg");
+            background-size: auto 100%;
+        }
+        .panoramic2:hover,
+        .panoramic2:focus {
+            animation: panoramic2 10s linear infinite alternate;
+        }
+        @keyframes panoramic2 {
+            to {
+                background-position: 100% 0;
+            }
+        }
+        /*~~~~3*/
+        .panoramic3 {
+            width: 150px;
+            height: 150px;
+            background: url("http://www.w3cplus.com/sites/default/files/blogs/2015/1507/naxos-greece-big.jpg");
+            background-size: auto 100%;
+            animation: panoramic3 10s linear infinite alternate;
+            animation-play-state: paused;
+        }
+        .panoramic3:hover,
+        .panoramic3:focus {
+            animation-play-state: running;
+        }
+        @keyframes panoramic3 {
+            to {
+                background-position: 100% 0;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="panoramic1"></div>
+<div class="panoramic2"></div>
+<div class="panoramic3"></div>
+</body>
+</html>

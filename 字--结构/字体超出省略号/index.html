@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <script type="text/javascript" src="jquery/jquery-1.5.2.min.js"></script>
+    <!--<script type="text/javascript" src="jquery/jquery.font.js"></script>-->
+    <title>无标题文档</title>
+    <style type="text/css">
+        p{
+            display: inline-block;
+            font-size: 12px;
+        }
+        a{
+            color:#646462;
+            font-size: 12px;
+            text-decoration: none;
+
+           /*float: left;*/
+
+        }
+        a:hover{
+            color: red;
+        }
+    </style>
+</head>
+
+<script type="text/javascript">
+    $(function () {
+        $("#font").fonts({
+            fontNum: 10
+        });
+        $("#font2").fonts({
+            fontNum: 40
+        });
+        $("#font3").fonts({
+
+        });
+    })
+</script>
+<body>
+
+<p id="font">
+    我们都有一个家每年工资噶搭噶的噶看到过狂欢节我们都有一个家每年工资噶搭噶的噶看到过狂欢节我们都有一个家每年工资噶搭噶的噶看到过狂欢节我们都有一个家每年工资噶搭噶的噶看到过狂欢节我们都有一个家每年工资噶搭噶的噶看到过狂欢节我们都有一个家每年工资噶搭噶的噶看到过狂欢节我们都有一个家每年工资噶搭噶的噶看到过狂欢节</p>
+
+<p id="font2">
+    我们都有一个家每年工资噶搭噶的噶看到过狂欢节我们都有一个家每年工资噶搭噶的噶看到过狂欢节我们都有一个家每年工资噶搭噶的噶看到过狂欢节我们都有一个家每年工资噶搭噶的噶看到过狂欢节我们都有一个家每年工资噶搭噶的噶看到过狂欢节我们都有一个家每年工资噶搭噶的噶看到过狂欢节我们都有一个家每年工资噶搭噶的噶看到过狂欢节</p>
+
+<p id="font3">
+    我们都有一个家每年工资噶搭噶的噶看到过狂欢节我们都有一个家每年工资噶搭噶的噶看到过狂欢节我们都有一个家每年工资噶搭噶的噶看到过狂欢节我们都有一个家每年工资噶搭噶的噶看到过狂欢节我们都有一个家每年工资噶搭噶的噶看到过狂欢节我们都有一个家每年工资噶搭噶的噶看到过狂欢节我们都有一个家每年工资噶搭噶的噶看到过狂欢节 </p>
+<a href="http://www.w3school.com.cn/tags/att_a_target.asp" target="_top ">[更多]</a>
+
+
+<a href=""></a>
+
+</body>
+</html>
+<script type="text/javascript">
+    (function ($) {
+        $.fn.fonts = function (option) {
+            option = $.extend({}, $.fn.fonts.option, option);
+            return this.each(function () {
+                var objString = $(this).text(),
+                        objLength = $(this).text().length,
+                        num = option.fontNum;
+                if (objLength > num) {
+                    objString = $(this).text(objString.substring(0, num) + "···");
+                }
+            })
+        }
+        // default options
+        $.fn.fonts.option = {
+            fontNum: 100 //font num
+        };
+
+    })(jQuery);
+</script>

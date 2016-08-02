@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+
+
+    function offset(ele){
+        var t=ele.offsetTop;
+        var l=ele.offsetLeft;
+        var p=ele.offsetParent;
+        while(p){//判断一下当前计算的元素有没有offsetParent
+            //如果有，则继续向上找
+            if(window.navigator.userAgent.indexOf("MSIE 8")==-1){
+                //window.navigator.userAgent//这个叫用户代理字符串，保存了浏览器厂商，版本号，内核等信息
+                //像Trident（IE的内核），Gecko（chrome），还有一个，这些是浏览器的核心技术，需要了解--用途是面试的时候和面试呼悠
+
+                //这个代理字符串只在IE11以下有用。
+                //一定要掌握：移动端浏览器和高版本的IE浏览器如何判断
+
+                //关于window.navigator.userAgent请参考高程三了解更多的细节
+                t+=p.offsetTop;
+                l+=p.offsetLeft;
+
+
+            }else{
+                t+=p.offsetTop+p.clientTop;//JS里只有直接获得左边框和上边框宽度的属性，没有获得下边框和右边框宽度的属性
+                l+=p.offsetLeft+p.clientLeft;
+
+
+            }
+
+            //下面这句，一定要写的判断的外边
+            p=p.offsetParent;
+        }
+        return {left:l,top:t}//把变量l的值赋给这个匿名对象的left属性……
+    }
+
+
+
+</script>

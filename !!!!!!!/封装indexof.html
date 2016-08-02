@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script type="text/javascript">
+    var string = 'adsadwe';
+    String.prototype.indexOf= function (str) {
+        var arr  = this.split('');
+        var oStr = str.split('')[0];
+
+        for (var i = 0; i < arr.length; i++) {
+
+            if (arr[i] === oStr) {
+                return i;
+            }
+        }
+
+        return -1;
+
+
+    };
+
+    document.writeln( string.indexOf('wa') +'<br>');//5
+
+
+    var array = ['dsew', 1232, null, undefined, 'xsd'];
+
+    Array.prototype.indexOf= function (obj) {
+
+        for (var i = 0; i < this.length; i++) {
+
+            if ( this[i] === obj ) {
+
+                return i;
+            }
+        }
+
+        return -1;
+
+    };
+
+    document.writeln(  array.indexOf('e') ); //4
+</script>

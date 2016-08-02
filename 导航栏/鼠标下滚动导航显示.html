@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>天猫滚动一定距离顶部显示搜索jquery插件 - 懒人建站 http://www.51xuediannao.com/</title>
+    <style type="text/css">
+        html {
+            font-size: 100%;
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+            *overflow: auto;
+            _overflow-x: hidden;
+        }
+
+        body {
+            margin: 0;
+        }
+
+        button, .fn-tinput {
+            margin: 0;
+            vertical-align: middle;
+            outline: 0;
+            background: transparent;
+            resize: none;
+        }
+
+        label, button {
+            cursor: pointer;
+        }
+
+        button, input {
+            *overflow: visible;
+            line-height: normal;
+        }
+
+        /*修正IE67的input宽度bug*/
+
+        body, button, input, textarea, select {
+            color: #333;
+        }
+
+        body, button, input, textarea, select, a {
+            font-family: 'Hiragino Sans GB', 'Microsoft Yahei', "WenQuanYi Micro Hei", SimSun, Tahoma, Arial, Helvetica, STHeiti;
+        }
+
+        /*天猫滚动一定距离顶部显示搜索*/
+        .fix-top {
+            width: 100%;
+            position: fixed;
+            left: 0;
+            z-index: 1000;
+            height: 30px;
+            padding: 10px;
+            top: -52px;
+            _display: none;
+        }
+
+        .fix-top-mask {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            background: #000;
+            opacity: 0.5;
+            filter: alpha(opacity=50);
+        }
+
+        .fix-top .inner {
+            width: 1000px;
+            position: relative;
+            z-index: 2;
+            margin: 0 auto;
+        }
+
+        .fix-top .site-name {
+            float: left;
+            line-height: 30px;
+            font-size: 24px;
+            margin-right: 50px;
+            color: #fff;
+        }
+
+        .fix-top .search {
+            height: 30px;
+            float: left
+        }
+
+        .fix-top .search-key {
+            height: 28px;
+            display: inline-block;
+            *display: inline;
+            *zoom: 1;
+            vertical-align: top;
+            border: #fff solid 1px;
+            background: #fff;
+        }
+
+        .fix-top .search input {
+            height: 28px;
+            line-height: 28px \9;
+            font-size: 14px;
+            border: none;
+            padding: 0 6px;
+            width: 630px;
+        }
+
+        .fix-top .search button {
+            height: 30px;
+            line-height: 30px \9;
+            font-size: 14px;
+        }
+
+        .fix-top .search button {
+            text-align: center;
+            background: #c40000;
+            border: #c40000 solid 1px;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div class="fix-top">
+    <div class="inner">
+        <div class="site-name">tmall.com</div>
+        <form class="search">
+            <div class="search-key"><input type="text" placeholder="天猫搜索" class="fn-tinput"></div>
+            <button type="submit">搜索一下</button>
+        </form>
+    </div>
+    <div class="fix-top-mask"></div>
+</div>
+
+
+<div style="height:5000px;">
+    <h2>鼠标往下滚动，看效果！！！</h2>
+
+
+</div>
+
+<script type="text/javascript" src="../js/jquery-1.9.1.js"></script>
+<script>
+    $(function () {
+
+        $(".fix-top").fixedPointShow({
+            //zIndex:1000,   //Z轴
+            // st:600         //滚动多少距离的时候出现导航
+        });
+    })
+    ;
+    (function ($) {
+        /*
+         * 天猫滚动一定距离顶部显示搜索
+         * 作者：懒人建站http://www.51xuediannao.com/
+         * 配置参数有两个
+         * zIndex:1000,        //Z轴
+         * st:600               //滚动多少距离的时候出现导航
+         */
+        var tools = {
+            /*
+             窗体改变(scroll resize)延时执行事件
+             示例：
+             $lr().TimeOutRun($(window),"scroll",runFun,2000);	//TimeOutRun(事件,要运行的函数名,间隔时间)
+             function runFun(){ alert("哈哈") }
+             */
+            TimeOutRun: function (obj, Event, callBack, time) {
+                var timeOutId = "",
+                        reStart = true;
+                obj.on(Event, function () {
+                    clearTimeout(timeOutId);
+                    if (reStart) {
+                        timeOutRun(time)
+                    }
+                });
+                function timeOutRun(time) {
+                    reStart = false;
+                    var timeOutId = setTimeout(function () {
+                        reStart = true;
+                        callBack()
+                    }, time);
+                }
+            },
+            log: function (log) {
+                if (window.console) {
+                    return console.log(log)
+                }
+            }
+
+        };
+
+        function FixedPointShow($el, config) {
+            var def = {
+                zIndex: 1000,        //Z轴
+                st: 600               //滚动多少距离的时候出现导航
+            };
+            this.opts = $.extend(true, def, config);
+            this.el = $el;
+        }
+
+        FixedPointShow.prototype = {
+            scrollNav: function () {
+                var isOpen = false, This = this,
+                        fixTopH = This['el'].outerHeight();
+
+                This['el'].css({"z-index": this.opts.zIndex});
+
+                tools.TimeOutRun($(window), "scroll", function () {
+                    var st = $(this).scrollTop();
+                    if (st > This.opts.st) {
+                        !isOpen && This.el.animate({"top": 0}, 400, function () {
+                            isOpen = true;
+                        });
+                    } else {
+                        This.el.animate({"top": -fixTopH}, 400, function () {
+                            isOpen = false;
+                        });
+                    }
+                    tools.log(st)
+                }, 200)
+            }
+        };
+        FixedPointShow.prototype.constructor = FixedPointShow;
+
+        $.extend($.fn, {
+            fixedPointShow: function (config) {
+                //IE6 返回
+                if (!("maxHeight" in document.createElement("div").style)) {
+                    $(this).remove();
+                    return
+                }
+                var fixedPointNav = new FixedPointShow($(this));
+                fixedPointNav.scrollNav();
+                return this;
+            }
+        });
+    }(jQuery));
+
+
+</script>
+</body>
+</html>

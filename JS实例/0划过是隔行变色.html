@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        #list {
+            list-style: none;
+            line-height: 60px;
+            margin: 10px;
+            padding: 10px;
+            font-size: 20px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        #list li {
+            margin: 10px;
+            border-radius: 33px
+
+        }
+
+        .bg1 {
+            background-color: pink;
+        }
+
+        .bg2 {
+            background-color: beige;
+        }
+
+        .bg3 {
+            background-color: tan;
+        }
+
+        .bg4 {
+            background-color: blue;
+        }
+
+    </style>
+</head>
+<body>
+<div>
+    <ul id="list">
+        <li a="bg1">sssss</li>
+        <li a="bg2">dddd</li>
+        <li>ffff</li>
+        <li>gggg</li>
+        <li>sssss</li>
+        <li>dddd</li>
+        <li>ffff</li>
+        <li>gggg</li>
+        <li>dddd</li>
+        <li>ffff</li>
+        <li>gggg</li>
+
+    </ul>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+    var oList = document.getElementById("list");
+    var oLis = oList.getElementsByTagName("li");
+    for (var i = 0; i < oLis.length; i++) {
+//        if(i%2==0){
+//            oLis[i].className="bg1"
+//        }else{
+//            oLis[i].className="bg2"
+//        }
+
+
+        i % 2 == 0 ? oLis[i].className = "bg1" : oLis[i].className = "bg2";
+
+        oLis[i].a = oLis[i].className;
+        oLis[i].onmouseover = function () {
+            this.className = "bg3"
+        }
+        oLis[i].onmouseout = function () {
+            this.className = this.a
+        }
+    }
+
+</script>

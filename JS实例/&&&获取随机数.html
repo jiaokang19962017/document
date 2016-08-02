@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script type="text/javascript">
+    //                   ##自动生成N项无序数组(不重复)
+    //    var a=[];
+    //    for(var i=0;i<1000;i++){
+    //        a.push(i);
+    //    }
+    //    a.sort((function(){return Math.random()>0.5}))
+    //    console.log(a)
+
+    ////                  ##自动生成N项无序数组(重复)
+    //    var a2=[];
+    //    for(var i=0;i<100;i++){
+    //        a2.push(Math.floor(Math.random()*100));
+    //    }
+    //    console.log(a2);
+
+
+    //                    n项数组随机取m项值(抽取随机数)          !!!!!
+    var ary=[];
+    for(var i=0;i<100;i++){
+        ary.push(Math.floor(Math.random()*100));
+    }
+    var a2 = [];
+    for (var i = 0; i < 100; i++) {
+        var r = Math.floor(Math.random() * ary.length)
+        var item=ary[r];
+        ary[r]=ary[ary.length-1];//用最后一项吧已经出栈的拿一项覆盖
+        ary.length--;
+        a2.push(item);
+    }
+    console.log(a2)
+    console.log(a2.length)
+
+
+
+    var a3=[];
+    for(var i=0;i<100;i++){
+        var r=Math.floor(Math.random()*ary.length);
+        var item=ary[r];
+        ary[r]=ary[ary.length-1];
+        ary.length--;
+        a3.push(item)
+    }
+    console.log(a3)
+
+
+
+
+
+
+    var ary=[];
+    while(ary.length<4){
+        var result=null;
+        result=Math.round(Math.random()*(62-1)+2);
+        if(ary.indexOf(result)==-1){
+            ary.push(result)
+        }
+    }
+
+
+
+</script>

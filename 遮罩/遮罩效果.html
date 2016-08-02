@@ -1,0 +1,180 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>label</title>
+    <style type="text/css">
+        *{
+            margin:0px;
+            padding:0px;
+            font:12px/2 微软雅黑;
+        }
+        #main{
+            width:960px;
+            margin:20px auto;
+        }
+        .items{
+            width:216px;
+            border:1px solid #dcdcdc;
+            overflow:hidden;
+            float:left;
+            margin:15px 15px 0 0;
+            background-color:#fff;
+        }
+        .items .img{
+            height:300px;
+            overflow:hidden;
+            position:relative;
+        }
+        .items .desc{
+            height:270px;
+            width:186px;
+            padding:15px;
+            position:absolute;
+            top:-300px;
+            left:0;
+            color:#fff;
+            background-image:url(data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAFoEvQfAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA1JREFUeNpjYmBgOAMAANsAzxM4pZ4AAAAASUVORK5CYII=);
+        }
+        .items .title{
+            border-top:1px solid #dcdcdc;
+            padding:7px 14px;
+        }
+    </style>
+    <script type="text/javascript" src="http://runjs.cn/js/sandbox/jquery/jquery-1.8.2.min.js"></script>
+</head>
+<body>
+<div id="main">
+
+    <div class="items">
+        <div class="img">
+            <img src="http://sandbox.runjs.cn/uploads/rs/246/t7vul5gq/label_1.jpg" width="216" height="300">
+            <div class="desc">这货是鸣人、这货是鸣人、这货是鸣人、这货是鸣人、这货是鸣人、这货是鸣人、这货是鸣人、</div>
+        </div>
+        <div class="title">鸣人</div>
+    </div>
+
+    <div class="items">
+        <div class="img">
+            <img src="http://sandbox.runjs.cn/uploads/rs/246/t7vul5gq/label_2.jpg" width="216" height="300">
+            <div class="desc">这货是鸣人他爹、这货是鸣人他爹、这货是鸣人他爹、这货是鸣人他爹、这货是鸣人他爹、</div>
+        </div>
+        <div class="title">鸣人他爹</div>
+    </div>
+
+    <div class="items">
+        <div class="img">
+            <img src="http://sandbox.runjs.cn/uploads/rs/246/t7vul5gq/label_3.jpg" width="216" height="300">
+            <div class="desc">这货是我爱罗、这货是我爱罗、这货是我爱罗、这货是我爱罗、这货是我爱罗、</div>
+        </div>
+        <div class="title">我爱罗</div>
+    </div>
+
+    <div class="items">
+        <div class="img">
+            <img src="http://sandbox.runjs.cn/uploads/rs/246/t7vul5gq/label_4.jpg" width="216" height="300">
+            <div class="desc">这货是斑、这货是斑、这货是斑、这货是斑、这货是斑、这货是斑、这货是斑、</div>
+        </div>
+        <div class="title">斑</div>
+    </div>
+
+    <div class="items">
+        <div class="img">
+            <img src="http://sandbox.runjs.cn/uploads/rs/246/t7vul5gq/label_1.jpg" width="216" height="300">
+            <div class="desc">这货是鸣人、这货是鸣人、这货是鸣人、这货是鸣人、这货是鸣人、这货是鸣人、这货是鸣人、</div>
+        </div>
+        <div class="title">鸣人</div>
+    </div>
+
+    <div class="items">
+        <div class="img">
+            <img src="http://sandbox.runjs.cn/uploads/rs/246/t7vul5gq/label_2.jpg" width="216" height="300">
+            <div class="desc">这货是鸣人他爹、这货是鸣人他爹、这货是鸣人他爹、这货是鸣人他爹、这货是鸣人他爹、</div>
+        </div>
+        <div class="title">鸣人他爹</div>
+    </div>
+
+    <div class="items">
+        <div class="img">
+            <img src="http://sandbox.runjs.cn/uploads/rs/246/t7vul5gq/label_3.jpg" width="216" height="300">
+            <div class="desc">这货是我爱罗、这货是我爱罗、这货是我爱罗、这货是我爱罗、这货是我爱罗、</div>
+        </div>
+        <div class="title">我爱罗</div>
+    </div>
+
+    <div class="items">
+        <div class="img">
+            <img src="http://sandbox.runjs.cn/uploads/rs/246/t7vul5gq/label_4.jpg" width="216" height="300">
+            <div class="desc">这货是斑、这货是斑、这货是斑、这货是斑、这货是斑、这货是斑、这货是斑、</div>
+        </div>
+        <div class="title">斑</div>
+    </div>
+
+</div>
+</body>
+</html>
+<script type="text/javascript">
+    /**
+     * 效果来源于 http://www.jue.so/ 采用 KISSY 的 UI 实现
+     * 以下是 jQuery 方法实现，当然原生 js 也不难实现、、
+     */
+    $(function () {
+        function zhezhao(index,cla){
+            $(index).hover(function (e) {
+                var _this  = $(this), //闭包
+                        _desc  = _this.find(cla).stop(true),
+                        width  = _this.width(), //取得元素宽
+                        height = _this.height(), //取得元素高
+                        left   = e.offsetX || e.originalEvent.layerX, //得到左边界
+                        top    = e.offsetY || e.originalEvent.layerY, //得到上边界
+                        right  = width - left, //计算出右边界
+                        bottom = height - top, //计算出下边界
+                        rect   = {}, //坐标对象，用于执行对应方法。
+                        _min   = Math.min(left, top, right, bottom), //得到最小值
+                        _out   = e.type == "mouseleave", //是否是离开事件
+                        spos   = {}; //起始位置
+
+                rect[left] = function (epos) { //鼠从标左侧进入和离开事件
+                    spos = {"left": -width, "top": 0};
+                    if (_out) {
+                        _desc.animate(spos, "fast"); //从左侧离开
+                    } else {
+                        _desc.css(spos).animate(epos, "fast"); //从左侧进入
+                    }
+                };
+
+                rect[top] = function (epos) { //鼠从标上边界进入和离开事件
+                    spos = {"top": -height, "left": 0};
+                    if (_out) {
+                        _desc.animate(spos, "fast"); //从上面离开
+                    } else {
+                        _desc.css(spos).animate(epos, "fast"); //从上面进入
+                    }
+                };
+
+                rect[right] = function (epos) { //鼠从标右侧进入和离开事件
+                    spos = {"left": left,"top": 0};
+                    if (_out) {
+                        _desc.animate(spos, "fast"); //从右侧成离开
+                    } else {
+                        _desc.css(spos).animate(epos, "fast"); //从右侧进入
+                    }
+                };
+
+                rect[bottom] = function (epos) { //鼠从标下边界进入和离开事件
+                    spos = {"top": height, "left": 0};
+                    if (_out) {
+                        _desc.animate(spos, "fast"); //从底部离开
+                    } else {
+                        _desc.css(spos).animate(epos, "fast"); //从底部进入
+                    }
+                };
+
+                rect[_min]({"left":0, "top":0}); // 执行对应边界 进入/离开 的方法
+            });
+        }
+
+        zhezhao(".items .img",".desc")//  图片 ,遮罩
+    });
+
+</script>

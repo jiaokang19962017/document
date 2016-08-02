@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #outer {
+            height: 300px;
+            width: 500px;
+            margin: 100px auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #outer #inner {
+            width: 2500px;
+            height: 300px;
+            position: absolute;
+            left: 0;
+            top: 0;
+
+        }
+
+        #outer #inner div {
+            height: 300px;
+            width: 500px;
+            line-height: 300px;
+            text-align: center;
+            font-size: 50px;
+            float: left;
+        }
+
+        #outer #inner div:nth-child(odd) {
+            background-color: #2c9dc4;
+            color: #ADFF2F;
+        }
+
+        #outer #inner div:nth-child(even) {
+            background-color: #BA55D3;
+            color: #8B0000;
+        }
+
+        /*#outer .btn {*/
+            /*display: block;*/
+            /*position: absolute;*/
+            /*left: 120px;*/
+            /*bottom: 40px;*/
+            /*list-style: none;*/
+            /*height: 30px;*/
+        /*}*/
+
+        /*.btn li {*/
+            /*background-color: #FA5889;*/
+            /*margin-left: 10px;*/
+            /*width: 30px;*/
+            /*height: 30px;*/
+            /*line-height: 30px;*/
+            /*text-align: center;*/
+            /*border-radius: 50%;*/
+            /*cursor: pointer;*/
+            /*display: inline-block;*/
+        /*}*/
+
+        /*.btn li.one {*/
+            /*background-color: #DBDBDB;*/
+            /*color: #FFCF78;*/
+        /*}*/
+        .name {
+            position: absolute;
+            top: 233px;
+            left: 147px;
+            width: 70px;
+            height: 18px;
+            z-index: 7;
+        }
+
+        .name a {
+            display: block;
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: #F79321;
+            position: absolute;
+            font-size: 12px;
+            font-family: "宋体";
+            color: #732a0a;
+            text-align: center;
+            line-height: 15px;
+        }
+
+        .name .active {
+            color: #F79321;
+        }
+
+        .name .num1 {
+            top: 0px;
+            left: 0px;
+        }
+
+        .name .num2 {
+            top: 0px;
+            left: 16px;
+        }
+
+        .name .num3 {
+            top: 0px;
+            left: 32px;
+        }
+
+        .name .num4 {
+            top: 0px;
+            left: 48px;
+        }
+        .name .num4 {
+            top: 0px;
+            left: 58px;
+        }
+
+        .an,.ana{
+            display: inline-block;
+            width: 100px;
+            height: 20px;
+            border: 1px solid #003399;
+        }
+
+    </style>
+</head>
+<body>
+<div id="outer">
+    <div id="inner">
+        <div>yi</div>
+        <div>er</div>
+        <div>san</div>
+        <div>si</div>
+        <div>wu</div>
+    </div>
+    <ul class="name">
+        <!--<li class="one">i</li>-->
+        <!--<li>2</li>-->
+        <!--<li>3</li>-->
+        <!--<li>4</li>-->
+        <!--<li>5</li>-->
+    </ul>
+</div>
+<input type="button" class="an"/>
+<input type="button" class="ana"/>
+
+</body>
+</html>
+<script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="../js/jquery.cycle.all.js"></script>
+<script type="text/javascript" src="../js/slippry.min.js"></script>
+<!--<script type="text/javascript" charset="UTF-8" src="js/prototype.js"></script>-->
+<script type="text/javascript">
+    var o_lis = document.getElementById("btn").getElementsByTagName("li");
+    var o_div = document.getElementById("inner").getElementsByTagName("div")[0];
+    inner.appendChild(o_div.cloneNode(true));
+    inner.style.width = inner.offsetWidth + o_div.offsetWidth + "px";
+    for (var i = 0; i < o_lis.length; i++) {
+        o_lis[i].n = i;
+        o_lis[i].onclick = function () {
+            window.clearInterval(autoTimer);
+            animate(inner, {left: this.n * (-500)}, 800);
+            autoTimer = window.setTimeout(function () {
+                autoTimer = setInterval(autoMove, 2000)
+            }, 3000);
+            step = this.n;
+            tips(this.n)
+        }
+    }
+    ;
+    var step = 0;
+    function autoMove() {
+        step++;
+        if (step == 6) {
+            inner.style.left = 0 + "px";
+            step = 1;
+        }
+        animate(inner, {left: step * -500}, 600);
+        tips(step)
+    }
+    var autoTimer = window.setInterval(autoMove, 2000);
+    function tips(n) {
+        for (var i = 0; i < o_lis.length; i++) {
+            o_lis[i].className = "";
+        }
+        if (n == 5) {
+            n = 0
+        }
+        o_lis[n].className = "one"
+    }
+//    ;
+//$('#inner').cycle({
+//    fx: 'fade',
+//    timeout: 4000, // 幻灯片过渡间隔，单位是毫秒 (若值为0则不自动切换)
+//    pause: 1, // 过渡的速度
+//    pager: '.number',// 按钮容器元素
+//    prev: '.an',
+//    next: '.ana',
+////    speed:1000,
+//    pagerEvent: 'click', // 按钮驱动页面导航的事件
+//    cleartype: !$.support.opacity, // 若为true，则应用clearType修正 (专为IE提供)是否支持半透明效果
+//    activePagerClass: 'active', // 当按钮链接被激活时的css类名
+//    pager:'.name',
+//    pagerAnchorBuilder: function (idx, slide) {  // 用于建立按钮超链接的回调函数:// function(index, DOMelement)
+//        idx += 1;
+//        return '<a href="javascript:void(0)" #btn' + idx + '">' + idx + '</a>';
+//    }
+//});
+
+
+
+</script>

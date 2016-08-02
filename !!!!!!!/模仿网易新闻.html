@@ -1,0 +1,134 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>瀑布流new</title>
+    <script type="text/javascript" src="../js/jquery-1.9.1.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .wrapper {
+            width: 720px;
+            margin: 50px auto;
+            position: relative;
+        }
+
+        .wrapper > div {
+            width: 350px;
+        }
+
+        .wrapper > div > div {
+            text-align: center;
+            margin-bottom: 15px;
+            border: 1px solid #dddddd;
+            padding: 5px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .wrapper > div > div > img {
+            display: block;
+            width: 100%;
+        }
+
+        .wrapper > div > div:hover {
+            border: 1px solid #AAAAAA;
+            box-shadow: 1px 0px 9px #AAAAAA;
+            -moz-box-shadow: 1px 0px 9px #AAAAAA;
+            -webkit-box-shadow: 1px 0px 9px #AAAAAA;
+        }
+
+        .fr {
+            position: absolute;
+            right: 0;
+        }
+
+        .fl {
+            position: absolute;;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <div class="fl">
+    </div>
+    <div class="fr">
+    </div>
+</div>
+<script>
+    (function (window) {
+        function infoInstance(left, right) {
+            this.$left = $(left);
+            this.$right = $(right);
+            this.loadNum = 2;
+            this.current = 0;
+            this.offsetLeft = 100;//左侧偏移量
+            this.offsetTop = 200;//右侧偏移量
+            this.url = "img/";
+            this.start();
+        }
+
+        infoInstance.prototype =
+        {
+            start: function () {
+                if (this.current < this.loadNum) {
+                    var $min = this.getMin();
+                    var index = this.getIndex();
+                    this.addChild($min, index);
+                }
+                else {
+                    this.current = 0;
+                }
+            },
+            getMin: function () {
+                var leftHeight = this.$left.height();
+                var rightHeight = this.$right.height();
+                var dis = leftHeight - rightHeight;
+                var $min = dis > 0 ? this.$right : this.$left;
+                return $min;
+            },
+            getIndex: function () {
+                return Math.ceil(Math.random() * 6);
+            },
+            addChild: function ($container, url) {
+                var self = this;
+                var $div = $("<div></div>");
+                var $img = $("<img />");
+                $img.attr("src", this.url + url + ".jpg");
+                $div.append($img);
+                $container.append($div);
+                var oleft = $container.attr("class") == "fl" ? this.offsetLeft * (-1) : this.offsetLeft
+                $div.css("left", oleft);
+                $div.css("top", this.offsetTop);
+                $img.load(function (e) {
+                    $div.animate({left: 0, top: 0}, "slow");
+                    self.current++;
+                    self.start();
+                })
+            }
+        }
+        window.infoInstance = infoInstance;
+    })(window)
+
+    var info = new infoInstance(".fl", ".fr");
+
+
+    $(document).bind("scroll", function (e) {
+        if ($(window).scrollTop() + 100 >= $(document).height() - $(window).height()) {
+            info.start();
+        }
+    })
+    $(document).bind("mousewheel", function (e) {
+        var e = window.event;
+        if (e.wheelDelta < 0 && $(document).height() <= $(window).height()) {
+            info.start();
+        }
+    })
+
+</script>
+</body>
+</html>

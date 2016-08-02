@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script type="text/javascript">
+    var arr = [2,1,3,4,2,1,2,4,3,1,1,2,1,2,2,2];
+    var keymap = {}, key, count = 0;
+
+    for(var i=0, len = arr.length; i < len; i++){
+        var item = arr[i];
+
+        if(keymap[item]){
+            keymap[item] += 1;
+        }else{
+            keymap[item] = 1;
+        }
+
+        if(keymap[item] > count){
+            key = item;
+            count = keymap[item];
+        }
+    }
+    console.log("最多的是:", key,",次数为：", count);
+
+</script>

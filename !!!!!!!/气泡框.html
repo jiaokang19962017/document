@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Bubble Box</title>
+    <style type="text/css">
+        .bubble-box, .bubble-box2{
+            position: relative;
+            width: 200px;
+            height: 80px;
+            margin: 100px auto;
+            background-color: orange;
+            border-bottom-color: orange;
+            box-sizing: border-box;
+        }
+
+        .bubble-box::after{
+            content: '';
+            position: absolute;
+            top: 0;
+            right: -24px;
+            width: 20px;
+            height: 20px;
+            border-width: 0 0 20px 20px;
+            border-style: solid;
+            border-radius: 0 0 60px 0;
+            border-bottom-color: inherit;
+            border-left-color: transparent;
+        }
+
+        .bubble-box2::before{
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: -5px;
+            width: 10px;
+            height: 10px;
+            margin-top: -10px;
+            background-color: inherit;
+            transform: rotate(45deg);
+        }
+    </style>
+</head>
+<body>
+<div class="bubble-box"></div>
+<div class="bubble-box2"></div>
+</body>
+</html>

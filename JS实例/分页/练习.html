@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        table, tr, th, td {
+            border: 1px solid #98F5FF;
+            border-collapse: collapse;
+        }
+
+        th,td{
+            width: 80px;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+        }
+        #nav span,#nav a{
+            float: left;
+            width: 60px;
+            height:30px ;
+            text-align: center;
+            line-height: 30px;
+            border: 1px solid #FFE4C4;
+            text-decoration: none;
+            cursor: pointer;
+            color: red;
+            margin:0 3px;
+
+        }
+        #nav a.b{
+            background-color: #AEADAE;
+            color: white;
+
+        }
+    </style>
+</head>
+<body>
+<div id="content"></div>
+</body>
+</html>
+<script type="text/javascript">
+    var xhr = new XMLHttpRequest();
+    xhr.open('get', 'data.txt', 'true');
+    xhr.send();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status == 200) {
+            var data = xhr.responseText;
+            init(data, 7);
+        }
+    };
+
+    function init(data, recordNum) {
+        var currentPage=0;
+        var a=JSON.parse(data);
+        var content=document.getElementById('content');
+        var oTable=document.createElement('table');
+        content.appendChild(oTable);
+        var oThead=document.createElement('tahead');
+        oTable.appendChild(oThead);
+        var oTr=document.createElement('tr');
+        oThead.appendChild(oTr);
+        for(var attr in a[0]){
+            oTr.innerHTML+='<th>'+attr+'</th>'
+        }
+
+        var totalPage=Math.ceil(a.length/recordNum);
+        var oTbody=document.createElement('tbody');
+        oTable.appendChild(oTbody);
+        showPage(currentPage);
+        var nav=document.createElement('div');
+        nav.id='nav';
+        content.appendChild(nav);
+
+        var oPrev=document.createElement('span');
+        oPrev.innerHTML='上一页';
+        oPrev.onclick=prevPage;
+        nav.appendChild(oPrev);
+
+        var container=document.createElement('div');
+        nav.appendChild(container);
+        for(var i=0;i<totalPage;i++){
+            var oPage=document.createElement('a');
+            oPage.href='###';
+            oPage.innerHTML='第'+(i+1)+'页';
+            oPage.onclick=function(e){
+                showPage(currentPage=this.innerHTML.match(/\d+/)[0]-1);
+                return false;
+            };
+            container.appendChild(oPage);
+            if(!i)oPage.className='b';
+        }
+
+        var oNext=document.createElement('span');
+        oNext.innerHTML='下一页';
+        oNext.onclick=nextPage;
+        nav.appendChild(oNext);
+
+
+        var oAll=document.createElement('span');
+        oAll.innerHTML="总"+totalPage+'页';
+        nav.appendChild(oAll);
+
+
+
+
+
+        function showPage(n) {
+            oTbody.innerHTML='';
+            for(var i=recordNum*n;i<(n+1)*recordNum;i++){
+                var oTr=document.createElement('tr');
+                for(var attr in a[i]){
+                    var oTd=document.createElement('td');
+                    oTd.innerHTML=a[i][attr];
+                    oTr.appendChild(oTd)
+                }
+                oTbody.appendChild(oTr)
+            }
+
+            var nav=document.getElementById('nav');
+            if(nav){
+                var ele=document.getElementById('nav').getElementsByTagName('a');
+                if(ele.length){
+                    for(var i=0;i<ele.length;i++){
+                        ele[i].className='';
+                    }
+                    ele[n].className='b';
+                }
+            }
+
+        }
+
+        function prevPage() {
+            if(currentPage-1>0){
+                showPage(--currentPage);
+            }
+        }
+
+        function nextPage() {
+            if(currentPage+1<=totalPage-1){
+                showPage(++currentPage);
+            }
+        }
+
+    }
+
+
+</script>

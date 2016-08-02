@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>无hack无js全兼容text-overflow-ellipsis效果</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #fff;
+        }
+
+        .list ul {
+            font-size: 12px;
+            font-family: simsun;
+            text-align: left;
+            line-height: 18px;
+        }
+
+        .list a {
+            color: #000;
+            text-decoration: none;
+            word-break: break-all;
+            text-overflow:ellipsis;
+        }
+
+        .list div {
+            position: relative;
+            zoom: 1;
+            padding-left: 1em;
+            background: url(/articleimg/2009/03/6494/ico.gif) no-repeat 3px 6px;
+
+
+        }
+
+        .list span {
+            position: absolute;
+            right: -10px;
+            bottom: 0;
+            height: 18px;
+            width: 10px;
+            background: #fff;
+            overflow: hidden;
+        }
+
+        .list li {
+            position: relative;
+            width: 11em;
+            background: url(/articleimg/2009/03/6494/pot.gif) right top no-repeat;
+            height: 18px;
+            overflow: hidden;
+            padding-right: 10px;
+            zoom: 1;
+        }
+
+        .list a:hover {
+            color: #f60;
+        }</style>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+</head>
+
+<body>
+<div class="list">
+    <ul>
+        <li>
+            <div><a href="#nogo">该标签中字符超过十个了</a> <span></span></div>
+        </li>
+        <li>
+            <div><a href="#nogo">只有六个汉字</a> <span></span></div>
+        </li>
+        <li>
+            <div style="text-overflow:ellipsis;"><a href="#nogo">该标签中字符超过三十个了该标签中字符超过三十个了该标签中字符超过三十个了该标签中字符超过三十个了</a> <span></span></div>
+        </li>
+        <li>
+            <div><a href="#nogo">blueidea blueidea blueidea</a> <span></span></div>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

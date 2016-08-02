@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<ul>
+    <li class="a d b g"></li>
+    <li class="c d v g c"></li>
+    <li class="b s c a c"></li>
+    <li class="a s d f"></li>
+    <li class="b c d g c"></li>
+    <li class="a e d f"></li>
+    <li class="a b d f c"></li>
+    <li class="c f d f c"></li>
+</ul>
+
+</body>
+</html>
+<script type="text/javascript">
+
+//    function geClass(str){
+//        var str=str.replace(/^ +| +$/g,"");
+//        var aClassName=str.split(/ +/);
+//        var eles=document.getElementsByTagName("*");
+//        for(var i=0;i<aClassName.length;i++){
+//            var a=[];
+//            var reg=new RegExp("(^| )"+aClassName[i]+"( |$)");
+//            for(var k=0;k<eles.length;k++){
+//                if(reg.test(eles[k].className)){
+//                    a.push(eles[k])
+//                }
+//            }
+//            eles=a;
+//        }
+//        return eles;
+//    }
+//console.log(geClass("a b c"))
+//
+//
+//  function oddClass(ele,str){
+//      var reg=new RegExp("(^| )"+str+"( |$)");
+//      if(reg.test(ele.className)){
+//          ele.className=" "+str;
+//      }
+//  }
+//
+//    function removeClass(ele,str){
+//        var reg=new RegExp("(^| )"+str+"( |$)","g");
+//        ele.className=reg.className.replace(reg," ")
+//    }
+
+
+ function gtClass(str){
+     var str=str.replace(/^ +| +$/g,"");
+     var aClassName=str.split(/ +/);
+     var eles=document.getElementsByTagName("*");
+     for(var i=0;i<aClassName.length;i++){
+         var a=[];
+         var reg=new RegExp("(^| )"+aClassName[i]+"( |$)");
+         for(var j=0;j<eles.length;j++){
+             if(reg.test(eles[j].className)){
+                 a.push(eles[j]);
+             }
+         }
+         eles=a;
+     }
+     return eles;
+ }
+
+//    添加类名和删除类名
+
+function oddClass(ele,srt){
+    var reg=new RegExp("(^| )"+srt+"( |$)");
+    if(reg.test(ele.className)){
+        ele.className+=" "+srt
+    }
+}
+
+function removeClass(ele,str){
+    var reg=new RegExp("(^| )"+str+"( |$)");
+    ele.className=reg.className.replace(reg," ")
+}
+
+
+
+
+
+
+
+
+
+
+
+//    function oddClass(ele,str){
+//        var reg=new RegExp("(^| )"+str+"( |$)");
+//        if(reg.test(ele.className)){
+//            ele.className+=" "+str
+//        }
+//    }
+//
+//
+//    function removeClass(ele,str){
+//        var reg=new RegExp("(^| )"+str+"( |$)","g");
+//        ele.className=reg.className.replace(reg," ")  //加空格
+//    }
+//
+//
+//addClass(oDiv,"f");
+</script>

@@ -1,0 +1,282 @@
+<!doctype html>
+<html >
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+        body{
+            background-color:#fff;
+        }
+        .job_btn button{
+            width:100px;
+            padding:5px 0;
+            text-align:center;
+            font-size:14px;
+            color:#969696;
+            background-color:#fff;
+            border:1px solid #ccc;
+            border-radius:5px;
+            margin:0 10px;
+            outline:0!important;
+        }
+        .job_btn button.active{
+            color:#fea331;
+            border:1px solid #fea331;
+        }
+        .job_txt{
+            display:none;
+        }
+        .job_detail{
+            background-color:#fff;
+        }
+
+        .job_detail .job{
+            display:none;
+        }
+
+        .job_detail .job.show{
+            display:block;
+        }
+
+        .job_detail .title{
+            font-size:18px;
+            height:60px;
+            line-height:60px;
+            padding-left:20px;
+            background-color:#E5E5E5;
+            color:#656565;
+            border-radius:10px;
+            /*margin-top:5px;*/
+        }
+        .job_detail .arrow {
+            width: 0;
+            height: 0;
+            float: right;
+            margin: 26px;
+        }
+        .job_detail .arrow-up {
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 10px solid #c8c8c8;
+            border-top: 0;
+            width: 0;
+            height: 0;
+            float: right;
+            margin: 26px;
+        }
+        .job_detail .arrow-down {
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 10px solid #c8c8c8;
+            border-bottom:0;
+            width: 0;
+            height: 0;
+            float: right;
+            margin: 26px;
+        }
+
+    </style>
+</head>
+<body>
+
+<div>
+    <button id="btn_1">财务部</button>	<button id="btn_2">研发部</button>	<button id="btn_3">市场部</button>
+</div>
+
+<div class="job_detail">
+
+    <!--财务部-->
+    <div class="job show" id="job_1">
+        <div class="title">
+            客服专员
+            <div class="arrow arrow-up"></div>
+        </div>
+        <div style="height:10px;"></div>
+        <div class="job_txt">
+            <p>1、接受用户咨询，记录用户咨询、投诉内容，按照相应流程给予用户反馈;</p>
+            <p>1、接受用户咨询，记录用户咨询、投诉内容，按照相应流程给予用户反馈;</p>
+            <p>1、接受用户咨询，记录用户咨询、投诉内容，按照相应流程给予用户反馈;</p>
+            <p>1、接受用户咨询，记录用户咨询、投诉内容，按照相应流程给予用户反馈;</p>
+        </div>
+
+        <div class="title">
+            客服专员
+            <div class="arrow arrow-up"></div>
+        </div>
+        <div style="height:10px;"></div>
+        <div class="job_txt">
+            <p>1、接受用户咨询，记录用户咨询、投诉内容，按照相应流程给予用户反馈;</p>
+            <p>1、接受用户咨询，记录用户咨询、投诉内容，按照相应流程给予用户反馈;</p>
+            <p>1、接受用户咨询，记录用户咨询、投诉内容，按照相应流程给予用户反馈;</p>
+            <p>1、接受用户咨询，记录用户咨询、投诉内容，按照相应流程给予用户反馈;</p>
+        </div>
+
+        <div class="title">
+            客服专员
+            <div class="arrow arrow-up"></div>
+        </div>
+        <div style="height:10px;"></div>
+        <div class="job_txt">
+            <p>1、接受用户咨询，记录用户咨询、投诉内容，按照相应流程给予用户反馈;</p>
+            <p>1、接受用户咨询，记录用户咨询、投诉内容，按照相应流程给予用户反馈;</p>
+            <p>1、接受用户咨询，记录用户咨询、投诉内容，按照相应流程给予用户反馈;</p>
+            <p>1、接受用户咨询，记录用户咨询、投诉内容，按照相应流程给予用户反馈;</p>
+        </div>
+    </div>
+
+    <!--研发部-->
+    <div class="job" id="job_2">
+        <div class="title">
+            研发专员
+            <div class="arrow arrow-up"></div>
+        </div>
+        <div style="height:10px;"></div>
+        <div class="job_txt">
+            <p>1、接受用户咨询，记录用户咨询、投诉内容，按照相应流程给予用户反馈;</p>
+            <p>1、接受用户咨询，记录用户咨询、投诉内容，按照相应流程给予用户反馈;</p>
+            <p>1、接受用户咨询，记录用户咨询、投诉内容，按照相应流程给予用户反馈;</p>
+            <p>1、接受用户咨询，记录用户咨询、投诉内容，按照相应流程给予用户反馈;</p>
+        </div>
+
+        <div class="title">
+            研发专员
+            <div class="arrow arrow-up"></div>
+        </div>
+        <div style="height:10px;"></div>
+        <div class="job_txt">
+            <p>1、接受用户咨询，记录用户咨询、投诉内容，按照相应流程给予用户反馈;</p>
+            <p>1、接受用户咨询，记录用户咨询、投诉内容，按照相应流程给予用户反馈;</p>
+            <p>1、接受用户咨询，记录用户咨询、投诉内容，按照相应流程给予用户反馈;</p>
+            <p>1、接受用户咨询，记录用户咨询、投诉内容，按照相应流程给予用户反馈;</p>
+        </div>
+
+        <div class="title">
+            研发专员
+            <div class="arrow arrow-up"></div>
+        </div>
+        <div style="height:10px;"></div>
+        <div class="job_txt">
+            <p>1、接受用户咨询，记录用户咨询、投诉内容，按照相应流程给予用户反馈;</p>
+            <p>1、接受用户咨询，记录用户咨询、投诉内容，按照相应流程给予用户反馈;</p>
+            <p>1、接受用户咨询，记录用户咨询、投诉内容，按照相应流程给予用户反馈;</p>
+            <p>1、接受用户咨询，记录用户咨询、投诉内容，按照相应流程给予用户反馈;</p>
+        </div>
+    </div>
+
+    <!--市场部-->
+    <div class="job" id="job_3">
+        <div class="title">
+            市场专员
+            <div class="arrow arrow-up"></div>
+        </div>
+        <div style="height:10px;"></div>
+        <div class="job_txt">
+            <p>1、接受用户咨询，记录用户咨询、投诉内容，按照相应流程给予用户反馈;</p>
+            <p>1、接受用户咨询，记录用户咨询、投诉内容，按照相应流程给予用户反馈;</p>
+            <p>1、接受用户咨询，记录用户咨询、投诉内容，按照相应流程给予用户反馈;</p>
+            <p>1、接受用户咨询，记录用户咨询、投诉内容，按照相应流程给予用户反馈;</p>
+        </div>
+
+        <div class="title">
+            市场专员
+            <div class="arrow arrow-up"></div>
+        </div>
+        <div style="height:10px;"></div>
+        <div class="job_txt">
+            <p>1、接受用户咨询，记录用户咨询、投诉内容，按照相应流程给予用户反馈;</p>
+            <p>1、接受用户咨询，记录用户咨询、投诉内容，按照相应流程给予用户反馈;</p>
+            <p>1、接受用户咨询，记录用户咨询、投诉内容，按照相应流程给予用户反馈;</p>
+            <p>1、接受用户咨询，记录用户咨询、投诉内容，按照相应流程给予用户反馈;</p>
+        </div>
+
+        <div class="title">
+            市场专员
+            <div class="arrow arrow-up"></div>
+        </div>
+        <div style="height:10px;"></div>
+        <div class="job_txt">
+            <p>1、接受用户咨询，记录用户咨询、投诉内容，按照相应流程给予用户反馈;</p>
+            <p>1、接受用户咨询，记录用户咨询、投诉内容，按照相应流程给予用户反馈;</p>
+            <p>1、接受用户咨询，记录用户咨询、投诉内容，按照相应流程给予用户反馈;</p>
+            <p>1、接受用户咨询，记录用户咨询、投诉内容，按照相应流程给予用户反馈;</p>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
+
+<script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+<script>
+
+    var $button, $job, $title, $arrow, $jobTxt;
+
+    $(function(){
+
+        // 初始化变量
+        initVariable();
+
+        // 点击按钮
+        $button.on("click", switchJob);
+
+        // 点击标题
+        $title.live("click", function(){ unfold($(this)); });
+
+        $title.first().click();
+    });
+
+    /**
+     * 初始化变量
+     */
+    function initVariable(){
+        // 按钮
+        $button = $("button[id^='btn_']");
+
+        // 部门块
+        $job = $("div[id^='job_']");
+
+        // 标题
+        $title = $(".show .title");
+
+        // 上下箭头
+        $arrow = $title.find(".arrow");
+
+        // 职位详情
+        $jobTxt = $title.next().next(".job_txt");
+    }
+
+    /**
+     * 切换部门
+     */
+    function switchJob(){
+
+        $job.removeClass("show");
+
+        var number = $(this).attr("id").split("_")[1];
+        $("#job_" + number).addClass("show");
+
+        initVariable();
+        $jobTxt.hide();
+        $title.first().find(".arrow").removeClass("arrow-up").addClass("arrow-down");
+        $title.first().next().next(".job_txt").slideDown();
+    }
+
+    /**
+     * 展开或收起
+     * @param $this 当前触发标题Jquery对象
+     */
+    function unfold($this){
+        var isOpen = $this.find(".arrow").hasClass("arrow-up");
+        $jobTxt.slideUp();
+        $arrow.removeClass("arrow-down").addClass("arrow-up");
+
+        if(isOpen){
+            $this.find(".arrow").removeClass("arrow-up").addClass("arrow-down");
+            $this.next().next(".job_txt").slideDown();
+        }else{
+            $this.find(".arrow").removeClass("arrow-down").addClass("arrow-up");
+            $this.next().next(".job_txt").slideUp();
+        }
+    }
+
+</script>

@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>jQuery.slidizle-可完全自定义的响应式jQuery幻灯片插件|自定义导航_jQuery之家-自由分享jQuery、html5、css3的插件库</title>
+	<link href="css/style.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" type="text/css" href="css/default.css">
+	<link rel='stylesheet' href='http://libs.useso.com/js/font-awesome/4.2.0/css/font-awesome.min.css'>
+	<!--[if IE]>
+		<script src="http://libs.useso.com/js/html5shiv/3.7/html5shiv.min.js"></script>
+	<![endif]-->
+</head>
+<body>
+	<header class="htmleaf-header">
+		<h1>jQuery.slidizle-可完全自定义的响应式jQuery幻灯片插件 <span>A Fully Responsive & Customizable jQuery Slider Plugin</span></h1>
+		<div class="htmleaf-links">
+			<a class="htmleaf-icon icon-htmleaf-home-outline" href="http://www.htmleaf.com/" title="jQuery之家" target="_blank"><span> jQuery之家</span></a>
+			<a class="htmleaf-icon icon-htmleaf-arrow-forward-outline" href="http://www.htmleaf.com/jQuery/Slideshow-Scroller/jQuery-slidizle-plugin.html" title="返回下载页" target="_blank"><span> 返回下载页</span></a>
+		</div>
+		<div class="htmleaf-demo center">
+		  <a href="index.html">基本例子</a>
+		  <a href="index2.html">滑动动画</a>
+		  <a href="index3.html">循环播放</a>
+		  <a href="index4.html">定时播放</a>
+		  <a href="index5.html">api驱动</a>
+		  <a href="index6.html">加载图片loading动画</a>
+		  <a href="index7.html" class="current">自定义导航</a>
+		  <a href="index8.html">带进度条显示</a>
+		</div>
+	</header>
+	<div class="container">
+		<!-- custom navigation -->
+		<section class="sample" data-slidizle>
+
+			<ul class="slider-content" data-slidizle-content>
+		
+				<li class="slider-item" style="background-image:url('img/01.jpg')">
+				</li>
+
+				<li class="slider-item" style="background-image:url('img/02.jpg')">
+				</li>
+
+				<li class="slider-item" style="background-image:url('img/03.jpg')">
+				</li>
+
+			</ul>
+
+			<header>
+				<h2>Custom Navigation</h2>
+				<h3>I have a custom navigation with image thumbs</h3>
+			</header>
+
+			<div class="slider-next" data-slidizle-next>
+				<i class="fa fa-arrow-right"></i>
+			</div>
+			<div class="slider-previous" data-slidizle-previous>
+				<i class="fa fa-arrow-left"></i>
+			</div>
+
+			<ul class="slider-navigation" data-slidizle-navigation>
+				<li class="slider-navigation-item" style="background-image:url('img/01.jpg')">
+				</li>
+				<li class="slider-navigation-item" style="background-image:url('img/02.jpg')">
+				</li>
+				<li class="slider-navigation-item" style="background-image:url('img/03.jpg')">
+				</li>
+			</ul>
+
+			<div class="slidizle-loading">
+			</div>
+
+		</section>
+
+		<!-- custom navigation in custom order -->
+		<section class="sample" data-slidizle>
+
+			<ul class="slider-content" data-slidizle-content>
+		
+				<li data-slidizle-slide-id="slide1" class="slider-item" style="background-image:url('img/01.jpg')">
+				</li>
+
+				<li data-slidizle-slide-id="slide2" class="slider-item" style="background-image:url('img/02.jpg')">
+				</li>
+
+				<li data-slidizle-slide-id="slide3" class="slider-item" style="background-image:url('img/03.jpg')">
+				</li>
+
+			</ul>
+
+			<header>
+				<h2>Custom Navigation (custom order)</h2>
+				<h3>I have a custom navigation with image thumbs in a custom order. This is done by using the <strong>data-slidizle-slide-id</strong> attribute on slide and navigation items</h3>
+			</header>
+
+			<div class="slider-next" data-slidizle-next>
+				<i class="fa fa-arrow-right"></i>
+			</div>
+			<div class="slider-previous" data-slidizle-previous>
+				<i class="fa fa-arrow-left"></i>
+			</div>
+
+			<ul class="slider-navigation" data-slidizle-navigation>
+				<li class="slider-navigation-item" data-slidizle-slide-id="slide2" style="background-image:url('img/02.jpg')">
+				</li>
+				<li class="slider-navigation-item" data-slidizle-slide-id="slide1" style="background-image:url('img/01.jpg')">
+				</li>
+				<li class="slider-navigation-item" data-slidizle-slide-id="slide3" style="background-image:url('img/03.jpg')">
+				</li>
+			</ul>
+
+			<div class="slidizle-loading">
+			</div>
+
+		</section>
+	</div>
+	<footer class="related">
+	    <h3>如果你喜欢这个插件，那么你可能也喜欢:</h3>
+	    <a href="http://www.htmleaf.com/jQuery/Slideshow-Scroller/201601052984.html">
+		  <img src="related/1.jpg" width="300" alt="lightslider-支持移动触摸的轻量级jQuery幻灯片插件"/>
+		  <h3>lightslider-支持移动触摸的轻量级jQuery幻灯片插件</h3>
+		</a>
+		<a href="http://www.htmleaf.com/jQuery/Slideshow-Scroller/201512242946.html">
+		  <img src="related/2.jpg" width="300" alt="Slippry-现代时尚的jQuery响应式幻灯片插件"/>
+		  <h3>Slippry-现代时尚的jQuery响应式幻灯片插件</h3>
+		</a>
+	</footer>
+	
+	<script src="http://libs.useso.com/js/jquery/2.1.1/jquery.min.js" type="text/javascript"></script>
+	<script>window.jQuery || document.write('<script src="js/jquery-2.1.1.min.js"><\/script>')</script>
+	<script src="js/jquery.slidizle.js"></script>
+
+	<script>
+
+		jQuery(function($) {
+
+			// setup slidizle
+			$('[data-slidizle]').slidizle({
+				beforeChange : function(api) {
+					console.log('previous', api.getPreviousSlide().index());
+					console.log('current', api.getCurrentSlide().index());
+					console.log('next', api.getNextSlide().index());
+					console.log('previous active', api.getPreviousActiveSlide().index());
+				}
+			});
+
+		});
+
+	</script>
+</body>
+</html>

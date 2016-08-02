@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+
+    <style type="text/css">
+        .test {
+            /*单行文字*/
+            /*text-overflow: ellipsis;*/
+            /*overflow: hidden;*/
+            /*white-space: nowrap;*/
+            /*width: 150px;*/
+
+
+
+            /*设置多行 chrome*/
+           -webkit-line-clamp:3;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 3;
+            -moz-line-clamp: 3;
+            overflow: hidden;
+            width:200px;
+
+        }
+
+        /*//多行文本溢出显示省略号*/
+        /*.line-over-ellipsis { /!/@line 表示可显示行数*!        /!*-webkit-line-clamp:@line;*!/*/
+        /*overflow: hidden;*/
+        /*display: -webkit-box;       /!*  //必须结合属性*!/*/
+        /*-webkit-box-orient: vertical; /!/必须结合属性*!        text-overflow: ellipsis;*/
+        /*}*/
+        /*p {*/
+        /*width: 100%;*/
+        /*.line-over-ellipsis (2);*/
+        /*/!/显示两行，多余文字按省略号显示*!        }*/
+
+    </style>
+</head>
+<body>
+<div class="test">
+    关于**产品的推广关于**产品的推广关于**产品的推广*产品的推广*产品的推广*产品的推广*产品的推广*产品的推广*产品的推广*产品的推广*产品的推广*产品的推广*产品的推广*产品的推广*产品的推广*产品的推广*产品的推广*产品的推广*产品的推广*产品的推广*产品的推广
+</div>
+
+<!--<div>-->
+<!--<p>-->
+<!--多行文本溢出显示省略多行文本溢出显示省略多行文本溢出显示省略多行文本溢出显示省略多行文本溢出显示省略多行文本溢出显示省略多行文本溢出显示省略-->
+<!--多行文本溢出显示省略多行文本溢出显示省略多行文本溢出显示省略多行文本溢出显示省略多行文本溢出显示省略多行文本溢出显示省略多行文本溢出显示省略-->
+<!--多行文本溢出显示省略多行文本溢出显示省略多行文本溢出显示省略多行文本溢出显示省略多行文本溢出显示省略多行文本溢出显示省略多行文本溢出显示省略-->
+<!--多行文本溢出显示省略多行文本溢出显示省略多行文本溢出显示省略多行文本溢出显示省略多行文本溢出显示省略多行文本溢出显示省略多行文本溢出显示省略-->
+<!--多行文本溢出显示省略多行文本溢出显示省略多行文本溢出显示省略多行文本溢出显示省略多行文本溢出显示省略多行文本溢出显示省略多行文本溢出显示省略-->
+<!--</p>-->
+<!--</div>-->
+</body>
+</html>

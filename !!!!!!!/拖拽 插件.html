@@ -1,0 +1,162 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="Generator" content="EditPlus®">
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <title>demo</title>
+    <script src="js/jquery-1.11.3.js"></script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+        }
+
+        .outer {
+            width: 300px;
+            height: 400px;
+            background: red;
+            position: absolute;
+            left: 50px;
+        }
+
+        .inner1 {
+            width: 200px;
+            height: 50px;
+            background: blue;
+            position: absolute;
+            left: 50px;
+            cursor: move;
+        }
+
+        .inner2 {
+            width: 200px;
+            height: 50px;
+            background: green;
+            position: absolute;
+            left: 50px;
+            top: 100px;
+            cursor: move;
+        }
+        #a{
+            width: 999px;
+            height: 888px;
+            border: 1px solid #FFFF00;
+            margin: 100px auto;
+        }
+    </style>
+    <script id="jquery_183" type="text/javascript" class="library" src="js/jquery.js"></script>
+</head>
+<body>
+<div id="a">
+请拖动小方块来移动大方块
+<div class="outer">大
+    <div class="inner1 inner">小1</div>
+    <div class="inner2 inner">小2</div>
+</div>
+</div>
+</body>
+
+<script>
+
+    /**
+     * jquery.dragMove.js plugin
+     */
+    ;
+    (function ($, window, document, undefined) {
+
+        var plugName = "dragMove",
+                defaults = {
+                    limit: false
+                };
+
+        function Drag($this, $that, options) {
+            this.name = plugName;
+            this.$this = $this;//拖动的
+            this.$that = $that;//跟随的
+            this.defaults = defaults;
+            this.options = $.extend({}, defaults, options);
+            this.init();
+        }
+
+        Drag.prototype = {
+            init: function () {
+                var This = this,
+                        $this = This.$this,
+                        $that = This.$that;
+
+                $this.on('mousedown.d', function (e) {
+                    var offX = e.offsetX,//点击的inner的位置
+                            offY = e.offsetY,
+                            offLeft = $this.position().left,//inner在outer里面的位置
+                            offTop = $this.position().top;
+
+                    //console.log(offTop)
+                    $(document).on('mousemove.d', function (e) {
+                        var diffX = e.clientX - offX - offLeft,
+                                diffY = e.clientY - offY - offTop,
+                                maxW = $(window).width() - $that.width();
+                        maxH = $(window).height() - $that.height();
+
+                        if (This.options.limit) {
+                            if (diffX <= 0) {
+                                diffX = 0;
+                            }
+                            if (diffX >= maxW) {
+                                diffX = maxW;
+                            }
+                            if (diffY <= 0) {
+                                diffY = 0;
+                            }
+                            if (diffY >= maxH) {
+                                diffY = maxH;
+                            }
+                        }
+
+
+                        $that.css({'left': diffX, 'top': diffY});
+                    });
+
+
+                });
+
+                $(document).on('mouseup.d', function () {
+                    $(document).off('mousemove.d');
+                });
+
+            },
+
+        }
+
+        $.fn.extend({
+            dragMove: function ($that, options) {
+                return this.each(function () {
+                    new Drag($(this), $that, options);
+                })
+            }
+        })
+
+
+    })(jQuery, window, document);
+
+
+</script>
+</html>
+<script type="text/javascript">
+
+
+    $(function () {
+        $('.inner').dragMove($('.outer'), {
+            limit: true//是否限制在窗口范围内
+        });
+
+
+    })
+</script>

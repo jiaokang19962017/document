@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>border_animation</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        div{
+            box-sizing: border-box;
+        }
+        .wrap{
+            width: 900px;
+            height: 700px;
+            margin: 100px auto;
+            overflow: hidden;
+            position: relative;
+        }
+        .border{
+            position: absolute;
+            background-color: #ffd400;
+            z-index: 10;
+            transition-duration: 800ms;
+        }
+        .border_tr{
+            top: 0;
+            left: 0;
+            width: 0px;
+            height: 3px;
+        }
+        .border_br{
+            bottom: 0;
+            right: 0;
+            width: 0px;
+            height: 3px;
+        }
+        .border_tb{
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 0px;
+        }
+        .border_rb{
+            bottom: 0;
+            right: 0;
+            width: 3px;
+            height: 0px;
+        }
+        .wrap img{
+            width: 100%;
+            transition: all ease 800ms;
+            transform: scale(1)
+        }
+        .wrap:hover img{
+            transform: scale(1.2);
+        }
+        .wrap:hover .border_tr{
+            width:900px;
+        }
+        .wrap:hover .border_br{
+            width:900px;
+        }
+        .wrap:hover .border_tb{
+            height:700px;
+        }
+        .wrap:hover .border_rb{
+            height:700px;
+        }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <div class="border border_tr"></div>
+    <div class="border border_tb"></div>
+    <div class="border border_br"></div>
+    <div class="border border_rb"></div>
+    <img src="http://www.fendi.cn/sites/all/themes/fendi/img/homepage/0703/1/pc_916_740.jpg" alt="" />
+</div>
+</body>
+</html>

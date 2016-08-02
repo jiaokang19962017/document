@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>5秒跳转到新页面...</title>
+</head>
+
+<body>
+<p id="view"></p>
+<script>
+    var view = document.getElementById("view");
+    var t = 5;
+    var url = "http://www.baidu.com";
+    setInterval("testTime()",1000);
+    function testTime(){
+        view.innerHTML = "<b>" + t + "</b>秒跳转到新页面...";
+        if(t==0){
+            window.location = url;
+        }
+        t--;
+    }
+</script>
+</body>
+</html>

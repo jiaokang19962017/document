@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<input type="button" name="btn1" id="btn1" value="全选" />
+		<input type="button" name="btn2" id="btn2" value="反选" />
+		<input type="checkbox" name="ch1" id="ch1" value="" />
+		<ul id="ul1">
+			<li><input type="checkbox" /></li>
+			<li><input type="checkbox" /></li>
+			<li><input type="checkbox" /></li>
+			<li><input type="checkbox" /></li>
+			<li><input type="checkbox" /></li>
+			<li><input type="checkbox" /></li>
+			<li><input type="checkbox" /></li>
+			<li><input type="checkbox" /></li>
+			<li><input type="checkbox" /></li>
+			<li><input type="checkbox" /></li>
+		</ul>
+	</body>
+	<script src="js/jquery-1.12.3.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		jQuery.fn.extend({
+			check: function() {
+				//遍历JQ对象中的每一个DOM对象 并把每一个DOM对象checked属性置为true;
+				return this.each(function() {
+					this.checked = true;
+				});
+			},
+			//遍历JQ对象中的每一个DOM对象 并把每一个DOM对象checked属性置为false;
+			uncheck: function() {
+				return this.each(function() {
+					this.checked = false;
+				});
+			}
+		});
+	</script>
+	<script type="text/javascript">
+		$(function() {
+			//全选
+			$("#btn1").click(function() {
+				//				$("input[type=checkbox]").prop("checked", true);
+				$("input[type=checkbox]").check();
+			});
+			$("#btn2").click(function() {
+				//				假设li中的每个input都是打钩的
+				var isAllChecked = true;
+				for (var i = 0; i < $("ul input").length; i++) {
+					$("ul input")[i].checked = !$("ul input")[i].checked;
+					if ($("ul input")[i].checked == false) {
+						isAllChecked = false;
+					}
+				}
+				$("input:nth-child(3)")[0].checked=isAllChecked;
+			})
+			//给每一个 ul下的checked  添加点击时间
+			$("ul input").click(function(){
+					var isAllChecked=true;
+					//遍历每一个ul下的input 看是否都被选中
+				for(var i=0;i<$("ul input").length;i++){
+					if($("ul input")[i].checked==false){
+						isAllChecked=false;
+					}
+
+				}
+					$("input:nth-child(3)")[0].checked=isAllChecked;
+				
+				
+			})
+		});
+	</script>
+
+</html>

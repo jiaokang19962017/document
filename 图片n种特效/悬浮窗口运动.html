@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title> New Document </title>
+    <meta name="Generator" content="EditPlus">
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+</head>
+<script type="text/javascript">
+
+    var timer = 50; // 数值越大，飘的越慢
+    var dx = 1;
+    var dy = 1;
+
+    window.onload = function(){
+        // 找到id属性为adWindow的节点
+        var adWindow = document.getElementById('adWindow');
+        var body = document.body;
+        var height = body.offsetHeight;
+        var width = body.offsetWidth;
+        var winHeight = adWindow.offsetHeight;
+        var winWidth = adWindow.offsetWidth;
+
+        // 每timer毫秒执行一次移动
+        setInterval(function(){
+
+            var top = adWindow.offsetTop + 3 * dy;
+            var left = adWindow.offsetLeft + 3 * dx;
+
+            if(dy == 1 && top >= height - winHeight){
+                dy = -1;
+            }else if(dy == -1 && top <= 0){
+                dy = 1;
+            }
+
+            if(dx == 1 && left >= width - winWidth){
+                dx = -1;
+            }else if(dx == -1 && left <= 0){
+                dx = 1;
+            }
+
+            adWindow.style.top = top + 'px';
+            adWindow.style.left = left + 'px';
+        }, timer)
+
+    }
+</script>
+
+<style>
+    *{
+        padding:0;
+        margin:0;
+    }
+
+    body{
+        background-color:#890d4f;
+    }
+
+    .adWindow{
+        /* 关键属性 */
+        position:absolute;
+        top:0;
+        left:0;
+
+        width:100px;
+        height:100px;
+        border:1px solid #999;
+        background-color:#ddd;
+    }
+</style>
+<body>
+<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/>
+<div id="adWindow" class="adWindow">
+    浮窗内容，可以是任何html标签
+</div>
+</body>
+</html>

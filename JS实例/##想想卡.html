@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        #tab, ul, li, div {
+            margin: 0;
+            padding: 0;
+            font-family: "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", "Hiragino Sans GB", "Heiti SC", "WenQuanYi Micro Hei", sans-serif;
+        }
+
+        #tab {
+            width: 800px;
+            /*margin: 20px auto;*/
+            font-size: 20px;
+            font-weight: 900;
+            position: relative;
+            top: 50%;
+            left: 50%;
+            margin-left: -400px;
+            margin-top: 200px;
+            cursor: pointer;
+
+        }
+
+        #tab ul li {
+            position: relative;
+            top: 25px;
+            left: 175px;
+            list-style: none;
+            width: 100px;
+            margin-right: 10px;
+            text-align: center;
+            display: inline-block;
+            line-height: 50px;
+            height: 50px;
+            background-color: pink;
+            border: 1px solid #cccccc;
+            border-radius: 43%;
+        }
+
+        #tab div {
+            text-align: center;
+            line-height: 400px;
+            height: 400px;
+            display: none;
+            border-radius: 40%;
+            border: 1px solid #bbbbbb;
+        }
+
+        #tab ul li.selectLi {
+            background-color: beige;
+            color: green;
+            font-weight: bolder;
+        }
+
+        #tab div.selectDiv {
+            background-color: beige;
+            display: block;
+            color: green;
+            font-weight: 900;
+
+        }
+
+    </style>
+</head>
+<body>
+<div id="tab">
+    <ul>
+        <li class="selectLi">yi</li>
+        <li>er</li>
+        <li>san</li>
+        <li>si</li>
+    </ul>
+    <div class="selectDiv">ui</div>
+    <div>er</div>
+    <div>san</div>
+    <div>si</div>
+</div>
+
+</body>
+</html>
+<script type="text/javascript">
+    var oTab = document.getElementById("tab");
+    var oLis = oTab.getElementsByTagName("li");
+    var oDivs = oTab.getElementsByTagName("div");
+    function changeTab(n) {
+        for (var i = 0; i < oLis.length; i++) {
+            oLis[i].className = "";
+            oDivs[i].className = "";
+        }
+//        alert("hell moto");
+        oLis[n].className = "selectLi";
+        oDivs[n].className = "selectDiv";
+    }
+
+
+//         自定义属性
+//    for (var i = 0; i < oLis.length; i++) {
+//        oLis[i].xx = i;
+//        oLis[i].onmousemove = function () {
+//            changeTab(this.xx)
+//        }
+//    }
+//
+//
+//          闭包
+//    for(var i=0;i<oLis.length;i++){
+//        ~(function(i){
+//            oLis[i].onmousemove=function(){
+//                changeTab(i)
+//            }
+//        })(i)
+//    }
+
+    for(var i=0;i<oLis.length;i++){
+        oLis[i].onmousemove=(function(i){
+            return function(){
+                changeTab(i)
+            }
+        })(i)
+    }
+
+</script>

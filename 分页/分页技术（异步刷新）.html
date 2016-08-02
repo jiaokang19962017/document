@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>jquery实现无刷新分页</title>
+    <style type="text/css">
+        body{
+            font-family: "微软雅黑";
+            font-size: 13px;
+        }
+        #wrap{
+            width: 600px;
+        }
+        .tbpage{width: 600px;border-collapse: collapse;margin-bottom: 10px;}
+        .tbpage th{background-color: #efefef;border: 1px solid #aaa;font-size: 14px;height: 30px;}
+        .tbpage td{text-align: left;text-indent: 15px;border: 1px solid #aaa;height: 20px;}
+        #pages{display: table-cell;float: right;}
+        #pages a{
+            text-decoration: none;
+            background-color: White;
+            border:1px solid #e8e8e8;
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            color: Black;
+            text-align: center;
+            line-height: 30px;
+        }
+        #pages a:hover
+        {
+            color: #f40;
+            border: 1px solid #f40;
+        }
+        #pages .on
+        {
+            background-color: #f40;
+            color: White;
+            border: 1px solid #f40;
+        }
+        #pages .on:hover
+        {
+            background-color: #f40;
+            color: White;
+            border: 1px solid #f40;
+        }
+    </style>
+    <script type="text/javascript" src="../js/jquery-1.9.1.js"></script>
+    <script type="text/javascript">
+
+        _jsonData = [];
+        $(function(){
+            //生成测试数据 -- json
+            for(var i = 0 ; i < 200 ; i++){
+                _jsonData.push({name:"张三"+(i+1),pwd:"123456abc"+(i+1),age:(i+1)});
+            }
+            pageTotal.getDate(1,1);
+            //alert(_jsonData.length);
+        });
+        //封装分页数据
+        var pageTotal= {
+            current:1, //当前页
+            pageCount:8 , //每页显示的数据量
+            count : 0 ,//总数据量
+            total : 0 , //总共的页码
+            first : 1, //首页
+            last : 0 , //尾页
+            pre : 1, //上一页
+            next : 1 , //下一页
+            getPages : function(){ //计算分页信息
+                pageTotal.total = Math.ceil(pageTotal.count / pageTotal.pageCount);
+                pageTotal.last = pageTotal.total ;
+                pageTotal.pre = pageTotal.current - 1 <= 0?1:(pageTotal.current - 1);
+                pageTotal.next = pageTotal.current + 1 >= pageTotal.total?pageTotal.total:(pageTotal.current + 1);
+            },
+            //获取数据
+            getDate: function(pageno,type){
+
+                //清除content所有数据和元素
+                $("#tbcontent").empty();
+                if(pageno == null){
+                    pageno = 1;
+                }
+                //设置当前页
+                pageTotal.current = pageno;
+                pageTotal.count = _jsonData.length;
+                //设置每页显示的数据条数
+                pageTotal.pageCount = 8;
+                //分页信息
+                for(var i = (pageno-1)*pageTotal.pageCount ; i < ((pageTotal.current)*(pageTotal.pageCount)) ; i++){
+                    $("#tbcontent").append("<tr><td>"+_jsonData[i]["name"]+"</td><td>"+_jsonData[i]["pwd"]+"</td><td>"+_jsonData[i]["age"]+"</td></tr>");
+                }
+                //获取分页样式
+                pageTotal.page(type); //type表示分页栏样式
+            },
+            page : function(type){
+                //清除分页栏元素
+                $("#pages").empty();
+                //填充分页样式欠要加载分页数据
+                pageTotal.getPages();
+                if(type == 1){
+
+                    var x = 6;
+                    //设置上下页
+                    $("#pages").append(pageTotal.current+"/"+pageTotal.total+"&nbsp;&nbsp;&nbsp;<a href='javascript:pageTotal.getDate(1,"+type+");'>首页</a>&nbsp;&nbsp;&nbsp;&nbsp;");
+                    var index = pageTotal.current <=Math.ceil(x/2)?1:(pageTotal.current)>=pageTotal.total-Math.ceil(x/2)?pageTotal.total-x:(pageTotal.current-  Math.ceil(x/2));
+                    var end = pageTotal.current <= Math.ceil(x/2)?(x+1):(pageTotal.current+Math.ceil(x/2))>=pageTotal.total?pageTotal.total:(pageTotal.current+Math.ceil(x/2));
+                    for(var i = index ; i <= end ; i++){
+                        if(i == pageTotal.current){
+                            $("#pages").append("<a href='javascript:pageTotal.getDate("+pageTotal.current+","+type+");' class='on'>"+i+"</a>");
+                        }else{
+                            $("#pages").append("<a href='javascript:pageTotal.getDate("+i+","+type+");'>"+i+"</a>");
+                        }
+                    }
+                    if(end != pageTotal.total){
+                        $("#pages").append("&nbsp;&nbsp;&nbsp;&nbsp;<span>...</span>");
+                    }
+                    $("#pages").append("&nbsp;&nbsp;&nbsp;&nbsp;<a href='javascript:pageTotal.getDate("+pageTotal.last+","+type+");'>尾页</a>");
+                }
+            }
+        };
+    </script>
+</head>
+<body>
+<h1>无刷新分页</h1>
+<div id="wrap">
+    <table class="tbpage">
+        <thead>
+        <tr>
+            <th width="80px">姓名</th>
+            <th>密钥</th>
+            <th width="40px">年龄</th>
+        </tr>
+        </thead>
+        <tbody id="tbcontent">
+
+        </tbody>
+    </table>
+    <div id="pages"></div>
+</div>
+</body>
+</html>

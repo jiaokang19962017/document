@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div style="width:100%;max-width:640px;">
+    <img src="http://img2.icson.com/event/2016/05/27/14643410021575.jpg" alt="" />
+    <img src="http://img2.icson.com/event/2016/05/27/14643410021575.jpg" data-oxlazy="http://img2.icson.com/event/2016/05/27/14643428952030.jpg" alt="" />
+    <img src="http://img2.icson.com/event/2016/05/27/14643410021575.jpg" data-oxlazy="http://img2.icson.com/event/2016/05/27/14643380023943.jpg" alt="" />
+    <img src="http://img2.icson.com/event/2016/05/27/14643410021575.jpg" data-oxlazy="http://img2.icson.com/event/2016/05/27/14643380049271.jpg" alt="" />
+    <img src="http://img2.icson.com/event/2016/05/27/14643410021575.jpg" data-oxlazy="http://img2.icson.com/event/2016/05/27/14643380072304.jpg" alt="" />
+</div>
+</body>
+</html>
+<script type="text/javascript" src="../js/jquery-1.9.1.js"></script>
+<script type="text/javascript">
+    //lazy loading
+    (function(a) {
+        var c = a(window);
+        var b = {
+            flag: "data-oxlazy",
+            init: function() {
+                this.items = a.makeArray(a("[" + this.flag + "]"));
+                this.cnt = this.items.length;
+                if (this.cnt === 0) {
+                    return false;
+                }
+                c.bind("scroll.oxlazy", function(d) {
+                    b.detect();
+                }).bind("resize.oxlazy", function(d) {
+                    b.detect();
+                });
+            },
+            detect: function() {
+                var e = [];
+                for (var d = 0; d < this.cnt; d++) {
+                    if (!b.rock(this.items[d])) {
+                        e.push(this.items[d]);
+                    }
+                }
+                this.items = e;
+                this.cnt = this.items.length;
+            },
+            isInView: function(f) {
+                var e = a(f),
+                        h = e.offset(),
+                        g = h.top - c.scrollTop(),
+                        d = c.height(),
+                        i = -(e.height());
+                if ((g < i) || (g >= d)) {
+                    return false;
+                }
+                return e;
+            },
+            rock: function(i) {
+                var h = i.getAttribute(this.flag);
+                if ((!h) || (h === "")) {
+                    return false;
+                }
+                var f = this.isInView(i);
+                if (!f) {
+                    return false;
+                }
+                var j = i.tagName === "IMG",
+                        e = i.tagName === "IFRAME",
+                        g = i.getAttribute(this.flag + "-timestamp") === "1",
+                        d = g ? ("?t=" + this.getTimeStamp()) : "";
+                h = h + d;
+                if (j || e) {
+                    i.setAttribute("src", h);
+                } else {
+                    f.css("background-image", "url(" + h + ")");
+                }
+                i.removeAttribute(this.flag);
+                return true;
+            },
+            getTimeStamp: function() {
+                var d = new Date();
+                return (d.getFullYear() + "" + d.getMonth() + "" + d.getDate());
+            }
+        };
+        a(function() {
+            b.init();
+            b.detect();
+        });
+    })(jQuery);
+</script>

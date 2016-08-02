@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JavaScript日期相减得到天数</title>
+    <script type="text/javascript">
+
+        /*JavaScript日期相减得到天数*/
+        function getDays(stratDateStr,endDateStr){
+            var stratDateArr,endDateArr,days;
+            stratDateArr = stratDateStr.split('-');
+            endDateArr = endDateStr.split('-');
+            var newDateS = new Date(Date.UTC(stratDateArr[0],stratDateArr[1]-1,stratDateArr[2]));
+            var newDateE = new Date(Date.UTC(endDateArr[0],endDateArr[1]-1,endDateArr[2]));
+            days = parseInt(Math.abs(newDateE - newDateS ) / 1000 / 60 / 60 /24);
+            return days;
+        }
+
+        alert(getDays('2015-12-05','2015-12-10'));
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

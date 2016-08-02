@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        p, div {
+            margin: 0;
+            padding: 0;
+        }
+
+        input[type="text"] {
+            width: 200px;
+            height: 30px;
+            line-height: 30px;
+        }
+
+        input[type="button"] {
+            width: 80px;
+            height: 34px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+
+        #div1 p {
+            line-height: 24px;
+            font-size: 14px;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function () {
+            var aInpt = document.getElementsByTagName('input'),
+                    oDiv = document.getElementById('div1');
+            aInpt[2].onclick = function () {
+                var oP = document.createElement('p'),
+                        Rem = 10 / parseInt(aInpt[0].value) * parseInt(aInpt[1].value);
+                oP.innerHTML = aInpt[1].value + 'px转换成：&nbsp;' + parseFloat(Rem.toFixed(4)) + 'rem';
+                oDiv.insertBefore(oP, oDiv.childNodes[0]);
+                aInpt[1].value = '';
+            }
+
+        }
+    </script>
+</head>
+<body>
+
+设计图宽度：<input type="text" placeholder="在此输入设计图宽度"><br/><br/>
+要转换的值：<input type="text" placeholder="在此输入要转换的像素"><input type="button" value="转换">
+
+<div id="div1" style=" height: 400px; margin-top:20px; padding:10px 20px; overflow: auto; border:1px solid #ccc;">
+    <span></span>
+</div>
+
+</body>
+</html>

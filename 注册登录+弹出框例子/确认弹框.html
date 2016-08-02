@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+    <title>jQuery Confirm</title>
+    <style>
+        html:not(.mobile).higher-than-window.confirm-active {
+            overflow: hidden;
+            margin-right: 15px;
+        }
+
+        .confirm {
+            display: none;
+        }
+
+        .confirm.active {
+            display: block;
+        }
+
+        .confirm .confirm-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            margin: auto;
+            z-index: 1;
+        }
+
+        .confirm .confirm-body {
+            width: 320px;
+            position: fixed;
+            z-index: 2;
+            top: 30%;
+            left: 0;
+            right: 0;
+            margin: auto;
+            box-shadow: 0 2px 30px rgba(0, 0, 0, .15);
+            box-sizing: border-box;
+            background: #fff;
+        }
+
+        .confirm .msg {
+            padding: 20px;
+        }
+
+        .confirm .btns {
+            width: 100%;
+            border-top: 1px solid #eee;
+        }
+
+        .confirm .btns .btn {
+            width: 50%;
+            float: left;
+            text-decoration: none;
+            height: 40px;
+            line-height: 40px;
+            box-sizing: border-box;
+            text-align: center;
+            color: initial;
+        }
+
+        .confirm .btns .btn:hover {
+            background: #f5f5f5;
+        }
+
+        .confirm .btns .btn + .btn {
+            border-left: 1px solid #eee;
+        }
+    </style>
+    <script src="./js/jquery-1.9.1.js"></script>
+</head>
+<body style="max-width:620px;margin:auto;">
+<center style="margin-top:50px;">
+    <h1>jQuery Confirm</h1>
+
+    <h2><a href="javascript:;" id="click-confirm">点击确认</a></h2>
+</center>
+<div id="pop-confirm" class="confirm" clickout-removeclass='active'>
+    <div class="confirm-bg cancel"></div>
+    <div class="confirm-body">
+        <div class="msg"></div>
+        <div class="btns">
+            <a href="javascript:;" class="btn cancel">取消</a>
+            <a href="javascript:;" class="btn ok">确认</a>
+        </div>
+    </div>
+</div>
+<script>
+    //jConfirm 关键代码
+    $(function () {
+        window.jConfirm = jConfirm;
+        //jConfirm 关键代码
+        function jConfirm(msg) {
+            var cancel_callback = function () {
+            };
+            var ok_callback = function () {
+            };
+            var result = {
+                cancel: function (callback) {
+                    cancel_callback = callback;
+                    return result;
+                },
+                ok: function (callback) {
+                    ok_callback = callback;
+                    return result;
+                }
+            }
+            $("#pop-confirm").find('.msg').text(msg);
+            $("#pop-confirm").find('.cancel').off().on("click", function () {
+                $("#pop-confirm").removeClass('active');
+                cancel_callback();
+            });
+            $("#pop-confirm").find('.ok').off().on("click", function () {
+                $("#pop-confirm").removeClass('active');
+                ok_callback();
+            });
+            setTimeout(function () {
+                $("#pop-confirm").addClass('active');
+            }, 0);
+            return result;
+        }
+
+        //jConfirm 辅助工作：PC和Mobile弹窗弹起时，防滚动
+        /mobile/i.test(window.navigator.userAgent) && $("html").addClass("mobile");
+        $("#pop-confirm").on('touchmove', function () {
+            return false;
+        });
+        $("html").on('click', function () {
+            setTimeout(function () {
+                $("html").height() > $(window).height() ? $("html").addClass("higher-than-window") : $("html").removeClass("higher-than-window");
+                $("#pop-confirm").hasClass('active') ? $("html").addClass("confirm-active") : $("html").removeClass("confirm-active");
+            }, 0);
+        });
+    });
+    //基础设施
+    $(function () {
+        // clickout-removeclass 指令，点击切换类名
+        $('html').on('click', function ($event) {
+            $('[clickout-removeclass]').each(function () {
+                if ($(this)[0] === $event.target || $(this)[0].contains($event.target)) {
+                    return;
+                }
+                var className = $(this).attr('clickout-removeclass');
+                $(this).removeClass(className);
+            });
+        });
+    });
+    //实际应用
+    $(function () {
+        $('#click-confirm').on('click', function () {
+            //实际应用
+            jConfirm('你真的确认吗？').ok(function () {
+                alert('你确认咯 :)');
+            }).cancel(function () {
+                alert('你取消咯 XD');
+            });
+        });
+    });
+</script>
+</body>
+</html>

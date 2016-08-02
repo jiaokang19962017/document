@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        /* Reset Styles */
+        html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, hr, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            outline: 0;
+            font-weight: inherit;
+            font-size: 100%;
+            font-family: inherit;
+            vertical-align: baseline
+        }
+
+        html {
+            height: 100%
+        }
+
+        body {
+            min-height: 101%;
+            line-height: 1;
+            color: black;
+            background: white;
+            font: 62.5%/1.4 Arial, Helvetica, sans-serif
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: bold
+        }
+
+        :focus {
+            outline: 0
+        }
+
+        ol, ul {
+            list-style: none
+        }
+
+        table {
+            border-collapse: separate;
+            border-spacing: 0 /* tables still need cellspacing="0" */
+        }
+
+        caption, th, td {
+            text-align: left;
+            font-weight: normal
+        }
+
+        blockquote:before, blockquote:after, q:before, q:after {
+            content: ""
+        }
+
+        blockquote, q {
+            quotes: "" ""
+        }
+
+        option, select {
+            min-width: 1.5em
+        }
+
+        ins {
+            text-decoration: none
+        }
+
+        del {
+            text-decoration: line-through
+        }
+
+        img, a img {
+            border: 0
+        }
+
+        #wrap {
+            width: 900px;
+            margin: 20px auto;
+            background: #eee;
+            padding: 50px 0;
+            overflow: hidden;
+            border: 1px solid #ccc;
+            height: 750px;
+            -moz-border-radius: 10px;
+            -webkit-border-radius: 10px;
+            -moz-box-shadow: 5px 5px 10px #ccc;
+            -webkit-box-shadow: 5px 5px 10px #ccc
+        }
+
+        .content {
+            width: 720px;
+            margin: 0 auto;
+            overflow: hidden;
+            background: #fff;
+            border: 1px solid #ccc;
+            padding-bottom: 300px
+        }
+
+        .stack > a {
+            background: url(http://sandbox.runjs.cn/uploads/rs/433/gupi3vve/arrow.png) right 9px no-repeat;
+            position: relative;
+        }
+
+        .toprow > ul {
+            margin-top: 30px;
+        }
+
+        li {
+            background: #aaa;
+            position: relative;
+            float: left;
+            display: block;
+            white-space: nowrap
+        }
+
+        li li {
+        }
+
+        li ul {
+            position: absolute;
+            display: block;
+            top: 0;
+            width: 0;
+            left: 0;
+            margin-left: 0;
+            height: 0;
+        }
+
+        a {
+            background: transparent;
+            line-height: 28px;
+            padding: 0 20px;
+            font-size: 14px;
+            color: #fff !important;
+            text-decoration: none;
+            font-weight: bold;
+            display: block;
+            height: auto;
+            width: auto;
+            border-top: 1px solid #ccc;
+            border-left: 1px solid #ccc;
+            border-right: 1px solid #999;
+            border-bottom: 1px solid #999;
+            height: 28px;
+            width: auto;
+        }
+
+        a:hover {
+            border-top: 1px solid #999;
+            border-left: 1px solid #999;
+            border-right: 1px solid #ccc;
+            border-bottom: 1px solid #ccc;
+            background: #555;
+        }
+    </style>
+</head>
+<body>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <!-- Meta tags -->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Style-Type" content="text/css"/>
+    <!-- w3c recomends this meta tag  -->
+    <meta http-equiv="Content-Script-Type" content="text/javascript"/>
+    <!-- w3c recomends this meta tag  -->
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta name="copyright" content=""/>
+    <meta name="author" content=""/>
+    <meta name="rating" content="general"/>
+    <meta name="robots" content="all"/>
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection"/>
+    <!-- Javascripts -->
+    <script id="jquery_183" type="text/javascript" class="library"
+            src="/js/sandbox/jquery/jquery-1.8.3.min.js"></script>
+    <script language="javascript" type="text/javascript"
+            src="http://sandbox.runjs.cn/uploads/rs/433/gupi3vve/nav2.2.js"></script>
+    <script language="javascript" type="text/javascript">
+        $(document).ready(function () {
+            $("#JqueryMenu").navPlugin();
+
+            $("#JqueryMenu2").navPlugin({
+                'itemWidth': 'auto',
+                'itemHeight': 30,
+                'navEffect': 'fade',
+                'speed': 500
+            });
+
+        });
+    </script>
+</head>
+
+<body>
+
+<div id="wrap">
+    <div class="content">
+
+        <div id="dropdown">
+
+            <ul id="JqueryMenu">
+                <li><a href="#">List Item 1</a>
+                    <ul>
+                        <li><a href="#">Item 1 A</a></li>
+                        <li><a href="#">Item 1 B</a></li>
+                        <li><a href="#">Item 1 C</a>
+                            <ul>
+                                <li><a href="#">C 1</a>
+                                    <ul>
+                                        <li><a href="#">C1 a</a>
+                                            <ul>
+                                                <li><a href="#">Item 1</a></li>
+                                                <li><a href="#">Item 2</a></li>
+                                                <li><a href="#">Item 3</a>
+                                                    <ul>
+                                                        <li><a href="#">a</a></li>
+                                                        <li><a href="#">b</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Item 1 D</a></li>
+                        <li><a href="#">Item 1 E</a></li>
+                        <li><a href="#">Item 1 F</a></li>
+                        <li><a href="#">Item 1 G</a></li>
+                        <li><a href="#">Item 1 H</a></li>
+                        <li><a href="#">Item 1 I</a></li>
+                        <li><a href="#">Item 1 J</a></li>
+                        <li><a href="#">Item 1 K</a></li>
+                        <li><a href="#">Item 1 L</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Item 2</a></li>
+                <li><a href="#">List Item 3</a>
+                    <ul>
+                        <li><a href="#">Item 3 A</a></li>
+                        <li><a href="#">Item 3 B</a></li>
+                        <li><a href="#">Item 3 C</a>
+                            <ul>
+                                <li><a href="#">C 1</a>
+                                    <ul>
+                                        <li><a href="#">C1 a</a></li>
+                                        <li><a href="#">C1 b</a></li>
+                                        <li><a href="#">C1 c</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Item 3 D</a></li>
+                        <li><a href="#">Item 3 E</a>
+                            <ul>
+                                <li><a href="#">E 1</a>
+                                    <ul>
+                                        <li><a href="#">E1 a</a></li>
+                                        <li><a href="#">E1 b</a></li>
+                                        <li><a href="#">E1 c</a></li>
+                                        <li><a href="#">E1 d</a></li>
+                                        <li><a href="#">E1 e</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Item 3 F</a></li>
+                        <li><a href="#">Item 3 G</a></li>
+                        <li><a href="#">Item 3 H</a>
+                            <ul>
+                                <li><a href="#">H 1</a>
+                                    <ul>
+                                        <li><a href="#">H1 a</a></li>
+                                        <li><a href="#">H1 b</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Item 3 I</a></li>
+                        <li><a href="#">Item 3 J</a></li>
+                        <li><a href="#">Item 3 K</a></li>
+                        <li><a href="#">Item 3 L</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Item 4</a></li>
+                <li><a href="#">Item 5</a></li>
+                <li><a href="#">Item 6</a></li>
+            </ul>
+
+        </div>
+        <!-- end of navmenu -->
+
+        <div class="dropdown" style="clear:both;margin-top:400px">
+
+            <ul id="JqueryMenu2">
+                <li><a href="#">Item 1</a>
+                    <ul>
+                        <li><a href="#">Item 1 A</a>
+                            <ul>
+                                <li><a href="#">A 1</a>
+                                    <ul>
+                                        <li><a href="#">A1 a</a></li>
+                                        <li><a href="#">A1 b</a></li>
+                                        <li><a href="#">A1 c</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">A 2</a></li>
+                                <li><a href="#">A 3</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Item 1 B</a></li>
+                        <li><a href="#">Item 1 C</a>
+                            <ul>
+                                <li><a href="#">C 1</a>
+                                    <ul>
+                                        <li><a href="#">C1 a</a>
+                                            <ul>
+                                                <li><a href="#">Item 1</a></li>
+                                                <li><a href="#">Item 2</a></li>
+                                                <li><a href="#">Item 3</a>
+                                                    <ul>
+                                                        <li><a href="#">a</a></li>
+                                                        <li><a href="#">b</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="#">C1 b</a></li>
+                                        <li><a href="#">C1 c</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">C 2</a></li>
+                                <li><a href="#">C 3</a>
+                                    <ul>
+                                        <li><a href="#">C3 a</a></li>
+                                        <li><a href="#">C3 b</a></li>
+                                        <li><a href="#">C3 c</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">C 4</a></li>
+                                <li><a href="#">C 5</a></li>
+                                <li><a href="#">C 6</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Item 1 D</a>
+                            <ul>
+                                <li><a href="#">D 1</a></li>
+                                <li><a href="#">D 2</a></li>
+                                <li><a href="#">D 3</a></li>
+                                <li><a href="#">D 4</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Item 1 E</a></li>
+                        <li><a href="#">Item 1 F</a></li>
+                        <li><a href="#">Item 1 G</a></li>
+                        <li><a href="#">Item 1 H</a></li>
+                        <li><a href="#">Item 1 I</a></li>
+                        <li><a href="#">Item 1 J</a></li>
+                        <li><a href="#">Item 1 K</a></li>
+                        <li><a href="#">Item 1 L</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Long Item 2</a></li>
+                <li><a href="#">A Very Long Item 3</a>
+                    <ul>
+                        <li><a href="#">Item 3 A</a>
+                            <ul>
+                                <li><a href="#">A 1</a></li>
+                                <li><a href="#">A 2</a></li>
+                                <li><a href="#">A 3</a></li>
+                                <li><a href="#">A 4</a></li>
+                                <li><a href="#">A 5</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Item 3 B</a></li>
+                        <li><a href="#">Item 3 C</a></li>
+                        <li><a href="#">Item 3 D</a>
+                            <ul>
+                                <li><a href="#">D 1</a></li>
+                                <li><a href="#">D 2</a></li>
+                                <li><a href="#">D 3</a></li>
+                                <li><a href="#">D 4</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li><a href="#">Item 4</a>
+                    <ul>
+                        <li><a href="#">Item 4 A</a></li>
+                        <li><a href="#">A long Item 4 B</a>
+                            <ul>
+                                <li><a href="#">B 1</a></li>
+                                <li><a href="#">B 2</a></li>
+                                <li><a href="#">B 3</a></li>
+                                <li><a href="#">B 4</a></li>
+                                <li><a href="#">B 5</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Item 4 C</a></li>
+                        <li><a href="#">Item 4 D</a>
+                            <ul>
+                                <li><a href="#">D 1</a></li>
+                                <li><a href="#">D 2</a></li>
+                                <li><a href="#">D 3</a></li>
+                                <li><a href="#">D 4</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li><a href="#">Item 5</a>
+                    <ul>
+                        <li><a href="#">Item 5 A</a>
+                            <ul>
+                                <li><a href="#">long long A 1</a></li>
+                                <li><a href="#">A 2</a></li>
+                                <li><a href="#">A 3</a></li>
+                                <li><a href="#">A 4</a></li>
+                                <li><a href="#">A 5</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Item 5 B</a>
+                            <ul>
+                                <li><a href="#">B 1</a></li>
+                                <li><a href="#">B 2</a></li>
+                                <li><a href="#">B 3</a></li>
+                                <li><a href="#">B 4</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li><a href="#">Item 6</a></li>
+            </ul>
+
+        </div>
+        <!-- end of navmenu -->
+
+    </div>
+    <!-- end of content -->
+</div>
+<!-- end of wrap div -->
+
+</body>
+</html>
+</body>
+</html>
+<script type="text/javascript">
+    // Two possible nav effects so far: 'fade' and 'slide' - added the default setting which has no effect
+    // going to make a vertical menu as well as the horizontal menu I have already
+    // Going to make the right side subitems fall to the left of the dropdown
+    // Going to make a fixed width or 'auto' width option for the top level items
+
+    // Settings
+    // itemWidth     -    Integer; width of each individual nav item
+    // itemHeight    -    Integer; height of each individual nav item
+    // navEffect     -    "default","slide","fade"; two options at the moment. slide or fade. Default has no effect
+    // speed         -    Integer; the speed of the tranition effect
+    // vertical      -    Boolean; default is a horizontal menu with vertical dropdowns. true - the top row is vertical
+
+    (function ($) {
+        'use strict';
+
+        // Plugin namespace definition
+        $.NavPlugin = function (options, element, callback) {
+            // wrap the element in the jQuery object
+            this.el = $(element);
+            // this is the namespace for all bound event handlers in the plugin
+            this.namespace = "navPlugin";
+            // extend the settings object with the options, make a 'deep' copy of the object using an empty 'holding' object
+            this.opts = $.extend(true, {}, $.NavPlugin.settings, options);
+            this.init();
+            // run the callback function if it is defined
+            if (typeof callback === "function") {
+                callback.call();
+            }
+        };
+
+        // these are the plugin default settings that will be over-written by user settings
+        $.NavPlugin.settings = {
+            'itemWidth': 120,
+            'itemHeight': 30,
+            'navEffect': "slide",
+            'speed': 200,
+            'vertical': true
+        };
+
+        // plugin functions go here
+        $.NavPlugin.prototype = {
+            init: function () {
+                // going to need to define this, as there are some anonymous closures in this function.
+                // something interesting to consider
+                var myObject = this;
+
+                // this seems a bit hacky, but for now I will unbind the namespace first before binding
+                this.destroy();
+
+                this.el.toprow = this.el.children("li");
+                this.el.submenu = this.el.children("li.toprow").children("ul");
+                this.el.stack = this.el.find("li:has(ul)");
+
+                // add classes to navigation items. If a submenu then add class "stack"
+                this.addClasses();
+                this.addCss();
+                // add style for hover states on top row, first submenu, then subsequent levels.
+                this.addTopRowEffect();
+                this.addSubMenuEffect();
+                // end of plugin stuff
+
+            },
+            // add classes to the menu items
+            addClasses: function () {
+                this.el.toprow.addClass("toprow");
+                this.el.submenu.addClass("submenu");
+                // add .stack class to all LI's that have a child UL
+                this.el.stack.addClass("stack");
+            },
+            // add style to the list
+            addCss: function () {
+                var nav = this;
+                // set width and height for horizontal list
+                this.el.css({"display": "inline"});
+                if (this.opts.itemWidth === 'auto') {
+                    // individually set the width of each item in the top row
+                    this.el.toprow.each(function () {
+                        var itemWidth = $(this).outerWidth();
+                        $(this).find("ul").each(function () {
+                            // for each child li, find the longest
+                            var thisList = $(this),
+                                    longest = 0;
+
+                            thisList.children("li").each(function () {
+                                if ($(this).outerWidth() > longest) {
+                                    longest = $(this).outerWidth();
+                                }
+                            });
+                            thisList.children("li").css({width: longest + "px", height: nav.opts.itemHeight + "px"});
+                            thisList.children("li").children("ul").css({"left": longest + "px"});
+                        });
+                    });
+                } else {
+                    this.el.find("li").css({width: nav.opts.itemWidth + "px", height: nav.opts.itemHeight + "px"});
+                    this.el.toprow.find("ul").find("li").find("ul").css({"left": nav.opts.itemWidth + "px"});
+                }
+                // hide the subnav items
+                this.el.stack.find("li").css("display", "none");
+            },
+            // add event handling for the top menu items
+            addTopRowEffect: function () {
+                var nav = this;
+                this.el.children("li.toprow").bind('mouseover.' + this.namespace, function () {
+                    clearTimeout(nav.el.timer);
+                    $(this).addClass("hover");
+                    var hoverSublist = $(this).children("ul").children("li"),
+                            otherSublists = $(this).siblings("li").children("ul").children("li");
+
+                    // show this sublist and hide the other sublists
+                    if (nav.opts.navEffect == "slide") {
+                        hoverSublist.slideDown(nav.opts.speed);
+                        otherSublists.slideUp(nav.opts.speed);
+                    }
+                    else if (nav.opts.navEffect == "fade") // do fade effect
+                    {
+                        hoverSublist.css("display", "block");
+                        otherSublists.fadeOut(nav.opts.speed);
+                    }
+                    else {
+                        hoverSublist.css("display", "block");
+                        otherSublists.css("display", "none");
+                    }
+                    ;
+                    hoverSublist.children("ul").css("display", "none");
+                    return false;
+                });
+
+                this.el.children("li.toprow").bind('mouseout.' + this.namespace, function () {
+                    $(this).removeClass("hover");
+                    nav.setTimer();
+                    return false;
+                });
+            },
+            // add event handling for submenu items
+            addSubMenuEffect: function () {
+                var nav = this;
+                this.el.children("li.toprow").find("li").bind('mouseover.' + this.namespace, function () {
+                    clearTimeout(nav.el.timer);
+                    $(this).addClass("hover");
+                    $(this).children("ul").css("display", "block");
+                    var hoverSublist = $(this).children("ul").children("li"),
+                            otherSublists = $(this).siblings("li").children("ul").children("li");
+
+                    // show this sublist and hide the other sublists
+                    if (nav.opts.navEffect == "slide") {
+                        hoverSublist.slideDown(nav.opts.speed);
+                        otherSublists.slideUp(nav.opts.speed);
+                    }
+                    else if (nav.opts.navEffect == "fade")  // do fade effect
+                    {
+                        hoverSublist.css("display", "block");
+                        otherSublists.fadeOut(nav.opts.speed);
+                    }
+                    else {
+                        hoverSublist.css("display", "block");
+                        otherSublists.css("display", "none");
+                    }
+                    ;
+                    hoverSublist.children("ul").css("display", "none");
+                    return false;
+                });
+
+                this.el.find("li.toprow").find("li").bind('mouseout.' + this.namespace, function () {
+                    $(this).removeClass("hover");
+                    nav.setTimer();
+                    return false;
+                });
+            },
+            // set navigation timer
+            setTimer: function () {
+                var nav = this;
+                clearTimeout(this.el.timer);
+                this.el.timer = setTimeout(function () {
+                    nav.hideNav()
+                }, 500);
+            },
+            // hide navigation
+            hideNav: function () {
+                var sublists = this.el.find("li.toprow ul");
+                if (this.opts.navEffect == "slide") {
+                    sublists.children("li").slideUp(this.opts.speed);
+                    sublists.children("ul").slideUp(this.opts.speed);
+                }
+                else if (this.opts.navEffect == "fade") // do fade effect
+                {
+                    sublists.children("li").fadeOut(this.opts.speed);
+                    sublists.children("ul").fadeOut(this.opts.speed);
+                }
+                else {
+                    sublists.children("li").css("display", "none");
+                    sublists.children("ul").css("display", "none");
+                }
+                ;
+            },
+            option: function (args) {
+                this.opts = $.extend(true, {}, this.opts, args);
+            },
+            destroy: function () {
+                this.el.unbind("." + this.namespace);
+            }
+        };
+        $.fn.navPlugin = function (options, callback) {
+            new $.NavPlugin(options, this, callback);
+        };
+    })(jQuery);
+
+</script>

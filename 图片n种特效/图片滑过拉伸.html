@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style type="text/css">
+        .mainSlider {
+            position: relative;
+            width: 1000px;
+            height: 300px;
+            margin: 30px auto 20px auto;
+            overflow: hidden;
+        }
+
+        .mainSlider .sliderContent {
+            width: 2000px;
+            height: 300px;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .mainSlider li {
+            float: left;
+            display: inline-block;
+            width: 200px;
+            height: 300px;
+            z-index: 1;
+        }
+
+        .mainSlider li#slider1 {
+            background: url('http://sandbox.runjs.cn/uploads/rs/58/6nyltuzz/b0823zhh01s.jpg') no-repeat center;
+        }
+
+        .mainSlider li#slider2 {
+            background: url('http://sandbox.runjs.cn/uploads/rs/58/6nyltuzz/19.jpg') no-repeat center;
+        }
+
+        .mainSlider li#slider3 {
+            background: url('http://sandbox.runjs.cn/uploads/rs/58/6nyltuzz/24.jpg') no-repeat center;
+        }
+
+        .mainSlider li#slider4 {
+            background: url('http://sandbox.runjs.cn/uploads/rs/58/6nyltuzz/161255234.jpg') no-repeat center;
+        }
+
+        .mainSlider li#slider5 {
+            background: url('http://sandbox.runjs.cn/uploads/rs/58/6nyltuzz/16931850.jpg') no-repeat center;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="http://sandbox.runjs.cn/uploads/rs/58/6nyltuzz/reset.css">
+    <script type="text/javascript" src="http://sandbox.runjs.cn/uploads/rs/58/6nyltuzz/jquery-1.8.3.min.js"></script>
+</head>
+<body>
+<div class="mainSlider">
+    <div class="sliderContent">
+        <ul>
+            <li id="slider1"></li>
+            <li id="slider2"></li>
+            <li id="slider3"></li>
+            <li id="slider4"></li>
+            <li id="slider5"></li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+    // main slider animation.
+    jQuery(function () {
+        // animate time.
+        var defaultOptions = {
+            millis: 950,
+            itemScaleWith: 50,
+            itemWidth: 200
+        }
+
+        var $mainSlider = jQuery(".mainSlider");
+        var $sliderContent = $mainSlider.find(".sliderContent");
+        var $li = $mainSlider.find("li");
+        $li.each(function (e) {
+            var $this = jQuery(this);
+            $this.bind({
+                'mouseover': function (e) {
+                    $li.each(function (e) {
+                        var $other = jQuery(this);
+                        if (!$other.is($this)) {
+                            $other.stop().animate({width: defaultOptions.itemWidth - defaultOptions.itemScaleWith}, defaultOptions.millis);
+                        }
+                    });
+                    $this.stop().animate({width: (4 * defaultOptions.itemScaleWith + defaultOptions.itemWidth)}, defaultOptions.millis);
+                }, 'mouseleave': function (e) {
+                    $li.each(function (e) {
+                        var $other = jQuery(this);
+                        if (!$other.is($this)) {
+                            $other.stop().animate({width: defaultOptions.itemWidth}, defaultOptions.millis);
+                        }
+                    });
+                    $this.stop().animate({width: defaultOptions.itemWidth}, defaultOptions.millis);
+                }
+            });
+        });
+    });
+</script>

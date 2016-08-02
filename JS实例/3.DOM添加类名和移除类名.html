@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        .a{
+            color: red;
+        }
+        .b{
+            font-size: 40px;
+        }
+        .c{
+            font-weight: bolder;
+        }
+        .g{
+            font-family: cursive;
+            font-size: 60px;
+        }
+    </style>
+</head>
+<body>
+<div class="a b c g">AAA</div>
+</body>
+</html>
+<script type="text/javascript">
+    var oDiv = document.getElementsByTagName("div").item(0);
+//    oDiv.className = "d";
+//    var className = "d";
+//    oDiv.className += " " + className;
+    function addClass(ele,str) {                  //添加类名
+        var reg = new RegExp("(^| )" + str + "( |$)");
+        if (!reg.test(ele.className)) {
+            ele.className += " " + str;
+        }
+    }
+    function removeClass(ele,str) {                    //移除类名
+        var reg = new RegExp("(^| )" + str + "( |$)","g");
+        ele.className=ele.className.replace(reg," ");   //  有bug  要加空格
+    }
+
+addClass(oDiv,"f")
+    removeClass(oDiv,"b");
+//    removeClass(oDiv,"c")
+</script>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul li{
+            list-style: none;
+            float: left;
+        }
+
+        .a{
+            width: 200px;
+            height: 200px;
+            overflow: hidden;
+            margin: 5px;
+        }
+
+        .c{
+            display: inline-block;
+            width: 200px;
+            height: 200px;
+            /*background: #00ffea;*/
+        }
+        .b{
+            width: 200px;
+            height: 200px;
+            background: rgba(225,234,186,.6);
+        }
+        .c:nth-child(1){
+            background: #2aabd2;
+        }
+       .c:nth-child(2){
+            background: #c3325f;
+        }
+        .c:nth-child(3){
+            background: #003399;
+        }
+
+
+    </style>
+</head>
+<body>
+<div>
+   <ul>
+       <li>
+           <div class="a">
+               <div class="c"></div>
+               <p class="b"></p>
+           </div>
+       </li>
+       <li>
+           <div class="a">
+               <div class="c"></div>
+               <p class="b"></p>
+           </div>
+       </li>
+       <li>
+           <div class="a">
+               <div class="c"></div>
+               <p class="b"></p>
+           </div>
+       </li>
+       <li>
+           <div class="a">
+               <div class="c"></div>
+               <p class="b"></p>
+           </div>
+       </li>
+       <li>
+           <div class="a">
+               <div class="c"></div>
+               <p class="b"></p>
+           </div>
+       </li>
+       <li>
+           <div class="a">
+               <div class="c"></div>
+               <p class="b"></p>
+           </div>
+       </li>
+       <li>
+           <div class="a">
+               <div class="c"></div>
+               <p class="b"></p>
+           </div>
+       </li>
+       <li>
+           <div class="a">
+               <div class="c"></div>
+               <p class="b"></p>
+           </div>
+       </li>
+       <li>
+           <div class="a">
+               <div class="c"></div>
+               <p class="b"></p>
+           </div>
+       </li>
+       <li>
+           <div class="a">
+               <div class="c"></div>
+               <p class="b"></p>
+           </div>
+       </li>
+       <li>
+           <div class="a">
+               <div class="c"></div>
+               <p class="b"></p>
+           </div>
+       </li>
+       <li>
+           <div class="a">
+               <div class="c"></div>
+               <p class="b"></p>
+           </div>
+       </li>
+   </ul>
+</div>
+</body>
+</html>
+<script type="text/javascript" src="../../../js/jquery-1.9.1.js"></script>
+<script>
+    (function ($) {
+        $.fn.extend({
+            show: function (div) {
+                var w = this.width(),
+                    h = this.height(),
+                    xpos = w / 2,
+                    ypos = h / 2,
+                    eventType = "",
+                    direct = "";
+                this.css({"overflow": "hidden", "position": "relative"});
+                div.css({"position": "absolute", "top": this.width()});
+                this.on("mouseenter mouseleave", function (e) {
+                    var oe = e || event;
+                    var x = oe.offsetX;
+                    var y = oe.offsetY;
+                    var angle = Math.atan((x - xpos) / (y - ypos)) * 180 / Math.PI;
+                    if (angle > -45 && angle < 45 && y > ypos) {
+                        direct = "down";
+                    }
+                    if (angle > -45 && angle < 45 && y < ypos) {
+                        direct = "up";
+                    }
+                    if (((angle > -90 && angle < -45) || (angle > 45 && angle < 90)) && x > xpos) {
+                        direct = "right";
+                    }
+                    if (((angle > -90 && angle < -45) || (angle > 45 && angle < 90)) && x < xpos) {
+                        direct = "left";
+                    }
+                    move(e.type, direct)
+                });
+                function move(eventType, direct) {
+                    if (eventType == "mouseenter") {
+                        switch (direct) {
+                            case "down":
+                                div.css({"left": "0px", "top": h}).stop(true, true).animate({"top": "0px"}, "fast");
+                                break;
+                            case "up":
+                                div.css({"left": "0px", "top": -h}).stop(true, true).animate({"top": "0px"}, "fast");
+                                break;
+                            case "right":
+                                div.css({"left": w, "top": "0px"}).stop(true, true).animate({"left": "0px"}, "fast");
+                                break;
+                            case "left":
+                                div.css({"left": -w, "top": "0px"}).stop(true, true).animate({"left": "0px"}, "fast");
+                                break;
+                        }
+                    } else {
+                        switch (direct) {
+                            case "down":
+                                div.stop(true, true).animate({"top": h}, "fast");
+                                break;
+                            case "up":
+                                div.stop(true, true).animate({"top": -h}, "fast");
+                                break;
+                            case "right":
+                                div.stop(true, true).animate({"left": w}, "fast");
+                                break;
+                            case "left":
+                                div.stop(true, true).animate({"left": -w}, "fast");
+                                break;
+                        }
+                    }
+                }
+            }
+        });
+    })(jQuery)
+
+</script>
+</body>
+</html>
+<script type="text/javascript">
+
+
+    /*
+     *使用说明：
+     *		$(".a").show($(".b"))
+     *		a是展示层，b是遮罩层
+     *		b在a的内部
+     */
+
+
+    $(".a").each(function (i) {
+        $(this).show($(".b").eq(i));
+    });
+</script>

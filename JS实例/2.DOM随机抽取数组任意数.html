@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    //随机的从任意数组中取出
+    var ary = [12, 3, 4, 5, 7, 8, 9, 8, 67, 5, 34, 5, 7]
+    function getRandom(ary) {
+        var a = [];
+        while (a.length < 4) {
+            var nIndex = Math.floor(Math.random() * ary.length);
+            //随机获取数组里的某个索引
+            var cur = ary[nIndex];//通过索引从数组取出一项内容
+            if(a.indexOf(cur)==-1){
+                a[a.length]=cur;
+            }
+        }
+        return a;
+
+    }
+    console.log(getRandom(ary))
+</script>

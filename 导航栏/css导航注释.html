@@ -1,0 +1,195 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=GB2312"/>
+    <title>纯CSS菜单</title>
+    <style type="text/css">
+        <!--
+        /*  */
+        * {
+            font-family: "宋体";
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            padding: 15px;
+        }
+
+        /* 设置table宽度、边框为0、(IE6) */
+        .nav ul table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 0;
+        }
+
+        /* 默认隐藏下一级ul列表 */
+        .nav ul li ul {
+            display: none;
+        }
+
+        /* 当鼠标经过时显示下一级ul列表 */
+        .nav ul li:hover ul,
+        .nav ul li a:hover ul {
+            display: block;
+            width: 100%;
+        }
+
+        /* 好久没玩...结果不知道哪出错了，不加粗就是不行。哪位有深入研究滴请详解~谢 */
+        .nav li a:hover {
+            font-weight: bold;
+        }
+
+        /* ====================== 以上为关键属性 ====================== */
+
+        /* ====================== 以下各位随意发挥 ====================== */
+        /* 修饰样式一 */
+        .nav li {
+            float: left;
+            width: 120px;
+            display: block;
+            font-size: 0;
+            border: solid #ccc;
+            border-width: 1px 0;
+            _border: 0;
+        }
+
+        .nav li a {
+            width: 120px;
+            display: block;
+            height: 16px;
+            padding: 5px 0 1px;
+            _border: solid #ccc;
+            _border-width: 1px 0;
+            font-size: 12px;
+            text-align: center;
+            color: #555;
+            text-decoration: none;
+            background: #f7f7f7;
+        }
+
+        .nav li:hover a,
+        .nav li a:hover {
+            font-weight: bold;
+            color: red;
+        }
+
+        .nav li:hover li {
+            border: 0;
+        }
+
+        .nav li li a,
+        .nav li:hover li a {
+            _border: 0;
+            font-weight: normal;
+            color: #555;
+        }
+
+        .nav li li a:hover {
+            color: red;
+            font-weight: normal;
+        }
+
+        -->
+    </style>
+</head>
+
+<body>
+<div class="nav">
+    <ul>
+        <li class="up"><a href="####">首页
+            <!--[if IE 7]><!--></a><!--<![endif]-->
+            <table>
+                <tr>
+                    <td>
+                        <ul>
+                            <li><a href="####">111112</a></li>
+                            <li><a href="####">111112</a></li>
+                            <li><a href="####">111112</a></li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+            <!--[if lte IE 6]></a><![endif]-->
+        </li>
+        <li><a href="####">导航2
+            <!--[if IE 7]><!--></a><!--<![endif]-->
+            <table>
+                <tr>
+                    <td>
+                        <ul>
+                            <li><a href="####">222221</a></li>
+                            <li><a href="####">222221</a></li>
+                            <li><a href="####">222221</a></li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+            <!--[if lte IE 6]></a><![endif]-->
+        </li>
+        <li><a href="####">导航3
+            <!--[if IE 7]><!--></a><!--<![endif]-->
+            <table>
+                <tr>
+                    <td>
+                        <ul>
+                            <li><a href="####">333331</a></li>
+                            <li><a href="####">333331</a></li>
+                            <li><a href="####">333331</a></li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+            <!--[if lte IE 6]></a><![endif]-->
+        </li>
+        <li><a href="####">导航4
+            <!--[if IE 7]><!--></a><!--<![endif]-->
+            <table>
+                <tr>
+                    <td>
+                        <ul>
+                            <li><a href="####">444441</a></li>
+                            <li><a href="####">444441</a></li>
+                            <li><a href="####">444441</a></li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+            <!--[if lte IE 6]></a><![endif]-->
+        </li>
+        <li><a href="####">导航5
+            <!--[if IE 7]><!--></a><!--<![endif]-->
+            <table>
+                <tr>
+                    <td>
+                        <ul>
+                            <li><a href="####">555551</a></li>
+                            <li><a href="####">555551</a></li>
+                            <li><a href="####">555551</a></li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+            <!--[if lte IE 6]></a><![endif]-->
+        </li>
+        <li><a href="####">导航6
+            <!--[if IE 7]><!--></a><!--<![endif]-->
+            <table>
+                <tr>
+                    <td>
+                        <ul>
+                            <li><a href="####">666661</a></li>
+                            <li><a href="####">666661</a></li>
+                            <li><a href="####">666661</a></li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+            <!--[if lte IE 6]></a><![endif]-->
+        </li>
+    </ul>
+</div>
+<p>查找更多代码，请访问：<a href="http://www.lanrentuku.com" target="_blank">懒人图库</a></p>
+</body>
+</html>

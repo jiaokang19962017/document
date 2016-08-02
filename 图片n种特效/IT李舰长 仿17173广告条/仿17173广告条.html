@@ -1,0 +1,189 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>IT李舰长原创 蓝色宙宇 http://www.lszyu.com 欢迎光临！</title>
+    <link href="main.css" type="text/css" rel="stylesheet"/>
+    <style>
+        #box {
+            width: 960px;
+            height: 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #box .banner {
+            height: 100px;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        #box .banner .banner_imgBox {
+            float: left;
+            overflow: hidden;
+            width: 240px;
+        }
+
+        #box .banner .banner_imgBox .banner_overflow {
+            width: 1000px;
+        }
+
+        #box .banner .banner_imgBox .w {
+            width: 240px;
+            height: 100px;
+        }
+
+        #box .banner .banner_imgBox .w2 {
+            width: 720px;
+            height: 100px;
+        }
+
+        .bColor1 {
+            background: #8fb552
+        }
+
+        .bColor1_2 {
+            background: #c5e494
+        }
+
+        .bColor2 {
+            background: #3a9598
+        }
+
+        .bColor2_2 {
+            background: #91dde0
+        }
+
+        .bColor3 {
+            background: #3660c0
+        }
+
+        .bColor3_2 {
+            background: #a6b8e1
+        }
+
+        .bColor4 {
+            background: #883e9d
+        }
+
+        .bColor4_2 {
+            background: #d9abe6
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <div class="banner clearfix">
+        <div class="banner_imgBox clearfix">
+            <div class="banner_overflow">
+                <div class="w bColor1 left">1</div>
+                <div class="w2 bColor1_2 left">111dddddddddddd</div>
+            </div>
+        </div>
+        <div class="banner_imgBox clearfix">
+            <div class="banner_overflow">
+                <div class="w bColor2 left">2</div>
+                <div class="w2 bColor2_2 left">aaaa222aaaaa</div>
+            </div>
+        </div>
+        <div class="banner_imgBox clearfix">
+            <div class="banner_overflow">
+                <div class="w bColor3 left">3</div>
+                <div class="w2 bColor3_2 left">dddd333ddd</div>
+            </div>
+        </div>
+        <div class="banner_imgBox clearfix">
+            <div class="banner_overflow">
+                <div class="w bColor4 left">4</div>
+                <div class="w2 bColor4_2 left">sssssss444ssss</div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    window.onload = function () {
+        var oBox = document.getElementById("box");
+        var oBanner = getByClass(oBox, "banner")[0];
+        var oBimg = getByClass(oBanner, "banner_imgBox");
+        oBanner.style.width = 960 * oBimg.length + "px";
+        var n = 240;
+        for (var i = 0; i < oBimg.length; i++) {
+            (function (index) {
+                oBimg[i].onmouseover = function () {
+                    move(this, {width: 960})
+                    move(oBanner, {left: -n * index})
+                }
+                oBimg[i].onmouseout = function () {
+                    move(this, {width: 240})
+                    move(oBanner, {left: 0})
+                }
+            })(i)
+        }
+        ;
+
+        /*oBimg[0].onmouseover=function(){
+         move(this,{width:960})
+         };
+         oBimg[0].onmouseout=function(){
+         move(this,{width:240})
+         };
+         oBimg[1].onmouseover=function(){
+         move(this,{width:960})
+         move(oBanner,{left:-n})
+         };
+         oBimg[1].onmouseout=function(){
+         move(this,{width:240})
+         move(oBanner,{left:0})
+         };
+         oBimg[2].onmouseover=function(){
+         move(this,{width:960})
+         move(oBanner,{left:-n*2})
+         };
+         oBimg[2].onmouseout=function(){
+         move(this,{width:240})
+         move(oBanner,{left:0})
+         };
+         oBimg[3].onmouseover=function(){
+         move(this,{width:960})
+         move(oBanner,{left:-n*3})
+         };
+         oBimg[3].onmouseout=function(){
+         move(this,{width:240})
+         move(oBanner,{left:0})
+         };*/
+    };
+    function getByClass(obj, oClass) {
+        var oTag = obj.getElementsByTagName("*");
+        var arr = [];
+        var oR = new RegExp("\\b" + oClass + "\\b");
+        for (var i = 0; i < oTag.length; i++) {
+            if (oR.test(oTag[i].className)) {
+                arr.push(oTag[i])
+            }
+            ;
+        }
+        ;
+        return arr;
+    }
+    ;
+    function getStyle(obj, name) {
+        return obj.currentStyle ? obj.currentStyle[name] : getComputedStyle(obj, false)[name];
+    }
+    ;
+    function move(obj, json) {
+        clearInterval(obj.timer);
+        obj.timer = setInterval(function () {
+            for (var name in json) {
+                var oCurentStyle = parseInt(getStyle(obj, name));
+                var speed = (json[name] - oCurentStyle) / 8;
+                speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+                obj.style[name] = speed + oCurentStyle + "px";
+            }
+            ;
+        }, 30);
+    }
+    ;
+</script>
+</body>
+</html>

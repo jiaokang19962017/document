@@ -1,0 +1,366 @@
+<!Doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>addClass demo</title>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        div, h3 {
+            margin: 0;
+            padding: 0;
+        }
+
+        a {
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        .dd {
+            height: 466px;
+            background: #c81623;
+            position: relative;
+            width: 210px;
+            margin: 50px;
+        }
+
+        .dd-inner {
+        }
+
+        .dd-inner .item {
+            border-left: 1px solid #b61d1d;
+            position: relative;
+            z-index: 1;
+            height: 31px;
+            color: #fff;
+        }
+
+        .dd-inner .item.active {
+            background: #f7f7f7;
+        }
+
+        .dd-inner .item.active a {
+            color: red;
+        }
+
+        .dd-inner h3 {
+            position: absolute;
+            z-index: 2;
+            height: 31px;
+            padding: 0 10px;
+            line-height: 31px;
+            font-family: "微软雅黑";
+            font-size: 14px;
+            font-weight: 400;
+        }
+
+        .dd-inner i {
+            position: absolute;
+            z-index: 1;
+            top: 9px;
+            right: 14px;
+            width: 4px;
+            height: 14px;
+            font: 400 9px/14px consolas;
+        }
+
+        .dd-inner .item a {
+            color: #fff;
+        }
+
+        .dorpdown {
+            position: absolute;
+            left: 209px;
+            top: 0;
+            width: 779px;
+            background: #f7f7f7;
+            border: 1px solid #b61d1d;
+            overflow: hidden;
+            height: 464px;
+        }
+
+        .dorpdown .item-sub {
+            zoom: 1;
+            overflow: hidden;
+        }
+
+        .slider-page a {
+            display: block;
+            width: 28px;
+            height: 62px;
+            line-height: 62px;
+            background: gray;
+            background: rgba(0, 0, 0, .2);
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#32000000, endColorstr=#32000000);
+            color: #fff;
+            text-align: center;
+            font-size: 22px;
+            font-weight: 400;
+            font-family: simsun;
+        }
+
+        .box {
+            width: 160px;
+            height: 160px;
+            position: relative;
+            border: 1px solid #dbdbdb;
+        }
+
+        .box.active img {
+            top: -25%;
+        }
+
+        .box-hover {
+            position: absolute;
+            width: 100%;
+            height: 25%;
+            bottom: 0;
+            background: #2C3F52;
+            color: #FFF;
+            z-index: 5;
+            text-align: center;
+            opacity: 0;
+            visibility: hidden;
+            -webkit-transform: perspective(300px) rotateX(-90deg);
+            -webkit-transform-origin: 50% 100%;
+            -webkit-transition: all .35s;
+            -moz-transform: perspective(300px) rotateX(-90deg);
+            -moz-transform-origin: 50% 100%;
+            -moz-transition: all .35s;
+            transform: perspective(300px) rotateX(-90deg);
+            transform-origin: 50% 100%;
+            transition: all .35s;
+        }
+
+        .box:hover .box-hover {
+            opacity: 1;
+            transform: perspective(300px) rotateX(0deg);
+            visibility: visible;
+        }
+
+        .p-img {
+            width: 160px;
+            height: 160px;
+            position: relative;
+            overflow: hidden;
+            padding: 0;
+        }
+
+        .p-img img {
+            position: absolute;
+            left: 0;
+            top: 0;
+            -webkit-transition: all .4s;
+            -moz-transition: all .4s;
+            -o-transition: all .4s;
+            -ms-transition: all .4s;
+            transition: all .4s;
+        }
+
+        .box3, .box2 {
+            width: 160px;
+            height: 160px;
+            border: 1px solid #dbdbdb;
+            position: relative;
+        }
+
+        .box2 > .mask {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            bottom: 50%;
+            right: 50%;
+            -webkit-transition: all .5s;
+            -moz-transition: all .5s;
+            -o-transition: all .5s;
+            -ms-transition: all .5s;
+            transition: all .5s;
+            color: #fff;
+            text-align: center;
+            line-height: 160px;
+            font-size: 18px;
+        }
+
+        .box2:hover .mask {
+            background: rgba(0, 0, 0, .5);
+            left: 0;
+            bottom: 0;
+            top: 0;
+            right: 0;
+            position: absolute;
+            z-index: 10;
+        }
+
+        .box3:hover .p-img:after {
+            left: 100%;
+            transition: .8s;
+            -moz-transition: .8s;
+            -o-transition: .8s;
+            -webkit-transition: .8s;
+            -ms-transition: .8s;
+        }
+
+        .p-img:after {
+            content: "";
+            display: block;
+            position: absolute;
+            left: -100%;
+            top: 0;
+            width: 40%;
+            height: 100%;
+            background-image: -moz-linear-gradient(0deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, .5), rgba(255, 255, 255, 0));
+            background-image: -webkit-linear-gradient(0deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, .5), rgba(255, 255, 255, 0));
+            transform: skewx(-25deg);
+            -o-transform: skewx(-25deg);
+            -moz-transform: skewx(-25deg);
+            -ms-transform: skewx(-25deg);
+            -webkit-transform: skewx(-25deg);
+        }
+    </style>
+</head>
+<body>
+
+<!--导航-->
+<div class="dd">
+    <div class="dd-inner">
+        <div class="item">
+            <h3>
+                <a href="">张三</a>
+            </h3>
+            <i>&lt;</i>
+        </div>
+        <div class="item">
+            <h3>
+                <a href="">李四</a>
+            </h3>
+            <i>&lt;</i>
+        </div>
+        <div class="item">
+            <h3>
+                <a href="">王二</a>
+            </h3>
+            <i>&lt;</i>
+        </div>
+        <div class="item">
+            <h3>
+                <a href="">麻子</a>
+            </h3>
+            <i>&lt;</i>
+        </div>
+        <div class="item">
+            <h3>
+                <a href="">张三</a>
+            </h3>
+            <i>&lt;</i>
+        </div>
+        <div class="item">
+            <h3>
+                <a href="">李四</a>
+            </h3>
+            <i>&lt;</i>
+        </div>
+        <div class="item">
+            <h3>
+                <a href="">王二</a>
+            </h3>
+            <i>&lt;</i>
+        </div>
+        <div class="item">
+            <h3>
+                <a href="">麻子</a>
+            </h3>
+            <i>&lt;</i>
+        </div>
+    </div>
+    <div class="dorpdown hide">
+        <div class="item-sub hide">11</div>
+        <div class="item-sub hide">22</div>
+        <div class="item-sub hide">33</div>
+        <div class="item-sub hide">44</div>
+        <div class="item-sub hide">11</div>
+        <div class="item-sub hide">22</div>
+        <div class="item-sub hide">33</div>
+        <div class="item-sub hide">44</div>
+    </div>
+</div>
+<!--旋转效果-->
+<div class="box">
+    <div class="p-img">
+        <a href="http://item.jd.com/1584066535.html" title="慕丝妮榴莲饼300g/袋 榴莲肉酥饼6个 休闲 糕点零食品 300g袋装"
+           target="_blank"><img class="err-product pimg1584066535" width="160" height="160" data-img="1"
+                                src="http://img10.360buyimg.com/n2/jfs/t2020/311/858818370/564831/5bf71c42/56303e7bNbd517e8b.jpg"
+                                alt="慕丝妮榴莲饼300g/袋 榴莲肉酥饼6个 休闲 糕点零食品 300g袋装">
+        </a>
+    </div>
+    <div class="box-hover">
+        sss
+    </div>
+</div>
+
+<!--中心放大-->
+<div class="box2">
+    <img class="err-product pimg1584066535" width="160" height="160" data-img="1"
+         src="http://img10.360buyimg.com/n2/jfs/t2020/311/858818370/564831/5bf71c42/56303e7bNbd517e8b.jpg"
+         alt="慕丝妮榴莲饼300g/袋 榴莲肉酥饼6个 休闲 糕点零食品 300g袋装">
+
+    <div class="mask">
+
+    </div>
+</div>
+
+<!--阴影闪过-->
+<div class="box3">
+    <div class="p-img">
+        <img class="err-product pimg1584066535" width="160" height="160" data-img="1"
+             src="http://img10.360buyimg.com/n2/jfs/t2020/311/858818370/564831/5bf71c42/56303e7bNbd517e8b.jpg"
+             alt="慕丝妮榴莲饼300g/袋 榴莲肉酥饼6个 休闲 糕点零食品 300g袋装">
+    </div>
+
+</div>
+<script src="../js/jquery-1.9.1.js"></script>
+<script>
+    $(function () {
+
+        var di = $(".dd-inner .item");
+        var d = $(".dorpdown");
+        var dis = $(".dorpdown .item-sub");
+        di.each(function (i) {
+            $(this).hover(function () {
+                $(this).addClass("active");
+                d.removeClass("hide");
+                dis.eq(i).removeClass("hide");
+            }, function () {
+                $(this).removeClass("active");
+                d.addClass("hide");
+                dis.eq(i).addClass("hide");
+            })
+        });
+
+
+        var b = $(".box");
+        b.hover(function () {
+            $(this).addClass("active");
+        }, function () {
+            $(this).removeClass("active");
+        });
+
+        var b2 = $(".box2");
+//            var bm = $(".box2 .mask");
+//            b2.hover(function(){
+//                bm.addClass("hover");
+//                bm.text("我是蒙版")
+//            },function(){
+//                bm.removeClass("hover");
+//                bm.text(" ")
+//            })
+
+    })
+</script>
+</body>
+</html>

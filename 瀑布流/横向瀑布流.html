@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>横向瀑布流</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        .g-mn{
+            width: 1200px;
+            margin: 0 auto;
+        }
+        .g-mn:after{
+            content: "";
+            display: block;
+            clear: both;
+        }
+        .g-mn ul{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .g-mn li{
+            float: left;
+            margin-right: 5px;
+            margin-bottom: 5px;
+            overflow: hidden;
+        }
+        .g-mn img{
+            border:none;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+<div class="g-mn" id="imgId">
+
+</div>
+<script src="../js/jquery-1.9.1.js"></script>
+<script src="js/imgflow.js"></script>
+<script>
+    $.ajax({
+        url:"list.json",
+        type:"get",
+        dataType:"json",
+        success:function(data){
+            $("#imgId").imgflow({
+                data:data,  //数据
+                imgHeight:200  //图片单元高度
+            });
+        }
+    })
+
+
+
+
+    $.fn.imgflow = function(option) {
+        var _self = this;
+        var timer;
+        var def = {
+            imgHeight: "200",
+            data: null
+        }
+        def = $.extend(def, option);
+
+        function formatHTML(data) {
+            var str = "<ul>";
+            for (var i = 0, len = data && data.length; i < len; i++) {
+                str += "<li style='height:" + def.imgHeight + "px;'><a href=''><span>" + data[i].filename + "</span><img src='" + data[i].filepath + "' alt=''/></a></li>";
+            }
+            str += "</ul>";
+            return str;
+        }
+
+        function calcImgElWidth() {
+            var imgLi = $(this).find("li");
+            var wt=$(this).width();
+            var rWt = 0,
+                    rArr = [];
+            $.each(imgLi, function(i, n) {
+                var w = $(n).outerWidth(true);
+                rWt += w;
+                rArr.push(n);
+                if (rWt > wt) {
+                    var lastEl = rArr.pop();
+                    var sumLen = wt - rWt + $(lastEl).outerWidth(true);
+                    var d =Math.floor((sumLen) / rArr.length);
+                    var total=0;
+                    $.each(rArr, function(j, m) {
+                        var marginWt=Number($(m).css("margin-left").replace("px",""))||0+Number($(m).css("margin-right").replace("px",""))||0;
+                        var w2 = $(m).width() + d-marginWt;
+                        var imgEl = $(m).find("img").eq(0);
+
+                        total +=$(m).width() + d;
+                        if (j == rArr.length - 1 && total != wt) {
+                            $(m).width(w2 + wt - total - 2);
+                            imgEl.width(w2 + wt - total - 2);
+                        } else {
+                            if (w2 > imgEl.width()) {
+                                imgEl.css({
+                                    "width": w2 + "px",
+                                    "height": "auto"
+                                });
+                            }
+                            $(m).width(w2);
+                        }
+                    });
+                    rWt = $(lastEl).outerWidth(true);
+                    rArr.length = 0;
+                    rArr.push(lastEl);
+                }
+            });
+        }
+
+        $(window).bind("resize",function(){
+            if(timer){
+                window.clearTimeout(timer);
+            }
+            $(_self).html(formatHTML(def.data));
+            timer= setTimeout(calcImgElWidth.call(_self), 500);
+        });
+
+        $(window).trigger("resize");
+    }
+
+</script>
+</body>
+</html>

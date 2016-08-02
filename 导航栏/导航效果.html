@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>RunJS</title>
+    <style type="text/css">
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-size: 14px;
+            font-weight: normal;
+        }
+
+        body {
+            font-size: 12px;
+            font-family: "宋体";
+            background: #f0efef;
+        }
+
+        .clear {
+            font-size: 0px;
+            clear: both;
+            line-height: 0;
+            height: 1px;
+        }
+
+        .clearfix:after {
+            content: ".";
+            display: block;
+            height: 0;
+            clear: both;
+            visibility: hidden;
+        }
+
+        .clearfix {
+            min-height: 1px;
+        }
+
+        * html .clearfix {
+            height: 1px;
+        }
+
+        img {
+            border-style: none;
+            display: block
+        }
+
+        a {
+            color: #000
+        }
+
+        a:link {
+            outline: none;
+            TEXT-DECORATION: none;
+        }
+
+        a:visited {
+            outline: none;
+            TEXT-DECORATION: none;
+        }
+
+        a:active {
+            outline: none;
+            TEXT-DECORATION: none;
+        }
+
+        .clear_box {
+            clear: both
+        }
+
+        ul, li {
+            list-style-type: none;
+        }
+
+        /*index
+        ---------------------------------------------------------------------*/
+
+        .top {
+            width: 100%;
+        }
+
+        .top_100 {
+            width: 100%;
+            float: left;
+            background: #f7f7f7
+        }
+
+        .top_bg {
+            width: 1003px;
+            margin: 0 auto
+        }
+
+        #logo {
+            float: left
+        }
+
+        .nav {
+            width: 100%;
+            height: 40px;
+            background: #f00;
+            height: 45px;
+            line-height: 45px;
+        }
+
+        .nav ul {
+            width: 1003px;
+            margin: 0 auto
+        }
+
+        .nav li {
+            float: left;
+            background: url(../images/pic16.gif) right bottom no-repeat;
+            overflow: hidden;
+            height: 45px;
+            position: relative;
+            padding: 0 7px;
+        }
+
+        .nav li a {
+            display: block;
+            width: 128px;
+            height: 45px;
+            color: #6d6e71;
+            font-size: 14px;
+            text-align: center;
+            position: relative
+        }
+
+        .nav li a span {
+            position: absolute;
+            width: 128px;
+            left: 0
+        }
+
+        .nav li a span.out {
+            top: 0
+        }
+
+        .nav li a span.bg {
+            background: #f60;
+            width: 128px;
+            height: 45px;
+            color: #fff !important
+        }
+
+        .nav li a span.over, .nav li a span.bg {
+            top: -45px;
+            color: #fff
+        }
+
+        .menu {
+            width: 128px;
+            color: #000;
+            position: absolute;
+            left: 0;
+            top: 45px;
+        }
+
+        .nav li .menu dd a {
+            color: #000
+        }
+
+        .search {
+            float: right;
+            width: 200px;
+            height: 25px;
+            margin: 32px 29px 0 0;
+            display: inline
+        }
+
+        .text {
+            background: url(../images/pic0.gif) no-repeat;
+            width: 162px;
+            height: 25px;
+            padding: 0 0 0 10px
+        }
+
+        .button {
+            width: 28px;
+            height: 25px;
+            background: url(../images/pic2.gif) no-repeat
+        }
+
+        .text, .button {
+            border: none;
+            outline: none;
+            color: #bfbfbf;
+            line-height: 25px;
+        }
+
+        .bot {
+            line-height: 24px;
+            width: 1003px;
+            margin: 0 auto
+        }
+
+        .n_bot {
+            float: left;
+            padding: 21px 0;
+            width: 1003px;
+        }
+
+        .bot_left {
+            float: left;
+            color: #8b8b8b
+        }
+
+        .bot_right {
+            float: right;
+            margin: 0 21px 0 0;
+            display: inline;
+        }
+
+        select {
+            border: 1px solid #c2c2c2;
+            height: 162px;
+            height: 23px
+        }
+
+        .banner {
+            margin: 0 auto;
+            width: 1003px
+        }
+
+        .box {
+            width: 1003px;
+            margin: 0 auto
+        }
+
+        .box2 {
+            width: 1003px;
+            float: left;
+            background: #ffffff;
+        }
+
+        .cokkie {
+            background: url(../images/pic5.gif) center bottom no-repeat;
+            color: #d8d8d8;
+            font-size: 26px;
+            font-family: Arial, Helvetica, sans-serif;
+            text-transform: uppercase;
+            padding: 0 0 0 12px;
+            line-height: 42px;
+            height: 42px;
+            font-weight: bold;
+        }
+
+        .cokkie span {
+            float: left
+        }
+
+        .cokkie font {
+            float: right;
+            background: url(../images/pic4.gif) left center no-repeat;
+            font-size: 12px;
+            padding: 0 0 0 23px;
+            margin: 0 17px 0 0;
+            display: inline;
+            color: #6d6e71
+        }
+
+        .cokkie strong {
+        }
+
+        a.orange {
+            color: #ff8400
+        }
+
+        a.grey {
+            color: #6d6e71
+        }
+
+        .titles {
+            width: 100%;
+            line-height: 41px;
+            height: 41px
+        }
+
+        .titles span {
+            background: url(../images/pic7.gif) left center no-repeat;
+            padding: 0 0 0 12px;
+            color: #333;
+            font-weight: bold;
+            margin: 0 0 0 11px;
+            display: inline;
+            float: left
+        }
+
+        .titles em a {
+            margin: 0 12px 0 0;
+            float: right;
+            display: inline;
+            font-style: normal;
+            padding: 0 8px 0 0;
+            color: #444444;
+            background: url(../images/pic9.gif) right center no-repeat
+        }
+
+        .box3 {
+            width: 982px;
+            margin: 0 auto
+        }
+
+        .box4 {
+            width: 982px;
+            float: left;
+            background: #f0efef;
+            padding: 10px 0 12px 0;
+        }
+
+        #myFocus {
+            width: 478px;
+            height: 370px;
+            overflow: hidden
+        }
+
+        .loading img {
+            margin: 0 auto
+        }
+
+        .new_left {
+            float: left
+        }
+
+        .new_right {
+            float: right
+        }
+
+        .new_left {
+            float: left;
+            margin: 0 0 0 9px;
+            display: inline
+        }
+
+        .right_news {
+            float: right;
+            width: 481px
+        }
+
+        .right_news h1 {
+            color: #e2000c;
+            text-align: center;
+            font-weight: bold;
+            margin: 0 0 14px 0
+        }
+
+        .a1 {
+            line-height: 25px;
+            height: 74px;
+            overflow: hidden;
+            padding: 1px 9px 0 0
+        }
+
+        .red {
+            color: #e2000c;
+        }
+
+        .index_news {
+            margin: 59px 0 0 0;
+            color: #898989;
+        }
+
+        .index_news a {
+            display: block;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 216px;
+            width: 216px;
+            font-family: "宋体";
+            background: url(../images/pic11.gif) left center no-repeat;
+            padding: 0 0 0 10px;
+            margin: 0 0 0 6px;
+            color: #333
+        }
+
+        .index_news li {
+            margin: 0 9px 0 0;
+            border-bottom: 1px dashed #333
+        }
+
+        .new2_left {
+            float: left;
+            width: 482px;
+            background: #f0efef;
+        }
+
+        .new2_right {
+            float: right;
+            width: 482px;
+            background: #f0efef;
+        }
+
+        .a2 {
+            line-height: 25px;
+            margin: 11px auto 0 auto;
+            width: 442px
+        }
+
+        .a2 h1 {
+            color: #e2000c;
+            text-align: center;
+            font-weight: bold;
+            font-size: 12px
+        }
+
+        .a3 {
+        }
+
+        .a4 {
+            padding: 0 7px 0 19px;
+            overflow: hidden;
+            height: 114px
+        }
+
+        .new2_left .index_news {
+            width: 466px;
+            margin: 43px auto 11px auto
+        }
+
+        .new2_right .index_news {
+            width: 466px;
+            margin: 43px auto 11px auto
+        }
+
+        .whites {
+            background: #fff
+        }
+
+        .mar_t {
+            padding: 0 0 44px 0
+        }
+
+        .se {
+            width: 159px;
+            color: #8b8b8b;
+            padding: 0 0 0 3px
+        }
+
+    </style>
+    <script id="jquery_183" type="text/javascript" class="library" src="js/jquery-1.9.1.js"></script>
+</head>
+<body>
+<div class="nav">
+    <ul>
+        <li><a href="#">首 页</a>
+
+            <div class="menu">
+                <dl>
+                    <dd><a href="#">21</a></dd>
+                    <dd><a href="#">111111</a></dd>
+                    <dd><a href="#">111111</a></dd>
+                    <dd><a href="#">111111</a></dd>
+                    <dd><a href="#">111111</a></dd>
+                    <dd><a href="#">111111</a></dd>
+                </dl>
+            </div>
+        </li>
+        <li><a href="#">关于宝山</a></li>
+        <li><a href="#">新闻中心</a></li>
+        <li><a href="#">集团业务</a></li>
+        <li><a href="#">集团文化</a></li>
+        <li><a href="#">人力资源</a></li>
+        <li><a href="#">联系我们</a></li>
+    </ul>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+    $(function () {
+        $(".nav li a").wrapInner('<span class="out"></span>').append('<span class="bg"></span>')
+        $(".nav li a ").each(function () {
+            $('<span class="over">' + $(this).text() + '</span>').appendTo(this)
+        });
+        $(".nav li a").hover(function () {
+            $(".out", this).stop().animate({top: "45"}, 250)
+            $(".over", this).stop().animate({top: "0"}, 300)
+            $(".bg", this).stop().animate({top: "0"}, 119)
+        }, function () {
+            $(".out", this).stop().animate({top: "0"}, 250)
+            $(".over", this).stop().animate({top: "-45"}, 300)
+            $(".bg", this).stop().animate({top: "-45"}, 119)
+        })
+        $(".menu dd a span.bg,.menu dd a span.over").remove()
+        $(".nav li:last").css("background", "none")
+    })
+</script>

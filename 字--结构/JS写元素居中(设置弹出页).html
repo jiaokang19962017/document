@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div class="center" style="width:200px;height:200px;background:#ccc;">我现在在屏幕的中间位置哦！</div>
+
+</body>
+</html>
+<script src="../js/jquery-1.9.1.js"></script>
+    <script type="text/javascript">
+            $(function(){
+                jQuery.fn.center = function(){
+                    this.css('position','absolute');
+                    this.css("top", ( $(window).height() - this.height() ) / 2+$(window).scrollTop() + "px");
+                    this.css("left", ( $(window).width() - this.width() ) / 2+$(window).scrollLeft() + "px");
+                    return this;
+                }
+
+                $('.center').center();
+            })
+</script>
+

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>demo</title>
+    <link rel="stylesheet" type="text/css" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <style>
+        ul,li {
+            list-style: none;
+        }
+        li {
+            display: inline-block;
+            font-size: 60px;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <ul>
+        <li>
+            <span class="glyphicon glyphicon-star-empty"></span>
+        </li>
+        <li>
+            <span class="glyphicon glyphicon-star-empty"></span>
+        </li>
+        <li>
+            <span class="glyphicon glyphicon-star-empty"></span>
+        </li>
+        <li>
+            <span class="glyphicon glyphicon-star-empty"></span>
+        </li>
+        <li>
+            <span class="glyphicon glyphicon-star-empty"></span>
+        </li>
+
+    </ul>
+</div>
+<script>
+    window.onload = function() {
+        var box = document.getElementById('box');
+        var aLi = box.getElementsByTagName('li');
+        var active = -1;
+        for (var i = 0; i < aLi.length; i++) {
+            aLi[i].index = i;
+            aLi[i].onmouseover = function() {
+                over(this.index,aLi,active);
+            }
+            aLi[i].onmouseout = function() {
+                out(this.index,aLi,active);
+            }
+            aLi[i].onclick = function() {
+                active = this.index;
+                click(active,aLi);
+            }
+        }
+    }
+    function over(index,obj,active) {
+        obj[index].style.color="#ffc107";
+        for (var i = 0; i < obj.length; i++) {
+            if(i < index) {
+                obj[i].style.color="#ffc107";
+            }if(index < active){
+                for(var j= index+1; j <= active; j++){
+                    obj[j].style.color="#333";
+                }
+            }
+        }
+    }
+    function out(index,obj,active) {
+        for (var i = 0; i < obj.length; i++) {
+            if(i > active) {
+                obj[i].style.color="#333";
+            }if(index < active){
+                for(var j= index; j <= active; j++){
+                    obj[j].style.color="#ffc107";
+                }
+            }
+
+        }
+    }
+    function click(active,obj) {
+        obj[active].style.color="#ffc107";
+        for (var i = 0; i < obj.length; i++) {
+            if(i < active) {
+                obj[i].style.color="#ffc107";
+            }
+        }
+    }
+</script>
+</body>
+</html>

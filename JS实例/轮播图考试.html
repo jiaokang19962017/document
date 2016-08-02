@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        #outer{
+            width: 500px;
+            height: 300px;
+            margin: 30px auto;
+            position: relative;
+            overflow: hidden;
+        }
+        #inner{
+            width: 2500px;
+            height: 300px;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        #inner div{
+            width: 500px;
+            height: 300px;
+            float: left;
+            text-align: center;
+            line-height: 300px;
+        }
+        #inner div.red{
+            background: red;
+        }
+        #inner div.blue{
+            background: blue;
+        }
+        #inner div.green{
+            background: green;
+        }
+        #inner div.orange{
+            background: orange;
+        }
+        #inner div.yellow{
+            background: yellow;
+        }
+        .span1{
+            display: block;
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            left: 0;
+            top: 100px;
+            background: #cccccc;
+        }
+        .span2{
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            right: 0;
+            top: 100px;
+            background: #cccccc;
+        }
+        #outer ul{
+            list-style: none;
+        }
+        #outer ul li{
+            float: left;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #cccccc;
+            text-align: center;
+            line-height: 30px;
+            color: white;
+        }
+        #outer ul li.li1{
+            position: absolute;
+            left: 50px;
+            bottom: 30px;
+        }
+        #outer ul li.li2{
+            position: absolute;
+            left: 100px;
+            bottom: 30px;
+        }
+        #outer ul li.li3{
+            position: absolute;
+            left: 150px;
+            bottom: 30px;
+        }
+        #outer ul li.li4{
+            position: absolute;
+            left: 200px;
+            bottom: 30px;
+        }
+        #outer ul li.li3{
+            position: absolute;
+            left: 250px;
+            bottom: 30px;
+        }
+        #outer ul li.bg{
+            background: black;
+        }
+    </style>
+</head>
+<body>
+<div id="outer">
+    <div id="inner">
+        <div class="red">yi</div>
+        <div class="blue">er</div>
+        <div class="green">san</div>
+        <div class="orange">si</div>
+        <div class="yellow">wu</div>
+    </div>
+    <span class="span1">左</span>
+    <span class="span2">右</span>
+    <ul>
+        <li class="li1 bg">1</li>
+        <li class="li2">2</li>
+        <li class="li3">3</li>
+        <li class="li4">4</li>
+        <li class="li5">5</li>
+    </ul>
+</div>
+</body>
+</html>
+<script>
+    function getCss(ele,attr){
+        if(window.getComputedStyle){
+            return parseFloat(getComputedStyle(ele,null)[attr]);
+        }else{
+            if(attr=="opacity"){
+                var reg=/alpha\(opacity *= *(\d+(\.\d+)?)\)/;
+                var str=ele.currentStyle[filter];
+                if(reg.test(str)){
+                    return RegExp.$1/100;
+                }else{
+                    return 1;
+                }
+            }else{
+                return parseFloat(ele.currentStyle[attr]);
+            }
+        }
+    }
+    function setCss(ele,attr,value){
+        if(attr=="opacity"){
+            ele.style[attr]=value;
+            ele.stylle.filter="alpha(opacity="+value+")";
+        }else{
+            ele.style[attr]=value+"px";
+        }
+    }
+    function animate(ele,attr,target,duration,callback){
+        var times=0;
+        var interval=15;
+        var begin=getCss(ele,attr);
+        var change=target-begin;
+        clearInterval(ele.timer);
+        function step(){
+            times+=interval;
+            if(times<duration){
+                ele.style[attr]=times/duration*change+begin+"px";
+            }else{
+                ele.style[attr]=target+"px";
+                clearInterval(ele.timer);
+                ele.timer=null;
+                if(typeof callback=="function"){
+                    callback.call(ele);
+                }
+            }
+        }
+        ele.timer=window.setInterval(step,interval);
+    }
+    var i=0;
+    var oDivs=inner.getElementsByTagName("div");
+    var oSpans=document.getElementsByTagName("span");
+    var oLis=document.getElementsByTagName("li");
+    oSpans[0].onclick=function() {
+        if (i < oDivs.length - 1) {
+            i++;
+        } else if (i = oDivs.length) {
+            i = 1;
+            inner.style.left=0;
+      }
+        animate(inner, "left", -500 * i, 800);
+    };
+    oSpans[1].onclick=function(){
+        if(i>0){
+            i--;
+        }else{
+            i=4;
+            inner.style.left="-2500px";
+        }
+        animate(inner,"left",-500*i,800);
+    }
+    var first=oDivs[0].cloneNode(true);
+    inner.appendChild(first);
+    inner.style.width="3000px";
+
+
+</script>

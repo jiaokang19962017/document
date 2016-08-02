@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>YesTop - HoverTree</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="http://hovertree.com/ziyuan/jquery/jquery-1.11.3.min.js"></script>
+    <!--<script type="text/javascript" src="http://hovertree.com/texiao/yestop/inc/jquery.yestop.js"></script>-->
+    <style>
+        body {
+            margin: 0px;
+            font-family: Arial
+        }
+
+        a {
+            color: blue
+        }
+    </style>
+</head>
+<body>
+<div style="text-align:center;width:100%;margin:0px auto;">
+    <h1>YesTop</h1>
+    A jQuery Plugin<br/>
+    <a href="http://hovertree.com/texiao/yestop/">Demo 1</a> <a href="http://hovertree.com/texiao/yestop/demo2.htm">Demo
+    2</a> <a href="http://hovertree.com/texiao/yestop/demo3.htm">Demo 3</a>
+    <a href="http://hovertree.com/texiao/yestop/demo4.htm">Demo 4</a> <a
+        href="http://hovertree.com/h/bjaf/topimage.htm">Images</a>
+</div>
+<div style="height: 360px;background-color: #66FF66;">
+
+</div>
+<div style="width:100%;text-align:center;height:200px">&copy; hovertree.com</div>
+<div style="height: 200px; visibility: visible; background-color: Olive">
+</div>
+<div style="height:200px;background-color:burlywood"></div>
+<div style="height:200px;background-color:darkorchid"></div>
+<div style="height: 200px; visibility: visible; background-color:gray">
+</div>
+<div style="height:200px;background-color:blue"></div>
+<div style="height:200px;background-color:red"></div>
+<div style="height:200px;background-color:yellow"></div>
+<div style="height:200px;background-color:yellowgreen"></div>
+<div style="height:800px;background-color:white"></div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $.fn.yestop({
+            yes_bottom: '50px',
+            yes_right: "50px",
+
+        });
+    })
+
+    /*
+    * 也就是：
+     $.fn.yestop();
+
+     这句代码就可以了。
+     当然还有高级的设置，如换图片，设置图标为圆形，设置位置，设置时间等等。
+     例如：
+
+     $.fn.yestop({
+     "yes_image": "http://hovertree.com/texiao/yestop/inc/yestoprocket.png"
+     , "yes_width": "48px", "yes_height": "125px" , "yes_time": 200
+     ,"yes_bottom":"20px","yes_right":"10px"
+     });
+    *
+    * */
+
+
+        /*!
+         * YesTop(jQuery GoToTop)
+         * version: 1.1.2
+         * Copyright (c) 2015 HoverTree
+         * http://hovertree.com
+         * http://hovertree.com/texiao/yestop/
+         */
+    (function ($) {
+        $.fn.yestop = function (options) {
+
+            var settings = $.extend({
+                yes_position: 'fixed',
+                yes_width: '48px',
+                yes_height: '48px',
+                yes_image: 'http://hovertree.com/texiao/yestop/inc/yestop.png',
+                yes_hoverImage: '',
+                yes_length: '268',
+                yes_time: 500,
+                yes_bottom: '50px',
+                yes_right: "50px",
+                yes_top: "",
+                yes_left: "",
+                yes_title: "Go Top",
+                yes_opacity: "0.8",
+                yes_hoverOpacity:"1",
+                yes_radius: "0%",
+                yes_html: "",
+                yes_hoverHtml: "",
+                yes_fontSize:"12px",
+                yes_lineHeight: "48px",
+                yes_backColor: "transparent"
+            }, options);
+
+            settings.yes_image = "url(" + settings.yes_image + ")";
+
+
+            var h_yesObj;
+            if($(this).length<1)//
+            {
+                if ($("#yesTopHovertree").length < 1) {
+                    $("<div id='yesTopHovertree'></div>").appendTo("body");
+                }
+                h_yesObj = $("#yesTopHovertree");
+            }
+            else {
+                h_yesObj = $(this);
+            }
+
+            h_yesObj.css({
+                "width": settings.yes_width, "height": settings.yes_height
+                , "cursor": "pointer", "border-radius": settings.yes_radius
+                , "position": settings.yes_position
+                , "opacity": settings.yes_opacity, "background-image": settings.yes_image
+                , "text-align": "center", "line-height": settings.yes_lineHeight
+                ,"background-color":settings.yes_backColor,"font-size":settings.yes_fontSize
+            })
+
+            if (settings.yes_html != "")
+            { h_yesObj.html(settings.yes_html) }
+
+            if (settings.yes_hoverHtml != "")
+            {
+                h_yesObj.hover(function () { h_yesObj.html(settings.yes_hoverHtml) }, function () { h_yesObj.html(settings.yes_html) })
+            }
+
+            if (settings.yes_position == "fixed") {
+                if (settings.yes_top == "") {
+                    h_yesObj.css({ "bottom": settings.yes_bottom })
+                }
+                else { h_yesObj.css({ "top": settings.yes_top }) }
+                if(settings.yes_left=="")
+                { h_yesObj.css({ "right": settings.yes_right }) }
+                else { h_yesObj.css({ "left": settings.yes_left }) }
+            }
+
+            h_yesObj.hover(
+                    function () {
+                        h_yesObj.css({ "opacity": settings.yes_hoverOpacity })
+                    },
+                    function () {
+                        h_yesObj.css({ "opacity": settings.yes_opacity })
+                    }
+            )
+
+
+            if (settings.yes_hoverImage != "")
+            {
+                settings.yes_hoverImage = "url(" + settings.yes_hoverImage + ")"
+                h_yesObj.hover(
+                        function () { h_yesObj.css({ "background-image": settings.yes_hoverImage });}
+                        , function () { h_yesObj.css({ "background-image": settings.yes_image }) });
+            }
+
+            h_yesObj.attr("title", settings.yes_title);
+
+            if (settings.yes_length > 0)
+                h_yesObj.hide();
+            else { h_yesObj.show();}
+
+            $(window).scroll(function () {
+                if ($(window).scrollTop() > settings.yes_length) {
+                    h_yesObj.fadeIn(100);
+                }
+                else {
+                    h_yesObj.fadeOut(100);
+                }
+            });
+
+            h_yesObj.on("click", function () {$('html,body').animate({ scrollTop: '0px' }, settings.yes_time); return false;  })
+
+        }
+    }(jQuery));
+</script>
+</body>
+</html>

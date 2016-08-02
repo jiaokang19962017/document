@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>数据源是实例</title>
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="./jquery.dataTables.css">
+
+    <!-- jQuery -->
+    <script type="text/javascript" charset="utf8" src="../jquery-1.9.1.js"></script>
+
+    <!-- DataTables -->
+    <script type="text/javascript" charset="utf8" src="../jquery.dataTables.js"></script>
+
+    <style>
+        /*最外层的容器自己再定个样式*/
+        #table_id_wrapper{
+            width: 1200px;
+            margin: 0 auto;
+        }
+    </style>
+
+</head>
+<body>
+<table id="table_id" class="cell-border order-column">
+    <thead>
+    <tr>
+        <th>name</th>
+        <th>salary</th>
+        <th>office</th>
+        <th>position</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+</table>
+</body>
+<script>
+
+    function Employee ( name, position, salary, office ) {
+        this.name = name;
+        this.position = position;
+        this.salary = salary;
+        this._office = office;
+
+        this.office = function () {
+            return this._office;
+        }
+    };
+
+
+    //初始化Datatables
+    $(document).ready( function () {
+        $('#table_id').DataTable({
+            data:[
+                new Employee( "Tiger Nixon", "System Architect", "$3,120", "Edinburgh" ),
+                new Employee( "Garrett Winters", "Director", "$5,300", "Edinburgh" )
+            ],
+            columns: [//选择与列对应的数据
+                { data: 'name' },
+                { data: 'salary' },
+                { data: 'office()' },
+                { data: 'position' }
+            ]
+        });
+    } );
+</script>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>RunJS</title>
+    <script id="jquery_183" type="text/javascript" class="library" src="../js/jquery-1.9.1.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="http://miemiedev.github.com/mmGrid/src/mmGrid.css">
+    <script type="text/javascript" src="http://miemiedev.github.com/mmGrid/src/mmGrid.js"></script>
+    <link rel="stylesheet" type="text/css" href="http://miemiedev.github.com/mmGrid/src/mmPaginator.css">
+    <script type="text/javascript" src="http://miemiedev.github.com/mmGrid/src/mmPaginator.js"></script>
+    <style type="text/css">
+        body{
+            font-family: 'Helvetica Neue', helvetica, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+            color: #333;
+        }
+        .mmGrid, .mmPaginator
+        {
+            font-size: 12px;
+        }
+        .btnPrice {
+            display: block;
+            width: 16px;
+            height: 16px;
+            margin: 0px auto;
+            background: url(http://sandbox.runjs.cn/uploads/rs/412/rrczw3xl/botton_g1.gif) no-repeat;
+        }
+
+        .btnPrice:hover {
+            background: url(http://sandbox.runjs.cn/uploads/rs/412/rrczw3xl/botton_g2.gif) no-repeat;
+        }
+    </style>
+</head>
+<body style="background: #fff;">
+<table id="mmg"></table>
+<div id="pg" style="text-align: right;"></div>
+</body>
+</html>
+<script type="text/javascript">
+    $(document).ready(function(){
+
+
+        var fixed2 = function(val){
+            if(!val){
+                return '';
+            }
+            return val.toFixed(2);
+        }
+        var cols = [
+            {title:'行情', name:'', width: 30, align: 'center',lockWidth:true,  renderer: function(val,item,items,rowIndex){
+                return '<div class="btnPrice"></div>';
+            }},
+            {title:'股票', align: 'center', cols:[
+                { title:'股票代码', name:'SECUCODE' ,width:100, align:'center' ,sortable: true, lockDisplay: true},
+                { title:'股票名称', name:'SECUABBR' ,width:100, align:'center' ,sortable: true, lockDisplay: true}
+            ]},
+            { title:'今收盘', name:'CLOSINGPRICE' ,width:60, align:'right', sortable: true, type: 'number', renderer: fixed2},
+            { title:'涨跌幅', name:'DAYCHANGERATE' ,width:60, align:'right', sortable: true, type: 'number',renderer: function(val){
+                if(val > 0){
+                    return '<span style="color: #b00">' + val.toFixed(2) +'%' + '</span>';
+                }else if(val < 0){
+                    return '<span style="color: #0b0">' + val.toFixed(2) +'%' + '</span>';
+                }
+                return val.toFixed(2)+'%';
+            }},
+            { title:'涨跌额', name:'DAYCHANGE' ,width:60, align:'right', sortable: true, type: 'number', renderer: function(val){
+                if(val > 0){
+                    return '<span style="color: #b00">' + val.toFixed(2) + '</span>';
+                }else if(val < 0){
+                    return '<span style="color: #0b0">' + val.toFixed(2) + '</span>';
+                }
+                return val.toFixed(2);
+            }},
+            { title:'振幅', name:'AMPLITUDE' ,width:60, align:'right', sortable: true, type: 'number', renderer: function(val){
+                return val.toFixed(2)+'%';
+            }},
+            { title:'成交' ,align: 'center', cols: [
+                { title:'成交量(手)', name:'TURNOVERVOL' ,width:100, align:'right',type: 'number',sortable: true, renderer: function(val){
+                    return (val / 100).toFixed(2);
+                }},
+                { title:'成交额(万)', name:'TURNOVERVAL' ,width:100, align:'right',type: 'number' ,sortable: true, renderer: function(val){
+                    return (val / 10000).toFixed(2);
+                }}
+            ]},
+            { title:'昨收盘', name:'PREVCLOSINGPRICE' ,width:60, align:'right', sortable: true, type: 'number', renderer: fixed2},
+            { title:'今开盘', name:'OPENINGPRICE',width:60, align:'right', sortable: true, type: 'number', renderer: fixed2},
+            { title:'最高价', name:'HIGHESTPRICE' ,width:60, align:'right', hidden: true, sortable: true, type: 'number', renderer: fixed2},
+            { title:'最低价', name:'LOWESTPRICE' ,width:60, align:'right', hidden: true, sortable: true, type: 'number', renderer: fixed2}
+        ];
+
+
+        $('#mmg').mmGrid({
+            height: 460
+            ,	cols: cols
+            , url: '/uploads/rs/70/hqxxgtb7/stockQuotePage.json'
+            , sortName: 'SECUCODE'
+            , sortStatus: 'asc'
+            , multiSelect: true //多选
+            , checkCol: true //选框列
+            , fullWidthRows: true //伸展列宽自动充满表格
+            , nowrap :true //内容不折行
+            , plugins: [
+                $('#pg').mmPaginator({})
+            ] //分页插件
+        });
+
+    });
+</script>

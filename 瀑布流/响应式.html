@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #flow {
+            list-style: none;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        #flow li {
+            position: absolute;
+            font-size: 50px;
+            background-color: orange;
+            width: 200px;
+            transition: all 0.5s;
+        }
+    </style>
+</head>
+
+<body>
+<ul id="flow"></ul>
+<script type="text/javascript">
+    function randH(min, max) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+    }
+
+    var flow = document.getElementById("flow");
+
+    //高度数组，保存每个li的高度
+    var hs = [];
+    //布局函数
+    //当我bol为假的时候，更新的数组
+    function buju(bol) {
+        //获取所有的li用于大小改变时，更新布局
+        var lis = document.getElementsByTagName("li")
+
+        var cols = Math.floor(document.documentElement.clientWidth / 200);
+        var  fengxi = 10;
+        flow.style.width = cols * 200;
+
+        var arrH = [];
+        for (var i = 0; i < cols; i++) {
+            arrH[i] = 10;
+        }
+
+        for (var j = 0; j < 40; j++) {
+            var li = lis[j] || document.createElement("li");
+//					li.innerHTML = "<img scr =img/"+ (j+1)+".jpg />";
+            li.innerHTML = j;
+            var h = hs[j] || randH(100, 300)
+            li.style.height = h + "px";
+            if (bol) {
+                hs.push(h)
+            }
+            //求最短列
+            var minH = arrH[0];
+            var minI = 0;
+            for (var k = 0;k<arrH.length;k++) {
+                if (minH>arrH[k]) {
+                    minH = arrH[k];
+                    minI = k;
+                }
+            }
+            //设置left
+            li.style.left = fengxi +minI*(200 +fengxi)+"px";
+            //设置top
+            li.style.top = minH +"px" ;
+
+            //第一次l页面加载执行的时候 才执行appendChild添加
+            if(bol){
+                flow.appendChild(li)
+            }
+            //更新高度
+            arrH[minI] = fengxi + arrH[minI] +li.offsetHeight
+        }
+    }
+    //第一次创建这些li
+    buju(true);
+    window.onresize = function() {
+        buju(false)
+    }
+
+
+
+
+</script>
+</body>
+
+</html>

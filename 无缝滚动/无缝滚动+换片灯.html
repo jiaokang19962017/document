@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>RunJS-slide</title>
+    <style type="text/css">
+        *{margin:0;padding:0}
+        ol, ul, li {
+            list-style-type: none;
+        }
+        img {border:0}
+
+        body{
+            color:#000;
+            background:#f9f9f9;
+        }
+
+        .silde{
+            position: relative;
+            height: 250px;
+            width:1000px;
+            margin:0 auto;
+        }
+
+        ul{
+            position: relative;
+            overflow: hidden;
+            height: 250px;
+            width:1000px;
+
+        }
+
+        ul li{
+            float: left;
+            padding: 10px 0px;
+            border-right:5px solid #fff;
+            border-left:5px solid #fff;
+            display: block;
+            height:230px;
+            width:190px;
+            background:#ccc;
+            color:#fff;
+            font-size:80px;
+            line-height:230px;
+            text-align:center;
+        }
+
+        .silde span{
+            position: absolute;
+            top: 50%;
+            margin-top:-20px;
+        }
+        .prev{
+            left:-100px;
+        }
+        .next{
+            right:-100px;
+        }
+    </style>
+    <script id="jquery_183" type="text/javascript" class="library" src="../js/jquery-1.9.1.js"></script>
+</head>
+<body>
+<div id="zd" class="silde">
+    <span class="prev">上一个</span>
+    <span class="next">下一个></span>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+    </ul>
+</div>
+
+</body>
+</html>
+<script type="text/javascript">
+//    var _ = {};
+//    _.debounce = function(func, wait, immediate) {
+//        var timeout;
+//        return function() {
+//            var context = this, args = arguments;
+//            var later = function() {
+//                timeout = null;
+//                if (!immediate) func.apply(context, args);
+//            };
+//            var callNow = immediate && !timeout;
+//            clearTimeout(timeout);
+//            timeout = setTimeout(later, wait);
+//            if (callNow) func.apply(context, args);
+//        };
+//    };
+//
+//    _.throttle = function(func, wait, mustRun) { //节流操作
+//        var timeout,
+//                startTime = new Date();
+//        return function() {
+//            var context = this,
+//                    args = arguments,
+//                    curTime = new Date();
+//
+//            clearTimeout(timeout);
+//            // 如果达到了规定的触发时间间隔，触发 handler
+//            if(curTime - startTime >= mustRun){
+//                func.apply(context,args);
+//                startTime = curTime;
+//                // 没达到触发间隔，重新设定定时器
+//            }else{
+//                timeout = setTimeout(func, wait);
+//            }
+//        };
+//    };
+
+
+    (function ($) {
+        var Wk_Carousel_Pro = Wk_Carousel.prototype, timer = null;
+
+        function Wk_Carousel() { }
+        Wk_Carousel_Pro.init = function (opt) {
+            var ml = 0, mr = 0;
+            this.targetNum = 0;
+            this.ele = opt.ele;
+            this.$ele = $(opt.ele);
+            this.carousel_ul = this.$ele.find('ul');
+            this.carousel_li = this.carousel_ul.find('li');
+            this.carousel_li_w = this.carousel_li.outerWidth();
+            this.li_num = this.carousel_li.length;
+
+            this.prevBtn = this.$ele.find('.prev');
+            this.nextBtn = this.$ele.find('.next');
+            this.domOtherInit();
+        }
+
+        Wk_Carousel_Pro.domOtherInit = function () {
+            var that = this;
+            if (this.li_num > 5) {
+                this.prevBtn.show();
+                this.nextBtn.show();
+                that.$ele.on('mouseenter', function () {
+                    timer && clearInterval(timer);
+                }).on('mouseleave', function () {
+                    that.autoMove();
+                });
+                that.prevBtn.on('click', function () {
+                    if(that.carousel_li.is(":animated")){
+                        return;
+                    }
+                    that.targetNum--;
+                    that.move(that.targetNum, -1)
+                });
+                that.nextBtn.on('click', function () {
+                    if(that.carousel_li.is(":animated")){
+                        return;
+                    }
+                    that.targetNum++;
+                    that.move(that.targetNum, 1)
+                });
+                this.carousel_li.each(function(i){
+                    $(this).css({
+                        'position':'absolute',
+                        'left': that.carousel_li_w  * i
+                    });
+                });
+                that.autoMove();
+
+            }else{
+                this.prevBtn.hide();
+                this.nextBtn.hide();
+
+            }
+        }
+
+        Wk_Carousel_Pro.autoMove = function () {
+            var that = this;
+            timer = setInterval(function () {
+                if(that.carousel_li.is(":animated")){
+                    return;
+                }
+                that.targetNum--;
+                that.move(that.targetNum, -1);
+            }, 2000);
+        }
+        Wk_Carousel_Pro.move = function (num, typeNum) {
+            /*
+             typeNum :运转方向 顺时针 是1， 逆时针 -1；
+             */
+            var _w = this.carousel_li_w,
+                    _l = this.li_num;
+            if(Math.abs(num)==_l){
+                this.targetNum = num = 0
+            }
+            this.carousel_li.each(function(i){
+                var n = 0 ;
+                if(num==0 || num >0){
+                    n  = num+i;
+                    n  = n>=_l? n-_l:n;
+                }else if(num<0){
+                    n = num + i;
+                    n  = n >-1 ? n : _l + n;
+                };
+                if(n == _l -1 && typeNum<0){
+                    $(this).stop(false,true).animate({
+                        'left': _w  * typeNum
+                    }, 300, function(){
+                        $(this).css({
+                            'left': _w  * n
+                        })
+                    });
+
+                }else if(n == 0 && typeNum>0){
+
+                    $(this).css({
+                        'left': _w  * -typeNum
+                    });
+                    $(this).stop(false,true).animate({
+                        'left': _w  * n
+                    }, 300);
+
+                }else{
+                    $(this).css({
+                        'left': _w  *(n - typeNum)
+                    });
+                    $(this).stop(false,true).animate({
+                        'left': _w  * n
+                    }, 300);
+
+                }
+
+            });
+        }
+        $.fn.wk_Carousel = function (opt) {
+            return this.each(function () {
+                var $this = $(this);
+                opt = $.extend(opt, { ele: this });
+                new Wk_Carousel().init(opt);
+            });
+        }
+    })(jQuery);
+
+
+    $(function(){
+        // 启动动画
+        $('.silde').wk_Carousel();
+    });
+
+</script>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+	div{
+		width: 150px;
+		height: 150px;
+		border:1px solid #999;
+		margin:  50px;
+		background: url(bg.png) repeat;
+		float: left;
+	}
+	</style>
+	<script type="text/javascript" src="jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="jquery.showImg.min.js"></script>
+	<script type="text/javascript">
+	$(function () {
+		$(".fill").showImg({
+			'type':'fill',//(填满-溢出隐藏)
+		});
+		$(".full").showImg({
+			'type':'full',//(完整显示-多余部分留白)
+		});
+	})
+	</script>
+</head>
+<body>
+	<div class="fill">
+		<img src="1.jpg"/>
+	</div>
+	<div class="fill">
+		<img src="2.jpg"/>
+	</div>
+	<div class="full">
+		<img src="1.jpg"/>
+	</div>
+	<div  class="full">
+		<img src="2.jpg"/>
+	</div>
+</body>
+</html>

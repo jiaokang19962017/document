@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <!--<style type="text/css">-->
+    <!--*{-->
+    <!--margin: 0;-->
+    <!--padding: 0;-->
+    <!--font-family:"Helvetica Neue",Helvetica,Arial,"Microsoft Yahei","Hiragino Sans GB","Heiti SC","WenQuanYi Micro Hei",sans-serif;-->
+    <!--}-->
+    <!--div{-->
+    <!--position: absolute;-->
+    <!--top: 10px;-->
+    <!--left: 10px;-->
+    <!--width: 100px;-->
+    <!--height: 100px;-->
+    <!--background: red;-->
+
+    <!--}-->
+    <!--</style>-->
+
+</head>
+<body>
+
+</body>
+</html>
+<script type="text/javascript">
+    function getRandomColor() {
+        var winW = document.documentElement.clientWidth || document.body.clientWidth;//获取整个平模宽度
+        var winH = document.documentElement.clientHeight || document.body.clientHeight;//获取整个平模高度
+        var of = document.createDocumentFragment();//文档碎片
+        var boxWidth = winW / 10;//没个方块 的宽度
+        var boxHeight = winH / 10;//每个方块的高度
+        for (var j = 0; j < 10; j++) {
+            for (var i = 0; i < 10; i++) {
+                var oDiv = document.createElement("div");
+                oDiv.style.width = boxWidth + "px";
+                oDiv.style.height = boxHeight + "px";
+                //1,安排每个方块的位置(通过绝对定位,设置left和top的偏移量);
+                oDiv.style.position = "absolute";
+                oDiv.style.top = j * boxHeight + "px";
+                oDiv.style.left = i * boxWidth + "px";
+                var r = Math.floor(Math.random() * 255);
+                var g = Math.floor(Math.random() * 255);
+                var b = Math.floor(Math.random() * 255);
+                oDiv.style.backgroundColor = "rgb(" + r + "," + g + "," + b + ")";
+                document.body.appendChild(oDiv);
+//                of.appendChild(oDiv)
+            }
+        }
+
+
+    }
+
+    getRandomColor()
+    document.body.onmousemove=getRandomColor
+
+</script>

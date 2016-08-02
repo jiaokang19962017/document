@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<input type="button" name="sjyz" id="sjyz" value="获取验证码"  onclick  = 'sendCode(this)' />
+
+</body>
+</html>
+<script type="text/javascript" charset="utf-8">
+    //获取验证码倒计时
+    var nums=60;
+    var time;
+    var btn;
+    function sendCode(thisBtn){
+        btn = thisBtn;
+        btn.setAttribute("disabled",true);
+        btn.value = '还剩'+nums+'秒';
+        time = setInterval(doLoop, 1000);
+    }
+    function doLoop(){
+        nums --;
+        if(nums > 0){
+            btn.value = '还剩'+nums+'秒';
+        }else{
+            clearInterval(time);
+            btn.setAttribute("disabled",false);
+            btn.value = '获取验证码';
+            nums = 60;
+        }
+    }
+</script>

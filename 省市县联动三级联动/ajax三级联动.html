@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>地址联动</title>
+</head>
+<body>
+<form action="#">
+    <div class="selectItem" id="areaSelect">
+        <select class="province"></select>
+        <select class="city" style="display:none"></select>
+        <select class="county" style="display:none"></select>
+    </div>
+</form>
+<script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+<script src="js/addressAjax.js"></script>
+<script>
+    /**
+     * Created by zxhuan on 2016/7/20.
+     */
+    ;(function($, window, docuemnt, undefiend) {
+        $.fn.showCity = function(option) {
+            this.defaults = {
+                'defaultShow': false, //市、县是否显示,默认不显示
+                "ajaxURL":"#",        //json数据请求的地址
+                'defaultCity':[0,0,0] //设置地址的默认坐标
+            };
+            this.options = $.extend({}, this.defaults, option);
+            var oProvince = $('.province', this),
+                    oCity = $('.city', this),
+                    oCounty = $('.county', this);
+            this.creat = function() {
+                var pattern=/^\+?[1-9][0-9]*\,\+?[1-9][0-9]*\,\+?[1-9][0-9]*$/;//正则匹配数组转化为后的格式
+                if(pattern.test(this.options.defaultCity.toString())){
+                    this.defaultCity(this.options.defaultCity)
+                }else{
+                    this.creatProvince();
+                    this.createCity();
+                    this.createCounty();
+                };
+                oProvince.html('<option value="0">选择省</option>');
+                if (this.options.defaultShow) {
+                    //this.options.defaultShow存在，那么页面加载时市、县都显示
+                    oCity.show();
+                    oCounty.show();
+                    oCity.html('<option value="0">选择市</option>');
+                    oCounty.html('<option value="0">选择区</option>');
+                };
+            };
+            this.defaultCity=function(arr){
+                this.addressAjax(oProvince,null,1,arr[0])
+                this.addressAjax(oCity,arr[0],2,arr[1])
+                this.addressAjax(oCounty,arr[1],3,arr[2]);
+                this.createCity();
+                this.createCounty();
+            }
+            this.creatProvince = function() {
+                this.addressAjax(oProvince, null, 1);
+                //this.addressAjax(【省，市，区】,【selected选中的option value值或者null】,【1,2,3 通过三个参数，后期ajax分别请求不同层级的数据】)
+            };
+            this.createCity = function() {
+                var $this = this;
+                oProvince.on('change', function() {
+                    var pValue = oProvince.find('option:selected').val();
+                    if (pValue == '0') {
+                        oCounty.html('<option value="0">选择区</option>').show();
+                    }
+                    oCity.html('<option value="0">选择市</option>').show();
+                    oCounty.html('<option value="0">选择区</option>').show();
+                    $this.addressAjax(oCity, pValue, 2);
+                })
+            };
+            this.createCounty = function() {
+                var $this = this;
+                oCity.on('change', function() {
+                    var cValue = oCity.find('option:selected').val();
+                    var html = '<option value="0">选择区</option>';
+                    oCounty.html(html).show();
+                    $this.addressAjax(oCounty, cValue, 3);
+                })
+            };
+            this.addressAjax = function(district, cValue, ov,type) {
+                var oType = null;
+                $.ajax({
+                    url: this.options.ajaxURL,
+                    dataType: 'JSON',
+                    success: function(data) {
+                        if (ov == 3) {
+                            oType = data.county; //请求区的数据
+                        } else if (ov == 2) {
+                            oType = data.city; //请求市的数据
+                        } else if (ov == 1) {
+                            oType = data.provience; //请求省的数据
+                        }
+                        $.each(oType, function(key, value) {
+                            var countyItem='';
+                            if (cValue == null) {
+                                countyItem =  $("<option value='" + value.id + "'>" + value.name + "</option>");
+                            } else if (cValue == value.cid) {
+                                countyItem = $("<option value='" + value.id + "'>" + value.name + "</option>");
+                            }
+                            if(value.id ==type){
+                                countyItem.attr('selected','selected');
+                            }
+                            district.append(countyItem);
+                        });
+                    },
+                    error: function() {
+                        console.log('ajax error')
+                    }
+                })
+            }
+            return this.creat();
+        }
+    })(jQuery, window, document);
+    $('#areaSelect').showCity({
+        'defaultShow': true,//市、县是否显示,默认不显示
+        "ajaxURL":"http://www.zxhuan.com/jsonText/address.json",//json数据请求的地址
+        "defaultCity":[1,1,1]//设置地址的默认坐标
+    });
+</script>
+</body>
+</html>

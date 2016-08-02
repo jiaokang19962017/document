@@ -1,0 +1,137 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content=""/>
+    <meta name="copyright" content=""/>
+    <title></title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        #div1 {
+            width: 200px;
+            height: 200px;
+            background: #ccc;
+            position: relative;
+            margin: 100px auto;
+            transform-style: preserve-3d;
+            transform: perspective(800px) rotateX(0deg) rotateY(0deg);
+            /*transition: 2s all ease;*/
+        }
+
+        #div1 div {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 198px;
+            height: 198px;
+            border: 1px solid #000;
+            line-height: 198px;
+            text-align: center;
+            background: green;
+            opacity: 1;
+        }
+
+        #div1 .front {
+            transform: translateZ(100px);
+        }
+
+        #div1 .back {
+            transform: translateZ(-100px);
+        }
+
+        #div1 .left {
+            transform: rotateY(-90deg) translateZ(100px);
+        }
+
+        #div1 .right {
+            transform: rotateY(+90deg) translateZ(100px);
+        }
+
+        #div1 .top {
+            transform: rotateX(90deg) translateZ(100px);
+        }
+
+        #div1 .bottom {
+            transform: rotateX(-90deg) translateZ(100px);
+        }
+
+        /* #div1:active{transform:perspective(800px) rotateX(360deg) rotateY(180deg);} */
+    </style>
+
+
+    <script>
+        window.onload = function () {
+            var oDiv = document.getElementById('div1');
+
+
+            var x = 0;
+            var lastX = 0;
+            var speedX = 0;
+            var y = 0;
+            var lastY = 0;
+            var speedY = 0;
+            var timer = null;
+
+            oDiv.onmousedown = function (ev) {
+                clearInterval(timer)
+                disX = ev.clientX - y;  // 减去之前的位置
+                disY = ev.clientY - x;
+                document.onmousemove = function (ev) {
+                    clearInterval(timer);
+                    y = ev.clientX - disX; //y轴旋转
+                    x = ev.clientY - disY;  //x轴旋转
+
+                    speedY = y - lastY; //速度
+                    lastY = y;
+
+                    speedX = x - lastX;
+                    lastX = x;
+
+                    oDiv.style.transform = 'perspective(800px) rotateX(' + -x + 'deg) rotateY(' + y + 'deg)';
+
+                };
+                document.onmouseup = function () {
+                    clearInterval(timer);
+                    document.onmousemove = null;
+                    document.onmouseup = null;
+
+                    timer = setInterval(function () {
+                        y += speedY;
+                        x += speedX;
+                        speedY *= 0.95;
+                        speedX *= 0.95; //摩擦
+
+
+                        if (Math.abs(speedY) < 1) speedY = 0;
+                        if (Math.abs(speedX) < 1) speedX = 0;
+                        if (Math.abs(speedY) == 0 && speedX == 0) clearInterval(timer)
+
+                        oDiv.style.transform = 'perspective(800px) rotateX(' + -x + 'deg) rotateY(' + y + 'deg)';
+                        console.log('x-' + x, 'y-' + y)
+                    }, 30)
+                };
+
+                return false;
+            };
+
+        }
+    </script>
+
+</head>
+
+<body>
+<div id="div1">
+    <div class="front">前面</div>
+    <div class="back">后面</div>
+    <div class="left">左边</div>
+    <div class="right">右边</div>
+    <div class="top">上面</div>
+    <div class="bottom">下面</div>
+</div>
+
+</body>
+</html>

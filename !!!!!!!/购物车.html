@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>shopping</title>
+    <link href="http://meyerweb.com/eric/tools/css/reset/reset.css" rel="stylesheet">
+    <script src="http://cdn.bootcss.com/jquery/1.8.0/jquery-1.8.0.min.js"></script>
+    <script src="http://cdn.bootcss.com/underscore.js/1.8.3/underscore-min.js"></script>
+    <style type="text/css">
+        .clearfix{
+            *zoom:1;
+        }
+        .clearfix:before,
+        .clearfix:after{
+            content: " ";
+            display: table;
+        }
+        .clearfix:after{
+            clear: both;
+        }
+        .left{
+            float: left;
+        }
+        .right{
+            float: right;
+        }
+        .goodslist_c{
+            padding: 10px;
+        }
+        .goodslist_c:after{
+            content: '';
+            clear: both;
+            display: table;
+        }
+        .goodslist_l{
+            float: left;
+        }
+        .goods_img{
+            float: left;
+            display: block;
+            width: 80px;
+            height: 60px;
+            background-color: #ff7800;
+            border: 0;
+            margin-right: 10px;
+        }
+        .goods_c{
+            float: left;
+        }
+        .goodslist_r{
+            float: right;
+            margin-top: 25px;
+            position: relative;
+        }
+        .goods_title,.goods_price{
+            display: inline-block;
+        }
+        .goods_title{
+            margin-bottom: 10px;
+        }
+        .price_c{
+            color: #ff7800;
+        }
+        .goods_price{
+        }
+        .btn_add{
+            display: inline-block;
+            border: solid 1px #ff7800;
+            width: 15px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .btn_sub{
+            display: none;
+            border: solid 1px #ff7800;
+            width: 15px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .icon_flyer{
+            position: absolute;
+            right: 0;
+            top: 0;
+            background-color: #ff7800;
+            width: 10px;
+            height: 10px;
+            border-radius: 10px;
+        }
+
+        .icon_shop{
+            margin-left: 10px;
+            float: left;
+            position: relative;
+            width:30px;
+            height: 30px;
+            margin-top: 10px;
+            background: url(http://cdn.attach.w3cfuns.com/notes/pics/201605/03/113653e3xa5bvvxmv2qvmx.png) center center /cover;
+        }
+        .price{
+            float: left;
+            line-height: 50px;
+            width: 50px;
+            margin-left: 10px;
+        }
+        .icon_cart{
+            display: none;
+            position: absolute;
+            font-size: 12px;
+            text-align: center;
+            width: 16px;
+            height: 16px;
+            line-height: 16px;
+            right: 0;
+            top: 0;
+            border-radius: 16px;
+            background-color: #ff7800;
+        }
+        .goodscart{
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 50px;
+            background-color: #2a2a2a;
+            color: #fff;
+        }
+        .goodslist_num{
+            display: inline-block;
+            display: none;
+        }
+        .btn_submit{
+            color: #fff;
+            text-align: center;
+            vertical-align: middle;
+            height: 50px;
+            line-height: 50px;
+            float: right;
+            height: 100%;
+            width: 20%;
+            background-color: #039e15;
+        }
+        .modal{
+            position: absolute;
+            display: none;
+            z-index:20000;
+            left: 0%;
+            bottom:50px;
+            width: 100%;
+            height: 100%;
+            background: #000000;
+            background-color: rgba(0,0,0,0.5);/* IE9、标准浏览器、IE6和部分IE7内核的浏览器(如QQ浏览器)会读懂 */
+            filter:Alpha(opacity=50);/* 只支持IE6、7、8、9 */
+            *zoom:1; /* 激活IE6、7的haslayout属性，让它读懂Alpha */
+        }
+        .goods_cart{
+            display: none;
+            position: absolute;
+            bottom: 50px;
+            width: 100%;
+            left: 0;
+            z-index: 20001;
+            background-color: #fff;
+        }
+        .cart_row{
+            padding: 10px;
+            border-top: solid 1px #ff7800;
+            border-bottom: solid 1px #ff7800;
+            margin-top:10px;
+            margin-bottom: 10px;
+        }
+        .btn_pay{
+            display: block;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            color: #fff;
+            width: 90%;
+            background-color: #ff7800;
+            margin: 10px auto;
+        }
+    </style>
+</head>
+<body>
+<div class="goods">
+    <div class="goodslist">
+        <script type="text/template" id="goodslistli">
+            <div class="goodslist_c" data-id="{{id}}" data-title="{{title}}" data-price="{{price}}">
+                <div class="goodslist_l clearfix">
+                    <img class="goods_img" src="{{src}}">
+                    <div class="goods_c">
+                        <span class="goods_title">{{title}}</span>
+                        <div class="price_c">¥<span class="goods_price">{{price}}</span>.00</div>
+                    </div>
+                </div>
+                <div class="goodslist_r">
+                    <span class="btn_sub">-</span>
+                    <span class="goodslist_num">0</span>
+                    <span class="btn_add" data-addstyle="goodslist_add">+</span>
+                    <i class="icon_circle"></i>
+                    <span class="goodslist_price" style="display:none;"></span>
+                </div>
+            </div>
+        </script>
+    </div>
+    <div class="goodscart clearfix">
+        <div class="icon_shop"><i class="icon_cart"></i></div>
+        <div class="price">¥<span class="cartprice">0</span>.00</div>
+        <a class="btn_submit">选好了</a>
+    </div>
+</div>
+<div class="modal"></div>
+<div class="goods_cart">
+    <script type="text/temple" id="cartlist">
+            <div class="cart_row clearfix" data-id="{{id}}" data-title="{{title}}" dada-price="{{price}}">
+                <div class="left">
+                    <span class="cart_title left">{{title}}</span>
+                    <span class="cart_price left">{{price}}</span>
+                </div>
+                <div class="right">
+                    <span class="btn_sub" style="display:inline-block;">-</span>
+                    <span class="goodslist_num" style="display:inline-block;">1</span>
+                    <span class="btn_add" data-addstyle="cart_add">+</span>
+                </div>
+            </div>
+        </script>
+
+    <a class="btn_pay">
+        去结算（共<span class="cart_totalprice">0</span>元）
+    </a>
+</div>
+<script type="text/javascript">
+    var offset = $(".icon_shop").offset();
+    _.templateSettings = {
+        interpolate: /\{\{(.+?)\}\}/g
+    };
+    var goods =[{
+        id:1,
+        title:'草莓',
+        src:'http://cdn.attach.w3cfuns.com/notes/pics/201605/03/113653ch0yoh4081w8eopx.jpg',
+        price:'16'
+    },{
+        id:2,
+        title:'苹果',
+        src:'http://cdn.attach.w3cfuns.com/notes/pics/201605/03/113653yodedydppkxudp9d.jpg',
+        price:'20'
+    }];
+    var listTemplate = $.trim($('#goodslistli').html()),s='',ns;
+    _.each(goods,function(good){
+        ns = listTemplate;
+        _.each(good, function(value, key){
+            ns = ns.replace(new RegExp('\{\{'+key+'\}\}','g'), value||'');
+        });
+        s+=ns;
+    });
+    $('.goodslist').append(s);
+    var cart ={
+        cartNum:$('.icon_cart'),
+        cartPrice:$('.cartprice'),
+        btnAdd:$('.btn_add'),
+        btnSub:$('.btn_sub'),
+        goodlistBox:$('.goodslist_c'),
+        totalCount:0,
+        totalPrice:0,
+        addlist:$('.goods_cart'),
+        templ:$.trim($('#cartlist').html()),
+        add:function(id,title,price){
+            var len = this.addlist.find('.cart_row').length;
+            var f=1;
+            for(var i=0;i<len;i++){
+                if($(this.addlist.find('.cart_row')[i]).attr('data-id') == id){
+                    f=0;
+                    var tag = this.addlist.find('.cart_row')[i],
+                            num = $(tag).find('.goodslist_num').html(),
+                            updatenum = parseInt(num);
+                    updatenum+=1;
+                    $(tag).find('.goodslist_num').html(updatenum);
+                    //每件商品的总价
+                    var updateprice = parseInt($(tag).find('.cart_price').html()),
+                            cartprice = parseInt(price);
+                    updateprice += cartprice;
+                    $(tag).find('.cart_price').html(updateprice);
+                    break;
+                }
+            };
+            if(!f) return;
+            var self = this;
+            var updatelist = {
+                id:id,
+                title:title,
+                price:price
+            };
+            var listtempl = _.template($('#cartlist').html());
+            this.addlist.append(listtempl(updatelist));
+        },
+        minus:function(id,price){
+            var len = this.addlist.find('.cart_row').length;
+            var f=1;
+            for(var i=0;i<len;i++){
+                if($(this.addlist.find('.cart_row')[i]).attr('data-id') == id){
+                    f=0;
+                    //减少购物车里每件商品的数量
+                    var tag = this.addlist.find('.cart_row')[i],
+                            num = $(tag).find('.goodslist_num').html(),
+                            updatenum = parseInt(num);
+                    updatenum-=1;
+                    //减少购物车里每件商品给的价格
+                    var cartprice = $(tag).find('.cart_price').html(),
+                            updateprice = parseInt(cartprice);
+                    updateprice-=price;
+                    //减少购物车里的总价格
+                    var cartTotalPrice = $('.cart_totalprice').html(),
+                            updateCartTotalPrice = parseInt(cartTotalPrice);
+                    updateCartTotalPrice-=price;
+                    $('.cart_totalprice').html(updateCartTotalPrice);
+
+                    if(updatenum == 0){
+                        $(tag).remove();
+                    }else{
+                        $(tag).find('.goodslist_num').html(updatenum);
+                        $(tag).find('.cart_price').html(updateprice);
+                    }
+                    break;
+                }
+            };
+        },
+        unit:function(){
+            var self = this;
+            //添加到购物车
+            self.btnAdd.on('click',function(e){
+                var target = e.srcElement ? e.srcElement : e.target;
+                //每件商品的数量
+                var num = parseInt($(target).prev().html());
+                var listnum = num+=1;
+                $(target).prev().html(listnum);
+                $(target).prev().css('display','inline-block').prev().css('display','inline-block');
+
+
+                //每件商品的价格
+                var listprice= parseInt($(target).parent().parent().data('price'));
+                /*var price = listprice*listnum;
+                 $(target).parent().find('.goodslist_price').html(price);*/
+
+                var addstyle = $(target).data('addstyle');
+                if(addstyle == 'goodslist_add'){
+                    //购物车总数量
+                    var allCount = self.totalCount+=1;
+                    self.cartNum.show().html(allCount);
+                    //购物车的总价
+                    var allPrice = parseInt(self.cartPrice.html());
+                    allPrice+=listprice;
+                    self.cartPrice.html(allPrice);
+                    $('.cart_totalprice').html(allPrice);
+
+                    //购物车列表
+                    var tagpar = $(target).parent().parent(),
+                            id=tagpar.attr('data-id'),
+                            title =tagpar.attr('data-title'),
+                            price=tagpar.attr('data-price');
+                    self.add(id,title,price);
+
+                }
+                if(addstyle == 'cart_add'){
+                    //购物车总数量
+                    var allCount = self.totalCount+=1;
+                    self.cartNum.show().html(allCount);
+                    //购物车的总价
+                    var allPrice = self.totalPrice+=listprice;
+                    self.cartPrice.html(allPrice);
+                }
+
+            });
+            //减少商品
+            self.btnSub.on('click',function(e){
+                var target = e.srcElement ? e.srcElement : e.target;
+                //购物车总数量
+                if(self.totalCount > 0){
+                    self.totalCount-=1;
+                    self.cartNum.html(self.totalCount);
+                    if(self.totalCount == 0){
+                        self.cartNum.hide();
+                    }
+                }
+
+                //每件商品的数量
+                var num=parseInt($(target).next().html());
+                console.log(num);
+                if(num > 0){
+                    num-=1;
+                    $(target).next().html(num);
+                    if(num == 0){
+                        $(this).hide();
+                        $(this).next().hide();
+                    }
+                };
+                //减少购物车里商品的数量
+                var id = $(target).parent().parent().attr('data-id'),
+                        price = $(target).parent().parent().attr('data-price');
+                self.minus(id,price);
+                //减少总价格
+                var totalPrice = parseInt($('.cartprice').html());
+                totalPrice -=price;
+                $('.cartprice').html(totalPrice);
+
+            });
+        }
+    };
+    cart.unit();
+    function cart_minus(id){
+        var len = $('.goods_cart').find('.cart_row').length();
+        for(var i=0;i<=len;i++){
+            if($('.cart_row')[i].attr('data-id') == id){
+                //正在编辑
+            }
+        }
+    };
+    $('.goodscart').on('click',function(){
+        $('.modal').show();
+        $('.goods_cart').show();
+    })
+    $('.modal').on('click',function(){
+        $('.goods_cart').hide();
+        $(this).hide();
+    })
+</script>
+</body>
+</html>

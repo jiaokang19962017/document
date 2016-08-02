@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>jquery点击小图弹出大图，点击按钮大图可以360度旋转</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .sunbox {
+            width: 300px;
+            height: 200px;
+            margin: 100px auto;
+            overflow: hidden;
+            border: solid 2px #eee;
+        }
+
+        .sunbox img {
+            width: 300px;
+            height: 200px;
+            cursor: pointer;
+        }
+
+        .sunbox-alret {
+            width: 760px;
+            height: 300px;
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            background: #fff;
+            border-radius: 5px;
+            z-index: 999;
+            padding: 20px;
+        }
+
+        .sunbox-alret img {
+            width: 760px;
+            height: 300px;
+            display: block;
+        }
+
+        .sunbox-alret .xie-loading {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin: -25px 0 0 -25px;
+            width: 50px;
+            height: 50px;
+            display: none;
+        }
+
+        .sunbox-alret .xie-loading img {
+            width: 50px;
+            height: 50px;
+            display: block;
+        }
+
+        .xuanzhuan {
+            width: 40px;
+            height: 34px;
+            display: none;
+            background: #fff url(http://img1.isou365.cn/paimai/yunying/images/xuanzhuan.png) no-repeat;
+            cursor: pointer;
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            margin-left: -20px;
+            border-radius: 5px;
+            z-index: 99999;
+        }
+
+        .fork {
+            width: 40px;
+            height: 40px;
+            display: none;
+            background: url(http://img1.isou365.cn/paimai/yunying/images/close.png) no-repeat;
+            cursor: pointer;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 99999;
+        }
+
+        .pageBeijing {
+            width: 100%;
+            display: none;
+            height: 100%;
+            background: #000;
+            opacity: 0.5;
+            z-index: 998;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+<script type="text/javascript"
+        src="http://www.bird100.cn/wp-content/uploads/2016/demo/jquery39/jquery-1.11.1.js"></script>
+<script type="text/javascript"
+        src="http://www.bird100.cn/wp-content/uploads/2016/demo/jquery39/jquery.rotate.min.js"></script>
+<div class="sunbox"><img src="http://www.bird100.cn/wp-content/uploads/2016/05/2016050705.jpg"/></div>
+<div class="sunbox-alret">
+    <img src=""/>
+</div>
+<div class="fork"></div>
+<div class="xuanzhuan"></div>
+<div class="xie-loading"></div>
+<div class="pageBeijing"></div>
+
+<script>
+    $(document).ready(function () {
+
+        $(".sunbox img").click(function () {
+            var Img = $(this).attr("src");
+            $(".xuanzhuan").fadeIn();
+            $(".fork").fadeIn();
+            $(".xuanzhuan").fadeIn();
+            $(".fork").fadeIn();
+            $(".pageBeijing").css("display", "block");
+            $(".xie-loading").fadeIn();
+            $(".sunbox-alret img").attr("src", Img)
+            $(".xie-loading").fadeOut();
+            $(".sunbox-alret").fadeIn();
+            $(".sunbox-alret").rotate(0);
+            $(".sunbox-alret").css({
+                "marginTop": -$(".sunbox-alret").outerHeight() / 2,
+                "marginLeft": -$(".sunbox-alret").outerWidth() / 2,
+            })
+        })
+        var num = 0;
+        $(function () {
+            $(".xuanzhuan").click(function () {
+                num++;
+                $(".sunbox-alret").rotate(90 * num);
+            })
+        })
+
+        $(".fork").click(function () {
+            $(".pageBeijing").css("display", "none");
+            $(".sunbox-alret").fadeOut();
+            $(".xuanzhuan").fadeOut();
+            $(".xie-loading").fadeOut();
+            $(".fork").fadeOut();
+            $(".sunbox-alret img").attr("src", "");
+            num = 0;
+        })
+
+
+    })
+</script>
+</body>
+</html>

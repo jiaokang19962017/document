@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>圣诞节倒计时</title>
+    <style>
+        *{padding: 0;  margin: 0}
+        #box{text-align: center;font: 30px/1.9 "microsoft yahei"; color: red;padding-top: 3em;}
+    </style>
+</head>
+<body>
+<script>
+    function time(year, month, day, obj) {
+        var today = new Date();
+        endDate = new Date(year, month - 1, day)
+        endTime = endDate.getTime();
+        nowTime = today.getTime();
+        leftTime = endTime - nowTime; //时间戳
+        var leftsecond = parseInt(leftTime / 1000); //秒
+        var day_1 = Math.floor(leftTime / (24 * 60 * 60 * 1000));
+        var hour = sm(Math.floor((leftsecond - day_1 * 24 * 60 * 60) / 3600));
+        var minutes = sm(Math.floor((leftsecond - day_1 * 24 * 60 * 60 - hour * 3600) / 60));
+        var seconds = sm(Math.floor((leftsecond - day_1 * 24 * 60 * 60 - hour * 3600 - minutes * 60)))
+        var obj = document.getElementById(obj)
+        obj.innerHTML = '距离' + year + '年' + month + '月' + day + '日，还有' + day_1 + '天' + hour + '小时' + minutes + '分' + seconds + '秒';
+
+        /*
+        * obj.innerHTML = '距离放假还有' + day_1 + '天' + hour + '小时' + minutes + '分' + seconds + '秒'
+        * */
+    }
+    setInterval(function() {
+        time(2016, 12, 25, 'box')
+    }, 1000)
+
+    function sm(n) {
+        return n < 10 ? "0" + n : n
+    }
+</script>
+<div id="box"></div>
+</body>
+</html>

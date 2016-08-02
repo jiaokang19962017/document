@@ -1,0 +1,108 @@
+<!-- 实现有背景遮罩的弹窗，并且能够随着窗体的变化，响应式居中 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta Charset="UTF-8">
+    <title>自适应弹窗设计</title>
+    <style type="text/css">
+        /*CSS reset*/
+        body,p{margin: 0px;padding: 0px;}
+        html,body{height: 100%;}
+        body{font-family: 微软雅黑;font-size: 14px;}
+        .bgorange{background-color: Orange;}
+        .fr{float: right;}
+        .csr{cursor: pointer;}
+        .w500{width: 500px;}
+        .h300{height: 300px;}
+        .pt10{padding-top: 10px;}
+        .pl10{padding-left: 10px;}
+        .pr10{padding-right: 10px;}
+        .idt10{text-indent: 10px;}
+        .ls4{letter-spacing: 4px;}
+        .lh24{line-height: 24px;}
+        .white{color: White;}
+        /*---清除浮动---*/
+        .clearfix:after{
+            content: "";
+            display: block;
+            clear: both;
+            height: 0;
+            visibility: hidden;
+        }
+        /*---背景遮罩---*/
+        .blackoverlay
+        {
+            position: absolute;
+            background: #666;
+            overflow: hidden;
+            top: 0px;
+            left: 0px;
+            z-index: 1001;
+            -moz-opacity: 0.5;
+            opacity: .50;
+            filter: alpha(opacity=50);
+        }
+        /*---弹窗主体---*/
+        .whitecontent
+        {
+            position: absolute;
+            z-index: 1002;
+            background: White;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div class="blackoverlay"></div>
+<span id="openWindow" class="csr bgorange white">弹窗</span>
+<div class="whitecontent w500 h300" id="onePop">
+    <p class="bgorange clearfix lh24">
+        <label class="csr fr pr10 white" onclick="closepop()">close</label>
+    </p>
+    <p class="pt10 pl10 idt10 lh24 ls4">
+        我一直在骗你你知道吗？骗就骗吧，就像飞蛾一样，明知道要受伤，还是会扑到火上,飞蛾就那么傻！
+    </p>
+</div>
+<script type="text/javascript" src="../js/jquery-1.9.1.js"></script>
+<script type="text/javascript">
+    $(function(){
+        /*--- 打开弹窗---*/
+        $("#openWindow").click(function(){
+            popwindow("onePop");
+        })
+        /*---窗体变化时---*/
+        $(window).resize(function(){
+            if($(".whitecontent").is(":visible")){
+                popwindow(".whitecontent:visible");
+            }
+        });
+    })
+    /*---弹窗函数---*/
+    /*---obj:弹窗div的ID---*/
+    function popwindow(obj) {
+        var bw = $("body").width();
+        var bh = $("body").height();
+
+        /*IE*/
+        var ww=document.documentElement.clientWidth;
+        var wh=document.documentElement.clientHeight;
+
+        /*Chrome*/
+        var ww=window.innerWidth;
+        var wh=window.innerHeight;
+
+        var cw = $("#"+obj).width();
+        var ch = $("#"+obj).height();
+        var left = (Math.abs(ww - cw) / 2);
+        var top = (Math.abs(wh - ch) / 2);
+        $(".blackoverlay").css("width", bw).css("height", bh).show();
+        $("#"+obj).css("top", top).css("left", left).show();
+    }
+    /*---关闭弹窗---*/
+    function closepop() {
+        $(".blackoverlay").hide();
+        $(".whitecontent:visible").hide();
+    }
+</script>
+</body>
+</html>

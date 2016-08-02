@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>滑动验证待修改版</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link href="" rel="stylesheet">
+</head>
+
+<style type="text/css">
+    /*滑动验证*/
+    * {
+        padding: 0;
+        margin: 0;
+    }
+
+    html {
+        font-family: "Microsoft YaHei", Tahoma, SimSun;
+    }
+
+    .m-slivery {
+        width: 290px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .m-slivery > .pic {
+        position: relative;
+        background-color: #F2ECE1;
+        border-radius: 10px;
+        padding-top: 10px;
+        padding-bottom: 20px;
+    }
+
+    .m-slivery > .pic > .ct {
+        background-color: #6EC594;
+        height: 118px;
+        position: relative;
+        background: url(http://cdn.attach.w3cfuns.com/notes/pics/201605/17/010500vqgue13hzjq7vhhm.jpg) center center no-repeat;
+    }
+
+    .m-slivery > .pic > .cube {
+        width: 44px;
+        height: 44px;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        margin-top: -22px;
+        background-color: #fff;
+        box-shadow: 0px 0px 5px 1px #666;
+        z-index: 2;
+        border: 1px solid #666;
+        background: url(http://cdn.attach.w3cfuns.com/notes/pics/201605/17/010500vqgue13hzjq7vhhm.jpg);
+    }
+
+    .m-slivery > .pic > .cube.s-mach {
+        box-shadow: 0px 0px 0px transparent;
+        background-color: #ECD173;
+        z-index: 1;
+        opacity: 0;
+    }
+
+    .m-slivery > .pic > .cube.s-mach > .shade {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: #000;
+        opacity: 0.6;
+        filter: alpha(opacity=60);
+    }
+
+    .m-slivery > .pic > .ct {
+        overflow: hidden;
+    }
+
+    .m-slivery > .pic > .ct > .tips {
+        width: 100%;
+        bottom: -24px;
+        background-color: #fff;
+        opacity: 0.6;
+        color: #000;
+        text-align: center;
+        position: absolute;
+        padding: 5px 0;
+        font-size: 12px;
+        filter: alpha(opacity=60);
+    }
+
+    .m-slivery > .slidebar {
+        height: 30px;
+        line-height: 30px;
+        position: relative;
+        margin-top: 10px;
+        background-color: #ECE4DD;
+        border-radius: 20px;
+        width: 290px;
+        text-align: center;
+    }
+
+    .m-slivery > .slidebar > .btn {
+        height: 44px;
+        width: 44px;
+        border-radius: 100%;
+        background-color: #F8F8F5;
+        position: absolute;
+        left: 0px;
+        top: 50%;
+        margin-top: -22px;
+        cursor: pointer;
+        text-align: center;
+        line-height: 44px;
+        color: green;
+        border: 1px solid #C3C3C3;
+    }
+
+    .m-slivery.s-type2 {
+        position: relative;
+    }
+
+    .m-slivery.s-type2 > .pic {
+        position: absolute;
+        width: 100%;
+        top: -158px;
+        display: none;
+        z-index: 2;
+    }
+</style>
+
+<body>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<div data-slivery="1" id="slivery" style="background-color:#fff; padding:20px;"></div>
+<div data-slivery="1" class="slidevery1" style="background-color:#fff; padding:20px; margin-top:200px;"
+     data-type="2"></div>
+</body>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var F = {}
+
+        F['slivery'] = function (t, callback) {
+            var callback = callback || function () {
+                    };
+            var html = ['    <div class="m-slivery j-slivery">',
+                '        <div class="pic">',
+                '            <div class="ct">',
+                '                <div class="tips"></div>',
+                '            </div>',
+                '            <div class="cube j-cube"></div>',
+                '            <div class="cube s-mach j-cube_mach"><div class="shade"></div></div>',
+                '            ',
+                '        </div>',
+                '        <div class="slidebar">',
+                '        	 <span>拖动滑块完成验证</span>',
+                '            <div class="btn j-btn">┃┃┃</div>',
+                '        </div>',
+                '    </div>'].join("");
+            t.html('').append(html);
+            var $slivery = t.find('.j-slivery').first();
+            var $pic = $slivery.find('.pic').first();
+            //console.log(type);
+            var $cube = $slivery.find('.j-cube').first();
+            //console.log($cube);
+            var $cube_mach = $slivery.find('.j-cube_mach').first();
+            var $tips = $slivery.find('.tips').first();
+            var $btn = $slivery.find('.j-btn').first();
+            var width = $slivery.width();
+
+            function calposition() {
+                function getRandom(n) {
+                    return Math.floor(Math.random() * n + 1) + 50; //生成大于50的随机数
+                }
+
+                var mach_l = Number(getRandom(width - 44 - 50));
+                var cube_mach_t = Number($cube_mach.position().top);
+                var cube_mach_hei = Number($cube_mach.innerHeight());
+                var _y = ' ' + -(cube_mach_t - (cube_mach_hei / 2) + 1 - 10) + 'px '; //不知道为什么要-10，但是减了之后刚刚好....
+                var _x = ' ' + -(mach_l + 1) + 'px '; //加1是因为有border
+                var str = ' ' + _x + ' ' + _y + ' ';
+                $cube_mach.css({
+                    'left': mach_l,
+                    'backgroundPosition': str
+
+                });
+                $cube_mach.animate({'opacity': 1}, 300);
+                $cube.css({'backgroundPosition': str});
+            }
+
+            if (t.attr('data-type') == undefined) {
+                var type = 's-type1';
+
+            } else if (t.attr('data-type') == 2) {
+                var type = 's-type2';
+
+            }
+            ;
+            $slivery.addClass(type);
+            if ($pic.is(':hidden')) {
+                var $btn = $slivery.find('.j-btn');
+                var is_show = '';
+                $btn.on('mouseover', function () {
+                    var $this = $(this);
+                    if (Number($this.attr('data-lock')) == 1) {
+                        $pic.fadeIn(300);
+                        $btn.on('mouseleave', function () {
+                            $pic.fadeOut(300);
+                        })
+                    } else {
+                        if (is_show == 1) {
+                            $pic.fadeIn(300);
+                        } else {
+                            $pic.fadeIn(300, function () {
+                                is_show = 1;
+                                calposition();
+                                slidrage(2);
+                            });
+                        }
+                        ;
+                    }
+                    ;
+
+
+                });
+
+            } else {
+                calposition();
+                slidrage();
+            }
+            ;
+
+            function slidrage(type) {
+                $btn.on('mousedown', function (e) {
+                    var $this = $(this);
+                    if (Number($this.attr('data-lock')) == 1) {
+                        return false
+                    }
+                    ;
+                    var width = $this.width();
+                    var bar_w = $slivery.width();
+                    var max_w = bar_w - width;
+                    var _x = e.screenX; //鼠标距离左边距
+                    $(document).on('mousemove', function (v) {
+                        var $_this = $btn;
+                        var x = $_this.position().left; //元素距离左边距
+                        //console.log(x);
+                        if (x < 0) {
+                            $_this.css({'left': 0});
+                            $cube.css({'left': 0});
+                        } else if (x > max_w) {
+                            $_this.stop().css({'left': max_w});
+                            $cube.stop().css({'left': max_w});
+                        } else {
+                            var mouse_x = v.screenX - _x; //计算鼠标x轴偏移量
+                            $_this.stop().css({'left': mouse_x});
+                            $cube.stop().css({'left': mouse_x});
+                        }
+                        ;
+
+                        $btn.on('mousemove');
+                    });
+
+                });
+                $(document).on('mouseup', function (e) {
+                    var $this = $(this);
+                    if (Number($btn.attr('data-lock')) == 1) {
+                        return false
+                    }
+                    ;
+                    var x = $cube.position().left;
+                    var _x = $cube_mach.position().left;
+                    if ((_x - 3) < x && x < (_x + 3)) {
+                        $btn.attr('data-lock', 1);
+                        $tips.text('验证成功！').animate({'bottom': 0}, 'fast', function () {
+                            callback();
+                            setTimeout(function () {
+                                $tips.text('').animate({'bottom': -24}, 'fast');
+                                if (type == 2) {
+                                    $pic.fadeOut(300);
+                                }
+                                ;
+                            }, 1000)
+                        })
+                        $(document).off('mousemove');
+                        $btn.off('mousemove').animate({'left': $cube_mach.position().left}, 'fast');
+                        $cube.animate({'left': $cube_mach.position().left}, 'fast', function () {
+                            $cube.fadeOut(300);
+                            $cube_mach.fadeOut(0);
+                        });
+                    } else {
+                        $(document).off('mousemove');
+                        $tips.text('').animate({'bottom': -24}, 'fast');
+                        $btn.off('mousemove').animate({'left': 0}, 'slow');
+                        $cube.animate({'left': 0}, 'slow');
+                    }
+                    ;
+
+
+                });
+            } //slidrage
+
+
+        } //F
+
+        if ($('*[data-slivery]').length >= 1) {
+            F['slivery']($('#slivery'), function () {
+                alert("验证成功回调")
+            });
+            F['slivery']($('.slidevery1'), function () {
+                alert("隐藏型验证成功回调")
+            })
+        }
+        ;
+
+
+    }) //ready
+</script>
+</html>

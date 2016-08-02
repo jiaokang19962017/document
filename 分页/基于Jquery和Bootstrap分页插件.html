@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset = "utf-8">
+    <meta name = "viewport" content = "width=device-width,initial-scale=1.0,user-scalable=no">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="http://jackclown.sinaapp.com/Page.js"></script>
+</head>
+<body>
+<nav id = "box">
+    <ul class = "pagination"></ul>
+</nav>
+</body>
+<script>
+    Page.pagination("#box ul",1000);
+</script>
+</html>
+<script type="text/javascript">
+    !function(){
+        var Page = function(box,pageCount){
+            this.box = box;
+            this.curPage = 1;
+            this.pageCount = pageCount;
+            this._list = new Array(pageCount +  2);
+        }
+
+        Page.pagination = function(box,pageCount){
+            return new Page($(box)[0],pageCount).init();
+        }
+
+        Page.prototype.getPage = function(n){
+        }
+
+        Page.prototype.init = function(){
+            this._list[0] = document.createElement("li");
+            this._list[0].innerHTML = '<span>&laquo;</span>';
+            for(var i = 1;i <= this.pageCount;i++){
+                this._list[i] = document.createElement("li");
+                this._list[i].innerHTML = '<a href = "#">'+ i +'</a>';
+            }
+            this._list[this.pageCount + 1] = document.createElement("li");
+            this._list[this.pageCount + 1] .innerHTML = '<span>&raquo;</span>';
+
+            this._build();
+            $(this._list[this.curPage]).addClass("active");
+
+            var obj = this;
+            $(this.box).on("click",function(e){
+                var target = e.target || e.srcElement;
+                if(target.tagName == "A"){
+                    $(obj._list[obj.curPage]).removeClass("active");
+                    obj.curPage = +target.innerHTML;
+                    $(obj._list[obj.curPage]).addClass("active");
+                    obj._build();
+                }
+            });
+
+            $(this._list[0]).on("click",function(){
+                if(obj.curPage > 1){
+                    $(obj._list[obj.curPage--]).removeClass("active");
+                    $(obj._list[obj.curPage]).addClass("active");
+                    obj._build();
+                }
+            });
+
+            $(this._list[this.pageCount + 1]).on("click",function(){
+                if(obj.curPage < obj.pageCount){
+                    $(obj._list[obj.curPage++]).removeClass("active");
+                    $(obj._list[obj.curPage]).addClass("active");
+                    obj._build();
+                }
+            });
+
+            return this;
+        }
+
+        Page.prototype._build = function(){
+            while(this.box.childNodes.length){
+                this.box.removeChild(this.box.childNodes[0]);
+            }
+
+            var frag = document.createDocumentFragment();
+
+            frag.appendChild(this._list[0]);
+            frag.appendChild(this._list[1]);
+
+            if(this.curPage >= 3){
+                if(this.curPage >= 4)
+                    $(frag).append('<li><span>...</span></li>');
+                frag.appendChild(this._list[this.curPage - 1]);
+            }
+
+            if(this.curPage >= 2)
+                frag.appendChild(this._list[this.curPage]);
+
+            if(this.curPage <= this.pageCount - 2){
+                frag.appendChild(this._list[this.curPage + 1]);
+                if(this.curPage <= this.pageCount - 3)
+                    $(frag).append('<li><span>...</span></li>');
+            }
+
+            frag.appendChild(this._list[this.pageCount]);
+            frag.appendChild(this._list[this.pageCount + 1]);
+
+            this.box.appendChild(frag);
+        }
+
+        window.Page = Page;
+    }();
+
+</script>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+
+    //有哪些算法：  快速排序**   冒泡排序   插入排序     二叉树
+    //1
+    //    function A() {
+    //    }
+    //    var a = new A;
+    //    console.log(a.__proto__);
+
+    //对比一下
+//    function A() {
+//
+//    }
+//    var a = A();
+//    console.log(a.__proto__);
+
+    //2
+    function A() {
+        console.log(this === window);
+    }
+    var obj = {
+        A: function () {
+            console.log(this === window);
+        }
+    };
+    window.A();
+    obj.A();
+    new A();  //new一个类都干了哪些事
+    obj.A.call(this);
+    console.log(this);
+
+    //3数组冒泡排序
+    Array.prototype.calcelSort = function calcelSort() {
+        for (var i = 0; i < this.length - 1; i++) {
+            for (var j = 0; j < this.length - 1 - i; j++) {
+                if (this[j] > this[j + 1]) {
+                    var temp = this[j];
+                    this[j] = this[j + 1];
+                    this[j + 1] = temp;
+                }
+
+            }
+        }
+        return this;
+    };
+    var ary = [1, 3, 4, 5, 7, 0];
+    console.log(ary.calcelSort());
+
+
+    //4查找指定元素在这个数组中的索引
+    Array.prototype.Arrayindex = function Arrayindex(val) {
+        if (!val) {
+            for (var i = 0; i < this.length; i++) {
+                if (this[i] === val) {
+                    index = i;
+                    return index;
+                }
+            }
+        } else {
+            return -1;
+        }
+
+
+    };
+    var ary = [1, 3, 4, 5, 7, 0];
+    console.log(ary.Arrayindex(0));
+
+    //5  ==和===区别
+    null == 0  //true   Number(null)--->>0
+    null === 0   //false
+
+    //6 什么是闭包
+    ~(function () {
+        a = 1;
+    })();
+    console.log(a);  //闭包+作用域链
+
+    //7 get和post的区别
+
+
+    //8 作用域分类     变量的分类(私有（局部）+共有（全局）)
+
+    //9 什么是cookie   cookie和localeStorage   sessionStorage
+
+    //10 BFC是什么   边距塌陷问题
+    // 11 css3选择器
+    // 12 position有哪些值，具体是什么意思
+    // 13 flexbox是什么
+
+    //
+    //    function createPerosn(name, age) {
+    //        var obj = {};
+    //        obj.name = name;
+    //        obj.age = age;
+    //        return obj;
+    //    }
+    //    createPerosn("changlianhai", 23)
+    //
+    //
+    //    function CreatePerson(name, age) {
+    //        this.name = name;
+    //        this.age = age;
+    //        return 10;
+    //    }
+    //    var person11 = new CreatePerson("")
+
+    //
+
+    //14写一个方法  random15   产生1-15之间的任意数，并且保证每一个数出现的几率都是1/15
+    //15 什么是CORS  ---->>https://www.duba.com/?f=liebaont
+    // 16 跨域
+
+</script>
+</body>
+</html>

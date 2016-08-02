@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8 '/>
+    <title>循环打字(input)</title>
+    <meta name='Keywords' content=""/>
+    <meta name='Description' content=""/>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        #content{
+            width:800px;
+            text-align: center;
+            margin:0 auto;
+            padding-top: 120px;
+        }
+        p{
+            text-align: left;
+        }
+        ul{
+        }
+        ul li{
+            text-align: left;
+            height:32px;
+            line-height: 32px;
+            cursor:pointer;
+        }
+        b{
+            font-weight: normal;
+        }
+        .Typing{
+            height:30px;
+            padding:5px 20px;
+            width:580px;
+            background: #355913;
+        }
+        .T_words{
+            display:block;
+            height:30px;
+            background: #fff;
+            font-family: "Arial";
+            font-size: 14px;
+            text-align: left;
+            padding-left: 10px;
+            width:560px;
+            border:0;
+        }
+    </style>
+    <!--<script src="http://code.jquery.com/jquery-latest.js"></script>-->
+    <script type="text/javascript" src="../js/jquery-1.9.1.js"></script>
+    <script>
+        $(function(){
+            var Twords=$(".T_words").val();//把需要执行循环打印的文本存进来
+            var Tlength = Twords.length;//注意length是属性，不是方法
+            $(".T_words").val("");//初始化清空
+            var Typingwords=$(".T_words").val();//已经打印出来的文本
+            var nowTyping=0;//正在打印的文本字符下标
+            var Typingtimer=null;//定时器
+            Typing();//执行
+            $(".T_words").focus();//文本框获得焦点，目的是模拟光标
+
+            function Typing(){//方法的定义
+                window.clearInterval(Typingtimer);//定时器设表先关原则
+                Typingtimer = window.setInterval(
+                        function(){
+                            if(nowTyping < Tlength){//当前打印的文本字符不是最后一个，继续打印
+                                Typingwords+=Twords[nowTyping];//把打印出来的字符追加到已打印文本中
+                                $(".T_words").val(Typingwords);//设置文本域
+                                nowTyping++;//打印下一个字符
+                            }else{
+                                nowTyping=0;//从头打印
+                                $(".T_words").val("");//清空文本域
+                                Typingwords=$(".T_words").val();//清空已打印出来的文本
+                            }
+                        }
+                        ,150);  //← 间隔时间，表示多少毫秒
+            }
+        });
+    </script>
+</head>
+
+<body>
+<div id="content">
+    <div class="Typing">
+        <input type="text" class="T_words" value="There are some textWords ! And my name is Alen ! Nice to meet you~~~">
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>免费获取激活短信</title>
+</head>
+
+<body>
+<input type="button" value="免费获取激活短信" id="btn">
+<script>
+    var btn = document.getElementById("btn");
+    btn.onclick = function(){
+        time(this);
+    }
+    var wait = 6;
+    function time(o){
+        if(wait==0){
+            o.removeAttribute("disabled");
+            o.value = "免费获取激活短信";
+            wait = 6;
+        }else{
+            o.setAttribute("disabled",true);
+            o.value = "重新发送(" + wait + ")";
+            setTimeout(function(){time(o)},1000);
+            wait--;
+        }
+    }
+</script>
+</body>
+</html>

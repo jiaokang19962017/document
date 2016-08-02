@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>toggle()  选择器初试</title>
+    <style>
+        body,h1,h2,h3,h4,h5,p,dl,dd,ul,ol,form,input,textarea,th,td,select { margin:0; padding:0; }
+        em { font-style:normal; }
+        li { list-style:none; }
+        a { text-decoration:none; }
+        img { border:none; vertical-align:top; }
+        table { border-collapse:collapse; }
+        input,textarea { outline:none; }
+        textarea { resize:none; overflow:auto; }
+        body { font-size:12px; font-family:"微软雅黑"; }
+
+        .SubCategoryBox{width:600px; margin: 100px auto; position: relative;}
+        .SubCategoryBox a{color: #000; display: block;}
+        .SubCategoryBox a:hover{ background: #c1c1c1}
+        .SubCategoryBox ul{ width: 600px;  border-top: 1px solid #c1c1c1;border-left: 1px solid #c1c1c1; clear:both;overflow:auto;  }
+        .SubCategoryBox ul li,.showmore{width:200px; height:26px; line-height:26px; text-align:center; float: left; background: #eaeaea; border-bottom: 1px solid #c1c1c1;border-right: 1px solid #c1c1c1;box-sizing:border-box;}
+        /*box-sizing:border-box;  理解为内边框*/
+        .showmore{ position:absolute; bottom:-50px; left: 50%; margin-left: -100px; border: 2px dotted #c1c1c1; background: none; }
+
+    </style>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+        $(function() {
+            var aLi = $('ul li:gt(5):not(:last)');
+            var oA = $(this).find('span');
+
+            aLi.hide();
+            $('.showmore>a').click(function(){
+
+                aLi.toggle(300);
+                if(oA.html() == '精简显示品牌'){
+                    oA.html('显示全部品牌');
+                }else{oA.html('精简显示品牌');}
+
+            })
+        })
+
+    </script>
+</head>
+<body>
+<div class="SubCategoryBox">
+    <ul>
+        <li><a href="#">佳能</a></li>
+        <li><a href="#">索尼</a></li>
+        <li><a href="#">三星</a></li>
+        <li><a href="#">尼康</a></li>
+        <li><a href="#">松下</a></li>
+        <li><a href="#">卡西欧</a></li>
+        <li><a href="#">富士</a></li>
+        <li><a href="#">柯达</a></li>
+        <li><a href="#">宾得</a></li>
+        <li><a href="#">理光</a></li>
+        <li><a href="#">奥林巴斯</a></li>
+        <li><a href="#">明基</a></li>
+        <li><a href="#">爱国者</a></li>
+        <li><a href="#">其他品牌</a></li>
+    </ul>
+
+    <div class="showmore">
+        <a href="#">
+            <span>显示全部品牌</span>
+        </a>
+    </div>
+
+</div>
+
+</body>
+</html>

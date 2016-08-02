@@ -1,0 +1,14 @@
+body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0;}
+body,button,input,select,textarea{font-family: Verdana, Arial, Helvetica, sans-serif; font-size:12px; padding:0; margin:0;}
+table{border-collapse:collapse;border-spacing:0;}
+ul,li{ margin:0px; padding:0px; list-style:none; }
+img{vertical-align:top; border:none;}
+h1,h2,h3,h4,h5,h6,p,{ margin:0; padding:0;}
+.clear{ clear:both; margin:0; padding:0;}
+a{text-decoration:none; color:#000;}
+html{overflow-x:hidden;-webkit-text-size-adjust:none;}
+/*公用样式*/
+.clearfix:after {content:".";display:block;height:0;visibility:hidden;clear:both;}
+.clearfix {*zoom:1;}
+.left{float:left;}
+.right{float:right;}

@@ -1,0 +1,153 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <script type="text/javascript" src="../js/jquery.js"></script>
+    <title>背景透明</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .aaa {
+            background-color: #fff;
+            border: 10px solid gray;
+            border-radius: 4px 4px 4px 4px;
+            display: none;
+            width: 300px;
+            position: absolute;
+            top: 30%;
+            left: 30%;
+            z-index: 11;
+            cursor: move;
+        }
+
+        .show {
+            display: none;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            z-index: 10;
+            left: 0;
+            top: 0;
+            background: #000000;
+            opacity: 0.3;
+            filter: alpha(opacity=30);
+        }
+
+        a {
+            TEXT-DECORATION: none
+        }
+
+        .w_close:hover {
+            color: #666666;
+            font-size: 12px;
+        }
+
+        .w_close:link {
+            color: #666666;
+            font-size: 12px;
+        }
+
+        .w_close:active {
+            color: #666666;
+            font-size: 12px;
+        }
+
+        .w_close:visited {
+            color: #666666;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+<div id="test">
+    <p>刘成亮刘成亮刘成亮刘成亮刘成亮刘成亮刘成亮刘成亮刘成亮</p>
+
+    <p>刘成亮刘成亮刘成亮刘成亮刘成亮刘成亮刘成亮刘成亮刘成亮</p>
+
+    <p>刘成亮刘成亮刘成亮刘成亮刘成亮刘成亮刘成亮刘成亮刘成亮</p>
+
+    <p>刘成亮刘成亮刘成亮刘成亮刘成亮刘成亮刘成亮刘成亮刘成亮</p>
+
+    <p>刘成亮刘成亮刘成亮刘成亮刘成亮刘成亮刘成亮刘成亮刘成亮</p>
+
+    <p>刘成亮刘成亮刘成亮刘成亮刘成亮刘成亮刘成亮刘成亮刘成亮</p>
+
+    <p>刘成亮刘成亮刘成亮刘成亮刘成亮刘成亮刘成亮刘成亮刘成亮</p>
+
+    <p>刘成亮刘成亮刘成亮刘成亮刘成亮刘成亮刘成亮刘成亮刘成亮</p>
+
+    <p>刘成亮刘成亮刘成亮刘成亮刘成亮刘成亮刘成亮刘成亮刘成亮</p>
+
+    <p>刘成亮刘成亮刘成亮刘成亮刘成亮刘成亮刘成亮刘成亮刘成亮</p>
+</div>
+<div id="showError">显示提示</div>
+<div id="" class="show"></div>
+<div class="aaa">
+    <div style="height:20px;background-color:#F2F2F2">
+        <span style="float:right;cursor:pointer;padding-top:4px;padding-right:4px;" id="close"><a class="w_close"
+                                                                                                  href="javascript:void(0);">关闭</a></span>
+    </div>
+    <div style="">
+        <table>
+            <tr>
+                <th>用户名：</th>
+                <td><input type="text" name="name"></td>
+            </tr>
+            <tr>
+                <th>密码：</th>
+                <td><input type="password" name="password"></td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="提交"></td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    $("#showError").live('click', function () {
+        $(".show").show();
+        $(".aaa").show();
+//$("body").addClass("fli"); 
+    })
+    $("#test").live('click', function () {
+        alert(11111);
+    })
+    $("#close").live('click', function () {
+        $(".show").hide();
+        $(".aaa").hide();
+    })
+
+
+    $(function () {
+        var _move = false;//移动标记
+        var _x, _y;//鼠标离控件左上角的相对位置
+        $(".aaa").click(function () {
+            //alert("click");//点击（松开后触发）
+        }).mousedown(function (e) {
+            _move = true;
+            _x = e.pageX - parseInt($(".aaa").css("left"));
+            _y = e.pageY - parseInt($(".aaa").css("top"));
+//            $(".aaa").fadeTo(20, 0.5);//点击后开始拖动并透明显示
+        });
+        $(document).mousemove(function (e) {
+            if (_move) {
+                var x = e.pageX - _x;//移动时根据鼠标位置计算控件左上角的绝对位置
+                var y = e.pageY - _y;
+                $(".aaa").css({top: y, left: x});//控件新位置
+            }
+        }).mouseup(function () {
+            _move = false;
+            $(".aaa").fadeTo("fast", 1);//松开鼠标后停止移动并恢复成不透明
+        });
+    });
+</script>
+</html> 

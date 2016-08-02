@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .min {
+            width: 350px;
+            height: 350px;
+            border: 1px solid black;
+            float: left;
+            position: relative;
+            cursor: pointer;
+        }
+        .min img{
+            width: 100%;
+            height: 100%;
+        }
+
+        .max {
+            width: 350px;
+            height: 350px;
+            border: 1px solid black;
+            float: left;
+            display: none;
+            position: relative;
+            overflow: hidden;
+
+        }
+        .max img{
+            position: absolute;
+        }
+        .fd {
+            width: 150px;
+            height: 150px;
+            background-color: skyblue;
+            opacity: 0.3;
+            position: absolute;
+            left: 0;
+            top: 0;
+            display: none;
+        }
+
+    </style>
+</head>
+
+<body>
+<div class="min">
+    <img src="../../../image/1.jpg" />
+    <div class="fd"> </div>
+</div>
+<div class="max">
+    <img src="../../../image/1.jpg" />
+</div>
+
+<script type="text/javascript">
+    function fdj(box,box1,shou,img){
+        var omin = document.querySelector(box);
+        var omax = document.querySelector(box1);
+        var ofd = document.querySelector(shou);
+        var img =document.querySelector(img);
+        omin.onmouseover=function(){
+            omax.style.display="block";
+            ofd.style.display="block";
+        }
+        omin.onmouseout=function(){
+            omax.style.display="none";
+            ofd.style.display="none";
+        }
+        document.onmousemove = function() {
+            var l =omin.offsetLeft
+            var t=omin.offsetTop;
+            var x=event.clientX;
+            var y=event.clientY;
+
+            var maxX=omin.clientWidth-ofd.offsetWidth;
+            var maxY=omin.clientHeight-ofd.offsetHeight;
+            if (x<=ofd.offsetWidth/2+l) {
+                x=ofd.offsetWidth/2+l
+            }else if (x>=maxX+ofd.offsetWidth/2+l) {
+                x=maxX+ofd.offsetWidth/2+l
+            }
+            if (y<=ofd.offsetHeight/2+t) {
+                y=ofd.offsetHeight/2+t
+            }else if (y>=maxY+ofd.offsetHeight/2+t) {
+                y=maxY+ofd.offsetHeight/2+t
+            }
+            ofd.style.left = x-ofd.offsetWidth/2-l+ "px";
+            ofd.style.top = y-ofd.offsetHeight/2-t+ "px";
+            //求比例
+            var pertX=ofd.offsetLeft/omin.offsetWidth;
+            var pertY=ofd.offsetTop/omin.offsetHeight;
+            //大图显示
+            img.style.left=-pertX*img.offsetWidth+"px";
+            img.style.top=-pertY*img.offsetHeight+"px";
+        }
+    }
+    fdj(".min",".max",".fd",".max img")
+
+</script>
+</body>
+
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>RunJS</title>
+    <style type="text/css">
+
+
+        button {
+            border: 1px solid #ccc;
+            cursor: pointer;
+            display: block;
+            margin: auto;
+            position: relative;
+            top: 100px;
+        }
+
+        .posBtnR {
+            width: 100px;
+            height: 100px;
+            background: red;
+            position: absolute;
+            right: 0;
+            top: 0;
+            z-index: 1;
+        }
+
+        img {
+            margin-top: 80px
+        }
+    </style>
+    <script src="../../js/jquery-1.9.1.js"></script>
+</head>
+<body>
+<img src='http://sandbox.runjs.cn/uploads/rs/198/kn8pai72/index_28.jpg'>
+
+<div class='posBtnR' id='posBtnR'>
+
+</div>
+</body>
+
+</html>
+<script type="text/javascript">
+    function MoveBox(obj) {
+        var divTop = $(obj).offset().top;
+        var divLeft = $(obj).offset().left;
+        $(obj).css({"position": "absolute", "z-index": "0", "left": divLeft + "px", "top": divTop + "px"});
+        $(obj).parent().append($(obj).clone());
+        $(obj).animate({
+            "left": ($("#posBtnR").offset().left) + "px",
+            "top": $("#posBtnR").offset().top + "px",
+            "width": "100px",
+            "height": "70px"
+        }, 1000, function () {
+            $(obj).animate({
+                "left": $("#posBtnR").offset().left + "px",
+                "top": $("#posBtnR").offset().top + "px"
+            }, 1000);
+            num++;
+            $("#btn_num", parent.document).text(num).animate({'opacity': 1, 'marginTop': '0'}, 500, function () {
+                setTimeout(function () {
+                    $("#btn_num").hide()
+                }, 8000);
+            });
+        });
+    }
+
+    $('img').on('click',function(){
+        MoveBox(this)
+    })
+</script>

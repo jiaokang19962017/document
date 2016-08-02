@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>javascript实现电商多个产品切换且有放大镜效果</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .clear {
+            line-height: 0;
+            font-size: 0;
+            width: 0;
+            clear: both;
+        }
+
+        .box {
+            width: 300px;
+            position: relative;
+            margin: 10px 0 0 10px;
+            display: block;
+            height: 300px;
+            padding: 1px;
+            border: solid 1px #eee;
+        }
+
+        .box img {
+            width: 300px;
+            height: 300px;
+            display: block;
+            vertical-align: top;
+            overflow: hidden;
+        }
+
+        .small {
+            width: 302px;
+            height: 90px;
+            display: block;
+            margin: 10px 0 0 10px;
+            border: solid 1px #eee;
+            overflow: hidden;
+        }
+
+        .small ul {
+            text-align: left;
+            margin: 0;
+            padding: 0;
+
+
+        }
+
+        .small ul li {
+            list-style: none;
+            width: 90px;
+            height: 90px;
+            margin: 5px;
+            cursor: pointer;
+            display: block;
+            float: left;
+            overflow: hidden;
+        }
+
+        .small ul li img {
+            width: 90px;
+            height: 90px;
+            display: block;
+        }
+
+        .big {
+            width: 400px;
+            height: 400px;
+            overflow: hidden;
+            display: none;
+            position: absolute;
+            top: 10px;
+            left: 320px;
+            overflow: hidden;
+        }
+
+        .big img {
+            width: 600px;
+            display: block;
+            height: 600px;
+        }
+
+        .box span {
+            width: 100px;
+            height: 100px;
+            margin: -50px 0 0 -50px;
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: #F79F00;
+            opacity: 0.8;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var aBox = document.getElementById("box");
+            var aSamll = document.getElementById("small");
+            var aImg = aSamll.getElementsByTagName("img");
+            var aBig = document.getElementById("big");
+            var oImg = aBox.getElementsByTagName("img")[0];
+            var bigImg = aBig.getElementsByTagName("img")[0];
+            var oSpan = aBox.getElementsByTagName("span")[0];
+            oImg.setAttribute("src", "../../../image/1.jpg")
+            for (var i = 0; i < aImg.length; i++) {
+                aImg[i].index = i;
+                aImg[i].onclick = function () {
+                    var this_Img = this.getAttribute("src");
+                    oImg.setAttribute("src", this_Img);
+                    aBig.style.display = "none";
+                    var big_Img = this.getAttribute("src");
+                    bigImg.setAttribute("src", big_Img);
+
+                }
+                aBox.onmousemove = function (ev) {
+                    var ev = ev || event;
+                    var l = ev.clientX;
+                    var t = ev.clientY;
+                    if (t < 51)t = 51;
+                    if (l < 51)l = 51;
+                    if (l > aBox.offsetWidth - 53)l = aBox.offsetWidth - 53;
+                    if (t > aBox.offsetHeight - 53)t = aBox.offsetHeight - 53;
+                    oSpan.style.left = l + "px";
+                    oSpan.style.top = t + "px";
+
+                    var disX = l - oSpan.offsetWidth / 2;
+                    var disY = t - oSpan.offsetHeight / 2;
+                    var bigX = disX / (aBox.offsetWidth - oSpan.offsetWidth) * (aBig.offsetWidth - bigImg.offsetWidth);
+                    var bigY = disY / (aBox.offsetHeight - oSpan.offsetHeight) * (aBig.offsetHeight - bigImg.offsetHeight);
+                    bigImg.style.marginLeft = bigX + "px";
+                    bigImg.style.marginTop = bigY + "px";
+
+
+                }
+                aBox.onmouseover = function () {
+                    oSpan.style.display = "block";
+                    aBig.style.display = "block";
+
+                }
+                aBox.onmouseout = function () {
+                    oSpan.style.display = "none";
+                    aBig.style.display = "none";
+                }
+            }
+
+//            function cuu(ul,li,delay, speed, lineHeight) {
+//                var slideBox = (typeof ul == 'string')?document.getElementById(ul):ul;
+//                var delay = delay||1000;
+//                var speed=speed||15;
+//                var lineHeight = lineHeight||60;
+//                var tid = null, pause = false;
+//                var start = function() {
+//                    tid=setInterval(slide, speed);
+//                }
+//                var slide = function() {
+//                    if (pause) return;
+//                    slideBox.scrollLeft += 2;
+//                    if (slideBox.scrollLeft % lineHeight == 0) {
+//                        clearInterval(tid);
+//                        slideBox.appendChild(slideBox.getElementsByTagName(li)[0]);
+//                        slideBox.scrollLeft = 0;
+//                        setTimeout(start, delay);
+//                    }
+//                }
+//                slideBox.onmouseover=function(){pause=true;}
+//                slideBox.onmouseout=function(){pause=false;}
+//                setTimeout(start, 2000);
+//            }
+//
+//            cuu('small',"li");//停留时间，相对速度（越小越快）,每次滚动多少，最好和Li的Line-height一致。
+
+        }
+    </script>
+</head>
+<body>
+<div class="box" id="box">
+    <img src=""/>
+    <span></span>
+</div>
+<div class="small" id="small">
+    <ul>
+        <li><img src="../../../image/1.jpg"/></li>
+        <li><img src="../../../image/2.jpg"/></li>
+        <li><img src="../../../image/2.jpg"/></li>
+        <li><img src="../../../image/2.jpg"/></li>
+        <li><img src="../../../image/3.jpg"/></li>
+        <div class="clear"></div>
+    </ul>
+</div>
+<div class="big" id="big">
+    <img src="../../../image/1.jpg"/>
+</div>
+</body>
+</html>

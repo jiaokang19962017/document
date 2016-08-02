@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+        *{
+            padding:0;
+            margin:0;
+        }
+        ul ,li {
+            list-style: none;
+        }
+        a {
+            text-decoration: none;
+        }
+        #gallery {
+            width: 400px;
+            margin:100px auto 0;
+        }
+        #gallery .gallery_main {
+            position: relative;
+            z-index: 100;
+            width: 400px;
+            height: 400px;
+        }
+        #gallery .gallery_small , #gallery .gallery_big {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 400px;
+            height: 400px;
+            overflow:hidden;
+        }
+        #gallery .gallery_big {
+            left: 420px;
+        }
+        #gallery .gallery_small img {
+            width: 100%;
+            height: 100%;
+        }
+        #gallery .gallery_small .gallery_move {
+            display: none;
+            position: absolute;
+            background: #f78f1e;
+            cursor: move;
+            width: 200px;
+            height: 200px;
+            opacity: 0.5;
+            filter: alpha(opacity=50);
+            z-index: 10;
+        }
+        #gallery .gallery_slide_box {
+            position: relative;
+            padding:10px 20px;
+            width: 360px;
+            height: 100px;
+        }
+        #gallery .gallery_big {
+            display: none;
+        }
+        #gallery .gallery_slide_box_inner {
+            position: relative;
+            width: 360px;
+            height: 100px;
+            overflow:hidden;
+        }
+        #gallery .gallery_slide {
+            position: absolute;
+            left: 0;
+            top:0;
+        }
+        #gallery .gallery_slide li {
+            float: left;
+            width: 88px;
+            height: 88px;
+            border: 1px solid #fff;
+            cursor: pointer;
+        }
+        #gallery .gallery_slide li:hover {
+            border-color: #f78f1e;
+        }
+        #gallery .gallery_slide .active {
+            border-color: #f78f1e;
+        }
+        #gallery .gallery_slide li img {
+            width: 100%;
+            height:auto;
+        }
+        #gallery .gallery_slide_box .arrow_left {
+            position: absolute;
+            left: 0;
+            top: 40px;
+            font-size: 24px;
+        }
+        #gallery .gallery_slide_box .arrow_right {
+            position: absolute;
+            right: 0;
+            top: 40px;
+            font-size: 24px;
+        }
+        #gallery .gallery_slide_box .arrow_ban {
+            color: #dedede;
+        }
+        #gallery .gallery_big img {
+            width: 800px;
+            height: 800px;
+        }
+    </style>
+</head>
+<body>
+<div id="gallery">
+    <div class="gallery_main">
+        <div class="gallery_small" id="gallerySmall">
+            <span class="gallery_move" id="galleryMove"></span>
+            <img src="http://image.mihui365.com/bbc/skuImg/4908049048341_1001.jpg" />
+        </div>
+        <div class="gallery_big" id="galleryBig">
+            <img src="http://image.mihui365.com/bbc/skuImg/4908049048341_1001.jpg
+				" id="galleryBigImg"/>
+        </div>
+    </div>
+    <div class="gallery_slide_box">
+        <a href="###" class="arrow_left" id="arrowLeft"><</a>
+        <a href="###" class="arrow_right" id="arrowRight">></a>
+        <div class="gallery_slide_box_inner" id="galleryInner">
+            <ul class="gallery_slide" id="gallerySlide">
+                <li>
+                    <img src="http://image.mihui365.com/bbc/skuImg/4908049048341_1001.jpg" />
+                </li><li>
+                <img src="http://cdn.attach.w3cfuns.com/notes/pics/201607/12/105408fkyo9aaqqq0mwaq9.jpg" />
+            </li><li>
+                <img src="http://cdn.attach.w3cfuns.com/notes/pics/201607/12/105528tfqndbfg1ydqj1dj.jpg" />
+            </li><li>
+                <img src="http://image.mihui365.com/bbc/skuImg/4908049048341_1001.jpg" />
+            </li><li>
+                <img src="http://cdn.attach.w3cfuns.com/notes/pics/201607/12/105528hbamrab34q6kjnj5.jpg" />
+            </li>
+
+            </ul>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function Enlarge(smallBox , bigBox , move , img , galleryInner , gallerySlide , arrowLeft , arrowRight) {
+        this.init(smallBox , bigBox , move , img, galleryInner , gallerySlide, arrowLeft , arrowRight);
+    }
+    Enlarge.prototype =  {
+        init: function(smallBox , bigBox , move , img, galleryInner , gallerySlide, arrowLeft , arrowRight) {
+            var that = this;
+            this.smallBox = smallBox ;
+            this.bigBox  = bigBox ;
+            this.move = move ;
+            this.img = img ;
+            this.scale1 = this.scale2 = 2;
+            this.galleryInner = galleryInner || '';
+            this.gallerySlide = gallerySlide || '';
+            this.arrowLeft = arrowLeft;
+            this.arrowRight = arrowRight;
+            this.gallerySlideLi = this.gallerySlide.getElementsByTagName('li');
+            this.num = this.gallerySlideLi.length;
+            this.width = this.gallerySlideLi[0].offsetWidth;
+            if( this.checkShow() === -1 ) {
+                this.arrowLeft.style.display = this.arrowRight.style.display = 'none';
+            } else {
+                this.gallerySlide.style.width = this.num * this.width + 'px';
+                this.index = 0;
+                this.arrowLeft.onclick = function() {
+                    if( that.index === 0 ) {
+                        return false;
+                    } else {
+                        that.prev();
+                    }
+                };
+                this.arrowRight.onclick = function() {
+                    if( that.index === that.num - 4 ) {
+                        return false;
+                    } else {
+                        that.next();
+                    }
+                }
+            }
+            this.smallBox.onmousemove = function(event) {
+                that.goMove(event);
+            };
+            this.smallBox.onmouseout = function() {
+                that.move.style.display = 'none';
+                that.bigBox.style.display = 'none';
+            };
+            for(var i = 0; i < this.gallerySlideLi.length ; i++ ) {
+                this.gallerySlideLi[i].onmouseover = function() {
+                    that.smallBox.getElementsByTagName('img')[0].src = that.bigBox.getElementsByTagName('img')[0].src = this.getElementsByTagName('img')[0].src;
+                }
+            }
+        },
+        checkShow : function() {
+            if( this.gallerySlide == '' || this.galleryInner == '' ) {
+                return -1;
+            } else {
+                if ( this.width * this.num <= this.galleryInner.offsetWidth ) {
+                    return -1;
+                }
+            }
+        },
+        prev : function() {
+            this.index--;
+            this.moveSlide(this.index);
+        },
+        next: function ()
+        {
+            this.index++;
+            this.moveSlide(this.index);
+        },
+        moveSlide :function(index) {
+            var translate = - index  * this.width;
+            var oThis = this;
+            clearInterval(oThis.timer);
+            oThis.timer = setInterval(function ()
+            {
+                var iSpeed = (translate - oThis.gallerySlide.offsetLeft) / oThis.num;
+                iSpeed = iSpeed > 0 ? Math.ceil(iSpeed) : Math.floor(iSpeed);
+                if( iSpeed === 0 ) {
+                    clearInterval(oThis.timer);
+                } else {
+                    oThis.gallerySlide.style.left =  oThis.gallerySlide.offsetLeft + iSpeed + 'px';
+                }
+            }, 25);
+        },
+        showBigImg :function() {
+
+        },
+        goMove : function(event) {
+            var event = window.event || event;
+            var x = event.clientX ;
+            var y = event.clientY ;
+            this.move.style.display = this.bigBox.style.display = 'block';
+            x = x - this.smallBox.getBoundingClientRect().left - this.move.offsetWidth/2;
+            y =  y - this.smallBox.getBoundingClientRect().top -  this.move.offsetHeight/2;
+            if( x < 0) {
+                x = 0;
+            } else if ( x > this.smallBox.offsetWidth - this.move.offsetWidth) {
+                x =  this.smallBox.offsetWidth - this.move.offsetWidth;
+            }
+            if ( y < 0 ) {
+                y = 0;
+            } else if ( y > this.smallBox.offsetHeight - this.move.offsetHeight) {
+                y = this.smallBox.offsetHeight - this.move.offsetHeight;
+            }
+            this.move.style.left = x + 'px';
+            this.move.style.top = y + 'px';
+            this.bigBox.scrollLeft = this.scale1 * x;
+            this.bigBox.scrollTop = this.scale2 * y;
+        }
+    };
+    var smallBox = document.getElementById('gallerySmall');
+    var bigBox = document.getElementById('galleryBig');
+    var galleryMove = document.getElementById('galleryMove');
+    var galleryBigImg = document.getElementById('galleryBigImg');
+    var galleryInner = document.getElementById('galleryInner');
+    var gallerySlide = document.getElementById('gallerySlide');
+    var arrowLeft = document.getElementById('arrowLeft');
+    var arrowRight = document.getElementById('arrowRight');
+    new Enlarge(smallBox , bigBox , galleryMove ,galleryBigImg, galleryInner, gallerySlide , arrowLeft , arrowRight);
+</script>
+</body>
+</html>

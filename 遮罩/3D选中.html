@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        body {
+            background: #efefef;
+            text-align: center;
+        }
+
+        .box {
+            display: inline-block;
+            perspective: 4000px;
+            -webkit-perspective: 4000px;
+            margin: 50px;
+            width: 310px;
+            height: 100px;
+        }
+
+        .item {
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform .6s;
+        }
+
+        .item:hover {
+            transform: rotateX(92deg)
+        }
+
+        .item:hover .show {
+            box-shadow: none
+        }
+
+        .item > div {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            border-radius: 5px;
+            transition: all .6s
+        }
+
+        .item .show {
+            background: #00a381;
+            transform: translateZ(50px);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .item .hide {
+            background: #d3a243;
+            transform: rotateX(-90deg) translateZ(50px);
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <div class="item">
+        <div class="show">
+            <img src="http://sandbox.runjs.cn/uploads/rs/155/azqeh6bj/1.png">
+        </div>
+        <div class="hide">
+            <img src="http://sandbox.runjs.cn/uploads/rs/155/azqeh6bj/2.png">
+        </div>
+    </div>
+</div>
+<div class="box">
+    <div class="item">
+        <div class="show"></div>
+        <div class="hide"></div>
+    </div>
+</div>
+</body>
+</html>

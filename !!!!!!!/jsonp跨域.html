@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <meta charset="utf-8"/>
+    <meta name="apple-touch-fullscreen" content="yes"/>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
+    <meta name="baidu-tc-verification" content="b1305d1a0963db7a6d943238104ff279"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+    <meta name="description" content="中国移动和阅读"/>
+    <meta name="keywords" content="中国移动和阅读"/>
+    <title>jsonp视频搬运合集</title>
+    <link href="http://wap.cmread.com/rbc/p//content/repository/ues/css/s109/homePageV6_0.css" rel="stylesheet"/>
+    <script src="../../js/jquery-1.11.3.min.js"></script>
+    <!--懒加载插件-->
+    <script src="延迟加载/图片延迟加载/jquery.lazyload.js"></script>
+    <style type="text/css">
+        /**书籍列表1*/
+        .videos {
+            max-width: 800px;
+            min-width: 240px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .bookList {
+            padding: 8px;
+            background-color: #fff;
+        }
+
+        .book_pic {
+            width: 75px;
+            float: left;
+            position: relative;
+        }
+
+        .book_pic img {
+            width: 100%;
+            height: 107px;
+        }
+
+        .book_info {
+            margin-left: 95px;
+            position: relative;
+            padding-bottom: 3px;
+            height: 107px;
+        }
+
+        .bookname {
+            margin: 5px 0px;
+            color: #121212;
+            font-size: 14px;
+            display: -webkit-box;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1;
+        }
+
+        .author {
+            margin-bottom: 20px;
+            color: #6c6c6c;
+            margin-left: 10px;
+            font-size: 14px;
+        }
+
+        .author:before {
+            content: "";
+            background-image: url("http://sandbox.runjs.cn/uploads/rs/134/bgjylnde/nameLeft.png");
+            background-size: 10px 10px;
+            margin-right: 5px;
+            width: 10px;
+            height: 10px;
+            position: absolute;
+            top: 22px;
+            left: 0px;
+        }
+
+        .bookdesc {
+            color: #a3a3a3;
+            display: -webkit-box;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 3;
+            line-height: 18px;
+        }
+
+        .bookbox {
+            margin-bottom: 9px;
+        }
+
+        /**搜索页*/
+        .sousuo {
+            background-color: #fff;
+        }
+
+        .sousuo_input {
+            height: 38px;
+            position: relative;
+            padding: 0 40px 0 8px;
+        }
+
+        .sousuo_input input {
+            border-radius: 25px;
+            border: 1px solid #cacaca;
+            height: 30px;
+            box-sizing: border-box;
+            position: relative;
+            width: 100%;
+            top: 5px;
+            font-size: 12px;
+            color: #909090;
+            padding: 0 0 0 36px;
+        }
+
+        .sousuo_img {
+            background-image: url("http://sandbox.runjs.cn/uploads/rs/134/bgjylnde/sousuo_img.png");
+            background-size: 100% 100%;
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            top: 10px;
+            left: 15px;
+        }
+
+        .sousuo_btn {
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 34px;
+            width: 39px;
+            padding: 2px 0px;
+            line-height: 34px;
+            text-align: center;
+            color: #6c6c6c;
+            font-size: 12px;
+        }
+
+        .both {
+            clear: both;
+        }
+
+        .hot {
+            background-color: #fff;
+            padding: 14px 8px;
+            position: relative;
+        }
+
+        .hot_title_left {
+            float: left;
+            margin-bottom: 10px;
+            color: #121212;
+            font-size: 14px;
+        }
+
+        .hot_hyh_right {
+            float: right;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .hot_hyh_right a {
+            color: #c4c4c4;
+        }
+
+        .hot-content {
+            margin-bottom: 10px;
+            line-height: 27px;
+            display: block;
+            display: -webkit-box;
+            display: -moz-box;
+            box-pack: justify;
+            -webkit-box-pack: justify;
+            border-top: 0px;
+            padding-top: 0px;
+        }
+
+        /*css3布局*/
+        .hot-content > li {
+            width: 86px;
+        }
+
+        .hot-content > li > a > div {
+            padding: 0px 13px;
+            color: #fdf6f6;
+            text-align: center;
+        }
+
+        .line2 {
+            border: 1px solid #d5d5d5;
+        }
+
+        .bookList_title {
+            background-color: #fff;
+            padding: 15px 8px 0px;
+            color: #393939;
+            font-size: 14px;
+        }
+
+        .bookList .bookPage li h3 {
+            margin-right: 0;
+        }
+
+        @media (min-width: 321px) and (max-width: 1080px) {
+            /**书籍列表1*/
+            .bookList {
+                padding: 10px;
+            }
+
+            .book_pic {
+                width: 84px;
+            }
+
+            .book_pic img {
+                height: 120px;
+            }
+
+            .book_info {
+                margin-left: 107px;
+                padding-bottom: 3px;
+                height: 120px;
+            }
+
+            .bookname {
+                margin: 7px 0px;
+            }
+
+            .author {
+                margin-bottom: 23px;
+                margin-left: 12px;
+            }
+
+            .author:before {
+                content: "";
+                background-image: url("http://sandbox.runjs.cn/uploads/rs/134/bgjylnde/nameLeft.png");
+                background-size: 11px 11px;
+                margin-right: 7px;
+                width: 11px;
+                height: 11px;
+                top: 24px;
+                left: 0px;
+            }
+
+            .bookdesc {
+                line-height: 18px;
+            }
+
+            .bookbox {
+                margin-bottom: 11px;
+            }
+
+            /**搜索页*/
+            .sousuo_input {
+                height: 40px;
+                padding: 0 44px 0 10px;
+            }
+
+            .sousuo_input input {
+                top: 7px;
+            }
+
+            .sousuo_img {
+                top: 13px;
+                left: 17px;
+            }
+
+            .sousuo_btn {
+                height: 36px;
+                width: 44px;
+                padding: 4px 0px;
+                line-height: 36px;
+            }
+
+            .hot {
+                padding: 16px 10px;
+            }
+
+            .hot_title_left, .hot_hyh_right {
+                margin-bottom: 11px;
+            }
+
+            .hot-content {
+                margin-bottom: 11px;
+                line-height: 30px;
+            }
+
+            /*css3布局*/
+            .hot-content > li {
+                width: 87px;
+            }
+
+            .bookList_title {
+                padding: 17px 10px 0px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="videos">
+    <!--搜索框-->
+    <div class="sousuo">
+        <div class="sousuo_input">
+            <input type="text" value="" placeholder="功能待加入……"/>
+            <i class="sousuo_img"></i>
+
+            <div class="sousuo_btn">搜索</div>
+        </div>
+    </div>
+    <div class="both"></div>
+    <!--热搜词-->
+    <div class="hot" id="node_choice">
+        <div class="hot_title">
+            <div class="hot_title_left">视频专区选择</div>
+            <!--<div class="hot_hyh_right"><a href="javascript:;">换一换</a></div>-->
+        </div>
+        <div class="both"></div>
+        <ul class="hot-content">
+            <li style="background-color:#ea7d7d"><a href="javascript:;" nid="11">
+                <div>连载新番</div>
+            </a></li>
+            <li style="background-color:#cfaaf1"><a href="javascript:;" nid="10">
+                <div>完结番组</div>
+            </a></li>
+            <li style="background-color:#f1c6aa"><a href="javascript:;" nid="26">
+                <div>剧场版</div>
+            </a></li>
+        </ul>
+        <ul class="hot-content">
+            <li style="background-color:#f1dfaa"><a href="javascript:;" nid="38">
+                <div>电影</div>
+            </a></li>
+            <li style="background-color:#80debe"><a href="javascript:;" nid="39">
+                <div>电视剧</div>
+            </a></li>
+            <li style="background-color:#7dcdea"><a href="javascript:;" nid="27">
+                <div>完结剧集</div>
+            </a></li>
+        </ul>
+        <ul class="hot-content">
+            <li style="background-color:#ea7d7d"><a href="javascript:;" nid="9">
+                <div>喜闻乐见</div>
+            </a></li>
+            <li style="background-color:#cfaaf1"><a href="javascript:;" nid="32">
+                <div>娱乐鬼畜</div>
+            </a></li>
+            <li style="background-color:#f1c6aa"><a href="javascript:;" nid="61">
+                <div>运动体育</div>
+            </a></li>
+        </ul>
+        <ul class="hot-content">
+            <li style="background-color:#f1dfaa"><a href="javascript:;" nid="57">
+                <div>科技·数码</div>
+            </a></li>
+            <li style="background-color:#80debe"><a href="javascript:;" nid="65">
+                <div>军事·情报</div>
+            </a></li>
+            <li style="background-color:#7dcdea"><a href="javascript:;" nid="15">
+                <div>宠物·猫狗</div>
+            </a></li>
+        </ul>
+        <ul class="hot-content">
+            <li style="background-color:#ea7d7d"><a href="javascript:;" nid="7">
+                <div>ACG音乐</div>
+            </a></li>
+            <li style="background-color:#cfaaf1"><a href="javascript:;" nid="31">
+                <div>翻唱</div>
+            </a></li>
+            <li style="background-color:#f1c6aa"><a href="javascript:;" nid="30">
+                <div>V家</div>
+            </a></li>
+        </ul>
+        <ul class="hot-content">
+            <li style="background-color:#f1dfaa"><a href="javascript:;" nid="28">
+                <div>MADAMV</div>
+            </a></li>
+            <li style="background-color:#80debe"><a href="javascript:;" nid="29">
+                <div>综合·周边</div>
+            </a></li>
+            <li style="background-color:#7dcdea"><a href="javascript:;" nid="25">
+                <div>原创·配音</div>
+            </a></li>
+        </ul>
+        <ul class="hot-content">
+            <li style="background-color:#ea7d7d"><a href="javascript:;" nid="16">
+                <div>综艺娱乐</div>
+            </a></li>
+            <li style="background-color:#cfaaf1"><a href="javascript:;" nid="43">
+                <div>国产动漫</div>
+            </a></li>
+            <li style="background-color:#f1c6aa"><a href="javascript:;" nid="88">
+                <div>OP·ED</div>
+            </a></li>
+        </ul>
+        <ul class="hot-content">
+            <li style="background-color:#f1dfaa"><a href="javascript:;" nid="34">
+                <div>网络游戏</div>
+            </a></li>
+            <li style="background-color:#80debe"><a href="javascript:;" nid="44">
+                <div>单机游戏</div>
+            </a></li>
+            <li style="background-color:#7dcdea"><a href="javascript:;" nid="33">
+                <div>电子竞技</div>
+            </a></li>
+        </ul>
+    </div>
+    <div class="line2"></div>
+    <!--热搜书单-->
+    <div class="bookList_title">视频列表</div>
+    <!--单个li 静态单结构-->
+    <div id="hiddendiv" style="display:none" videodesc="暂无简介">
+        <ul class="bookPage" nodeId="{nodeId}">
+            <a href="{videourl}">
+                <li>
+                    <div class="pic">
+                        <img class="lazy" alt="" data-original="{pic}"/>
+
+                        <div class="jiaob">
+                            <!--<i class="blue">搬运</i>-->
+                        </div>
+                    </div>
+                    <div>
+                        <h3>{videoname}</h3>
+
+                        <p class="wh60">{videoother}</p>
+
+                        <p class="info">{videodesc}</p>
+
+                        <p class="info_Label_box">
+                            <span class="info_Label blue">{nodeName}</span>
+                            <span class="fr">播放数:{play}</span>
+                        </p>
+                    </div>
+                </li>
+            </a>
+        </ul>
+    </div>
+    <!--视频列表-->
+    <input type="hidden" value="android" id="bi_ctype" class="bi_ctype" data-id="1">
+			<span class="tbox" style="display:block">
+				<splitnode1>
+                    <!--视频列表-->
+                    <div id="videoList" class="bookList"></div>
+                    <!--加载中-->
+                    <div class="moreBox" id="more_1">
+                        <div class="loading" id="loadingId">
+                            <div class="loadbg spin"></div>
+                        </div>
+                        <div id="more_1">
+                            <input type="hidden" id="loading" class="more_butall" value="查看更多" divid="more_1" mysp="1"/>
+                        </div>
+                    </div>
+                </splitnode1>
+			</span>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+    var isKYload = 0;//flag 是否可以加载下一页 1:可以 2:不可以
+    var isload = 0;//flag 是否加载下一页 1:是 2:否
+    var node_li = $("#node_choice .hot-content li a");
+
+    //本地存储 初始化nid
+    var dq_nid = localStorage.dq_nid;
+    if (dq_nid == undefined || dq_nid == "") {
+        dq_nid = 11;
+    }
+
+    var index;//专区下标
+    for (var i = 0; i < node_li.length; i++) {
+        var nid = node_li.eq(i).attr("nid");
+        if (nid == dq_nid) {
+            index = i;
+            break;
+        }
+    }
+    /**视频专区选择*/
+    node_li.click(function () {
+        var nid = $(this).attr("nid");
+        localStorage.dq_nid = nid;
+        $("#videoList").html("");
+        var pullPage = 1;//上拉加载初始页
+        var isSuccess = loadNextPage(nid, pullPage, 20, "date");
+        $("#loadingId").show();
+        pullPage++;
+        pullLoad(nid, pullPage);
+    }).eq(index).click();
+
+    /**加载下一页(专区id,第几页,每页几条,展示规则[date],)*/
+    function loadNextPage(tid, page, pagesize, order) {
+        var type = "json";//数据类型 json/xml
+        $.ajax({
+            url: "http://" + "cmtucao.duapp.com/tucao/videoListJson.php?",//外站定义好的json接口
+            async: true,
+            dataType: "jsonp",
+            type: "get",
+            data: "tid=" + tid + "&page=" + page + "&pagesize=" + pagesize + "&order=" + order + "&type=" + type,
+            jsonp: "jsonpcallback",
+            jsonpCallback: "data",
+            success: function (data) {
+                var code = data.code;//结果码
+                console.log(data);
+                if (code == 200) {
+                    var result = data.result;//结果数组
+                    var size = data.total_count;//结果个数
+                    for (var i = 0; i < size; i++) {
+                        var hid = result[i].hid;
+                        var videoname = result[i].title;//标题
+                        var videoother = result[i].user;//up主
+                        var pic = result[i].thumb;//封面
+                        var videodesc = result[i].description;//简介
+                        var nodeName = result[i].typename;//专区名
+                        var nodeId = result[i].typeid;//专区id
+                        var play = result[i].play;//播放量
+                        if (videodesc == "") {
+                            videodesc = $("#hiddendiv").attr("videodesc");
+                        }
+                        var videourl = "http://" + "cmtucao.duapp.com/play/?h=" + hid;//链接地址
+                        var li_html = $("#hiddendiv").html();//获取li 静态结构
+                        li_html = li_html.replace(/{videourl}/g, videourl).replace(/{pic}/g, pic).replace(/{videoname}/g, videoname).replace(/{videoother}/g, videoother).replace(/{videodesc}/g, videodesc).replace(/{nodeName}/g, nodeName).replace(/{nodeId}/g, nodeId).replace(/{play}/g, play);
+                        $(li_html).appendTo("#videoList");
+                    }
+                    $("img.lazy").lazyload();
+                    $("#loadingId").hide();
+                    return true;
+                } else {
+                    console.log("加载列表失败.");
+                    return false;
+                }
+            },
+            error: function () {
+                console.log("获取列表失败.");
+                loadNextPage(tid, page, pagesize, order);
+                return false;
+            }
+        });
+    }
+
+    /**上拉加载动作(专区id,下一页的页数)*/
+    function pullLoad(nid, pullPage) {
+        if ($(".more_butall").size() > 0 && $(".bi_ctype").size() > 0) {
+            window.onscroll = function () {//滚动事件
+                //屏幕滚动到最底部时触发事件
+                var a = document.body.clientHeight - document.body.scrollTop;
+                var b = document.documentElement.clientHeight;
+                if (a <= b) {
+                    $("#loadingId").show();
+                    PDLoad();
+                    return;
+                }
+                function PDLoad() {
+                    if (isKYload == 1) {//可以加载next
+                        if (isload == 1) {//加载next
+                            isKYload = 0;
+                            var isSuccess = loadNextPage(nid, pullPage, 20, "date");
+                            console.log("pullPage=" + pullPage);
+                            pullPage++;
+                        } else {//不加载next
+                            isload = 1;
+                        }
+                    } else {//不可以加载next
+                        isKYload = 1;
+                        setTimeout(function () {
+                            if (isKYload == 1) {
+                                PDLoad();
+                            }
+                        }, 500);
+                        PDLoad();
+                        return;
+                    }
+                }
+            }
+        }
+    }
+
+
+
+
+
+</script>

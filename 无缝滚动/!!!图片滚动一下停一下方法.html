@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        #searchbox {
+            position: absolute;
+            left: 19px;
+            top: 270px;
+            width: 570px;
+            height: 40px;
+            z-index: 3;
+            border: 1px solid #CCCCCC;
+        }
+
+        #IssueList {
+            margin: 0px 0px 12px 0px;
+            padding: 0;
+            list-style: none;
+            height: 300px;
+            width: 210px;
+            overflow: hidden;
+            /*background-color: #336699;*/
+            color: #FFFFFF;
+        }
+
+        #IssueList li {
+            line-height: 58px;
+        }
+
+
+    </style>
+</head>
+<body>
+<ul id="IssueList">
+    <li><img height="60" width="210" alt="1" src="../../../image/1.jpg"/></li>
+    <li><img height="60" width="210" alt="2" src="../../../image/2.jpg"/></li>
+    <li><img height="60" width="210" alt="3" src="../../../image/3.jpg"/></li>
+    <li><img height="60" width="210" alt="4" src="../../../image/4.jpg"/></li>
+    <li><img height="60" width="210" alt="4" src="../../../image/5.jpg"/></li>
+    <li><img height="60" width="210" alt="1" src="../../../image/1.jpg"/></li>
+    <li><img height="60" width="210" alt="2" src="../../../image/2.jpg"/></li>
+    <li><img height="60" width="210" alt="3" src="../../../image/3.jpg"/></li>
+    <li><img height="60" width="210" alt="4" src="../../../image/4.jpg"/></li>
+    <li><img height="60" width="210" alt="4" src="../../../image/5.jpg"/></li>
+    <li><img height="60" width="210" alt="1" src="../../../image/1.jpg"/></li>
+    <li><img height="60" width="210" alt="2" src="../../../image/2.jpg"/></li>
+    <li><img height="60" width="210" alt="3" src="../../../image/3.jpg"/></li>
+    <li><img height="60" width="210" alt="4" src="../../../image/4.jpg"/></li>
+    <li><img height="60" width="210" alt="4" src="../../../image/5.jpg"/></li>
+</ul>
+</body>
+</html>
+
+<script type="text/javascript">
+    function cuu(ul,li,delay, speed, lineHeight) {
+        var slideBox = (typeof ul == 'string')?document.getElementById(ul):ul;
+        var delay = delay||1000;
+        var speed=speed||15;
+        var lineHeight = lineHeight||60;
+        var tid = null, pause = false;
+        var start = function() {
+            tid=setInterval(slide, speed);
+        }
+        var slide = function() {
+            if (pause) return;
+            slideBox.scrollTop += 2;
+            if (slideBox.scrollTop % lineHeight == 0) {
+                clearInterval(tid);
+                slideBox.appendChild(slideBox.getElementsByTagName(li)[0]);
+                slideBox.scrollTop = 0;
+                setTimeout(start, delay);
+            }
+        }
+        slideBox.onmouseover=function(){pause=true;}
+        slideBox.onmouseout=function(){pause=false;}
+        setTimeout(start, 2000);
+    }
+
+    cuu('IssueList',"li");//停留时间，相对速度（越小越快）,每次滚动多少，最好和Li的Line-height一致。
+</script>

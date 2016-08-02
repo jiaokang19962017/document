@@ -1,0 +1,99 @@
+<HTML>
+<HEAD><TITLE>marquee上下滚动停顿效果</TITLE>
+    <META http-equiv=Content-Type content="text/html; charset=gb2312">
+    <META content="MSHTML 6.00.3790.118" name=GENERATOR>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+    <style>
+        div{
+            width: 1000px;
+
+            margin: 0 auto;
+        }
+        .title{
+            margin: 100px auto;
+        }
+        .title td {
+            FONT-SIZE: 14px;
+            color: #0F0F0F;
+            font-family: Verdana, Arial, Helvetica, sans-serif;
+        }
+
+        .title a:link {
+            COLOR: #3C3C3C;
+            TEXT-DECORATION: none;
+        }
+
+        .title a:visited {
+            COLOR: #3C3C3C;
+            TEXT-DECORATION: none;
+        }
+
+        .title a:active {
+            COLOR: #3C3C3C;
+            TEXT-DECORATION: none;
+        }
+
+        .title a:hover {
+            COLOR: #0099FF;
+            TEXT-DECORATION: none;
+        }
+    </style>
+</HEAD>
+
+<script>
+    var marqueeContent = new Array();
+
+    marqueeContent[0] = '<img src="http://ossweb-img2.qq.com/images/web/title/dot_news.gif" width="11" height="11">&nbsp;<a href="http://www.cnblogs.com/ntearn" target="_blank">[冰河博客园]记录日常操作中遇到问题的解决方法,以备查询！</a><br>'
+
+    marqueeContent[1] = '<img src="http://ossweb-img2.qq.com/images/web/title/dot_news.gif" width="11" height="11">&nbsp;<a href=http://www.wycaifu.com/ target="_blank">[爱搜索]搜索属于你的互联网世界！</a><br>'
+
+    marqueeContent[2] = '<img src="http://ossweb-img2.qq.com/images/web/title/dot_news.gif" width="11" height="11">&nbsp;<a href="http://www.ecoswaya.com/" target="_blank">[E科士威]同样是购物,换一种方式,会有额外的折扣与加报！</a><br>'
+
+    var marqueeInterval = new Array();
+    var marqueeId = 0;
+    var marqueeDelay = 3000;
+    var marqueeHeight = 19;
+    function initMarquee() {
+        var str = marqueeContent[0];
+        document.write('<div id="marqueeBox" style="overflow:hidden;height:' + marqueeHeight + 'px" onmouseover="clearInterval(marqueeInterval[0])" onmouseout="marqueeInterval[0]=setInterval(\'startMarquee()\',marqueeDelay)"><div>' + str + '</div></div>');
+        marqueeId++;
+        marqueeInterval[0] = setInterval("startMarquee()", marqueeDelay);
+
+    }
+    function startMarquee() {
+        var str = marqueeContent[marqueeId];
+        marqueeId++;
+        if (marqueeId >= marqueeContent.length) marqueeId = 0;
+        if (document.getElementById("marqueeBox").childNodes.length == 1) {
+            var nextLine = document.createElement('DIV');
+            nextLine.innerHTML = str;
+            document.getElementById("marqueeBox").appendChild(nextLine);
+        }
+        else {
+            document.getElementById("marqueeBox").childNodes[0].innerHTML = str;
+            document.getElementById("marqueeBox").appendChild(document.getElementById("marqueeBox").childNodes[0]);
+            document.getElementById("marqueeBox").scrollTop = 0;
+        }
+        clearInterval(marqueeInterval[1]);
+        marqueeInterval[1] = setInterval("scrollMarquee()", 20);
+    }
+    function scrollMarquee() {
+        document.getElementById("marqueeBox").scrollTop++;
+        if (document.getElementById("marqueeBox").scrollTop % marqueeHeight == (marqueeHeight - 1)) {
+            clearInterval(marqueeInterval[1]);
+        }
+    }
+</script>
+<body leftmargin="100" topmargin="100" marginwidth="0" marginheight="0" style="background-color:transparent">
+<div>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="title">
+    <tr>
+        <td>
+            <script>initMarquee()</script>
+        </td>
+    </tr>
+</table>
+</div>
+</BODY>
+</HTML>

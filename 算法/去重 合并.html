@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script type="text/javascript">
+    function aa(a,b){
+        var c=[];
+        var d=[];
+        d = a.concat(b);
+        for(var  i = 0;i<d.length;i++){
+            var index = d[i];
+            if(c.indexOf(index) === -1){
+                c.push(index)
+            }
+        }
+        return c;
+
+    }
+//    alert(aa([12,2,4,1,3,6],[23,3,4,1]))
+
+    function flatten(arr1,arr2){
+        var result = [];
+        var arr = [];
+
+        arr = arr2.reduce(function(prev, curr){
+            prev.push(curr);
+            return prev;
+        },arr1);
+
+        for (var i = 0; i < arr.length; i++) {
+            var index = arr[i];
+            if (result.indexOf(index) === -1) {
+                result.push(index);
+            }
+        }
+        return result.sort(function(a,b){return b-a});
+    }
+    console.log(flatten([1,2,4,5,44,3],[12,1,2,3,4]));
+</script>

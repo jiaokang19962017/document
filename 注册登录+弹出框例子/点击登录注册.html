@@ -1,0 +1,307 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>无标题文档</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+
+        ul, li {
+            list-style: none;
+        }
+
+        /* 半透明的遮罩层 */
+        #overlay, .overlays {
+            background: #fff;
+            filter: alpha(opacity=50); /* IE的透明度 */
+            opacity: 0.5; /* 透明度 */
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            height: 100%;
+            z-index: 1000; /* 此处的图层要大于页面 */
+            display: none;
+        }
+
+        /* 登录框 */
+        .loginBox {
+            width: 400px;
+            background: #fff;
+            position: fixed;
+            z-index: 1001;
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+            filter: alpha(opacity=0);
+            -moz-opacity: 0;
+            -khtml-opacity: 0;
+            opacity: 0;
+
+            border: #35a5e5 1px solid;
+            box-shadow: 0 0 8px rgba(255, 0, 0, 0.5);
+            -webkit-box-shadow: 0 0 8px rgba(255, 0, 0, 0.5);
+            -moz-box-shadow: 0 0 8px rgba(255, 0, 0, 0.5);
+            border: #999 1px solid;
+            border-radius: 7px;
+            outline: none;
+        }
+
+        .loginBox .wrap {
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .loginBox .wrap a.close {
+            display: block;
+            width: 20px;
+            height: 20px;
+            background: #ccc;
+            position: absolute;
+            top: 5px;
+            right: 5px;
+        }
+
+        .loginBox .wrap .list {
+            width: 285px;
+            margin: 0 auto;
+            margin-top: 20px;
+        }
+
+        .loginBox .wrap .list h1 {
+            height: 30px;
+            line-height: 30px;
+            display: block;
+            clear: both;
+            margin: 10px auto;
+        }
+
+        .loginBox .wrap .list h1 label {
+            float: left;
+            padding-right: 30px;
+            font-size: 14px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #000;
+        }
+
+        .loginBox .wrap .list li {
+            width: 240px;
+            height: 45px;
+            position: relative;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .loginBox .wrap .list li label.password {
+            position: absolute;
+            left: 15px;
+            top: 11px;
+            color: #BCBCBC;
+            display: block;
+        }
+
+        .loginBox .wrap .list li.dls label.password {
+            display: none;
+        }
+
+        .loginBox .wrap .list li input {
+            width: 220px;
+            height: 35px;
+            clear: both;
+            border: #999 1px solid;
+            border-radius: 4px;
+        }
+
+        .loginBox .wrap .list li span {
+            float: right;
+            margin-right: 15px;
+        }
+
+        .loginBox .wrap .list li input.check {
+            width: auto;;
+            height: auto;
+            margin-right: 5px;
+        }
+
+        .loginBox .wrap .list li input.subBtn {
+            width: 47px;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            color: #333;
+            float: right;
+        }
+
+        .loginBox .wrap .list li input.shadow {
+            border: #999 1px solid;
+            box-shadow: 0 0 8px rgba(255, 0, 0, 0.5);
+            -webkit-box-shadow: 0 0 8px rgba(255, 0, 0, 0.5);
+            -moz-box-shadow: 0 0 8px rgba(255, 0, 0, 0.5);
+        }
+
+        .loginBoxParent {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1001;
+        }
+
+    </style>
+</head>
+
+<body>
+<a href="javascript:;" class='loginBtn' id='loginBtn'>登录</a>
+
+<!-- 登录&注册框 -->
+<div>
+    <div id='loginBox' class='loginBox'>
+        <div class='wrap'>
+            <a href="javascript:;" class='close' id='loginClose' title='关闭'>X</a>
+
+            <div class='list'>
+                <h1 id='loginLabel'>
+                    <label><input id='loginRadio' value='1' type='radio' name='userRadio'
+                                  checked="checked"/>已有账号</label>
+                    <label><input id='signupRadio' value='2' type='radio' name='userRadio'/>注册新账号</label>
+                </h1>
+                <ul id='loginUL'>
+                    <!-- 登录 -->
+                    <li>
+                        <label for='password' class='password'>手机号：</label>
+                        <input name='loginInput' type='text' value=''/>
+                    </li>
+                    <li>
+                        <label for='password' class='password'>验证码：</label>
+                        <input name='loginInput' type='text' value=''/>
+                    </li>
+                    <li>
+                        <label for='password' class='password'>密　码：</label>
+                        <input name='loginInput' type='password' value=''/>
+                    </li>
+                    <li>
+                        <input type='button' value='登录' class='subBtn'/>
+                    </li>
+                </ul>
+
+                <ul style='display:none;' id='signUL'>
+                    <!-- 注册 -->
+                    <li>
+                        <label for='password' class='password'>手机号：</label>
+                        <input name='inputList' type='text'/>
+                    </li>
+                    <li>
+                        <label for='password' class='password'>验证码：</label>
+                        <input name='inputList' type='text'/>
+                    </li>
+                    <li>
+                        <label for='password' class='password'>密　码：</label>
+                        <input name='inputList' type='password'/>
+                    </li>
+                    <li>
+                        <label for='password' class='password'>重复密码：</label>
+                        <input name='inputList' type='password'/>
+                    </li>
+                    <li>
+                        <input type='button' value='注册' class='subBtn'/>
+                        <span><input type='checkbox' class='check'/>同意<a href="javascript:;">XX</a>协议 </span>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+    /* 获取ID */
+    function gId(id) {
+        var doc = document;
+        return doc.getElementById(id);
+    }
+    ;
+
+    var overlays, _loginBox, loginBoxParent;
+
+    //点击登录按钮
+    gId('loginBtn').onclick = function () {
+        overlays = document.createElement('div');
+        overlays.className = 'overlays';
+        overlays.style.display = 'block';
+        document.body.appendChild(overlays);
+
+        _loginBox = gId('loginBox');
+        _loginBox.style.display = 'block';
+        _loginBox.style.opacity = '1';
+        _loginBox.style.position = 'static';
+        _loginBox.style.margin = '0 auto';
+
+        loginBoxParent = _loginBox.parentNode;
+        loginBoxParent.className = 'loginBoxParent';
+
+        var _clientHeight = document.documentElement.clientHeight; //当前窗口可见区域的高度
+        var loginBoxParentTop = (_clientHeight / 2) - (_loginBox.offsetHeight / 2);
+        loginBoxParent.style.top = loginBoxParentTop + 'px';
+
+    };
+
+    //登陆框关闭按钮
+    var _loginClose = gId('loginClose');
+    if (_loginClose != null) {
+        _loginClose.onclick = function () {
+            _loginBox.style.display = 'none';
+            loginBoxParent.className = '';
+            overlays.parentNode.removeChild(overlays);
+        };
+    }
+    ;
+
+    //登录 & 注册，切换
+    var e = gId('loginLabel');
+    if (e != null) {
+        e.onclick = function () {
+            var eEvent, eTarget;
+            eEvent = arguments[0] || window.event;
+            eTarget = eEvent.srcElement ? eEvent.srcElement : eEvent.target;
+
+            if (eTarget.tagName.toLowerCase() == 'input' && eTarget.name == 'userRadio') {
+                if (eTarget.value == '1') {
+                    gId('loginUL').style.display = 'block';
+                    gId('signUL').style.display = 'none';
+                } else {
+                    gId('loginUL').style.display = 'none';
+                    gId('signUL').style.display = 'block';
+                }
+            }
+            ;
+
+        };
+    }
+    ;
+
+    //登录&注册框提示
+    var loginInput = gId('loginUL');
+    if (loginInput != null) {
+        loginInput.onclick = function () {
+            var ev, et;
+            ev = arguments[0] || window.event;
+            et = ev.srcElement ? ev.srcElement : ev.target;
+            var _el = loginInput.children;
+            for (var i = 0; i < _el.length; i++) {
+                _el[i].className = '';
+            }
+            ;
+            if (et.name === 'loginInput') {
+                et.parentNode.className = 'dls';
+            }
+            ;
+        }
+    }
+</script>

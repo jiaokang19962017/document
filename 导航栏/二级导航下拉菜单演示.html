@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>RunJS</title>
+    <style type="text/css">
+        body, ul, li {
+            margin:0;
+            padding:0;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: #ccc;
+            display: inline-block;
+        }
+
+        /* *********************************************** */
+        #nav_list {
+            margin: 10px auto;
+            width: 760px;
+            height: 40px;
+            background: #666;
+        }
+
+        #nav_list .nav_item {
+            float: left;
+            line-height: 40px;
+            width: 90px;
+            margin-right: 14px;
+            text-align: center;
+            position: relative;
+        }
+
+        #nav_list .nav_item a {
+            display: inline-block;
+            width: 90px;
+        }
+
+        #nav_list .nav_item a:hover {
+            background: #98E086;
+            color: black;
+        }
+
+        #nav_list .nav_item .meau_box {
+            position: absolute;
+            width: 90px;
+            top: 40px;
+            left: 0;
+            background: #AA89AD;
+            display: none;
+        }
+
+        #nav_list li:hover .meau_box {
+            display: block;
+        }
+
+    </style>
+</head>
+<body>
+<ul id="nav_list">
+    <li class="nav_item"><a href="">home</a></li>
+    <li class="nav_item"><a href="">web开发</a>
+        <ul class="meau_box">
+            <li class="meau_item"><a href="">html5</a></li>
+            <li class="meau_item"><a href="">css3</a></li>
+            <li class="meau_item"><a href="">jquery</a></li>
+            <li class="meau_item"><a href="">移动web</a></li>
+        </ul>
+    </li>
+
+    <li class="nav_item"><a href="">移动开发</a>
+        <ul class="meau_box">
+            <li class="meau_item"><a href="">安卓开发</a></li>
+            <li class="meau_item"><a href="">ios开发</a></li>
+        </ul>
+    </li>
+
+    <li class="nav_item"><a href="">demo</a>
+        <ul class="meau_box">
+            <li class="meau_item"><a href="">下拉菜单</a></li>
+            <li class="meau_item"><a href="">选项卡</a></li>
+        </ul>
+    </li>
+    <li class="nav_item"><a href="">blog</a>
+        <ul class="meau_box">
+            <li class="meau_item"><a href="">博客园</a></li>
+            <li class="meau_item"><a href="">网易博客</a></li>
+        </ul>
+    </li>
+    <li class="nav_item"><a href="">about</a>
+        <ul class="meau_box">
+            <li class="meau_item"><a href="">join us</a></li>
+            <li class="meau_item"><a href="">contact us</a></li>
+        </ul>
+    </li>
+    <li class="nav_item"><a href="">contact</a></li>
+
+
+</ul>
+</body>
+</html>

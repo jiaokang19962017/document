@@ -1,0 +1,9 @@
+简单明了的焦点图，兼容 IE 6/7/8/9 及其它主流浏览器，懒人图库推荐下载！
+
+使用方法：
+
+1、依次引入 simplefoucs.css、jQuery脚本库 以及 simplefoucs.js文件；
+2、复制代码到页面中即可。
+
+
+*更多代码请访问：懒人图库 www.lanrentuku.com/js/

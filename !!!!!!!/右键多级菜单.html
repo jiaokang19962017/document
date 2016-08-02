@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #ul1{
+            position: absolute;
+            display: none;
+
+        }
+        ul{
+            list-style: none;
+        }
+        li{
+            background-color: burlywood;
+            width: 100px;
+            text-align: center;
+            position: relative;
+
+        }
+        li>ul{
+            width: 100px;
+            position: absolute;
+            left: 98px;
+            top: -2px;
+            display: none;
+        }
+        #li3>ul{
+            width: 100px;
+            position: absolute;
+            left: 98px;
+            top: -2px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<ul id="ul1">
+    <li>我是老大</li>
+    <li>我是老二</li>
+    <li>我是老三
+        <ul>
+            <li>我是l31</li>
+            <li>我是132</li>
+            <li>我是133</li>
+        </ul>
+    </li>
+    <li>我是老四
+        <ul>
+            <li>我是l41</li>
+            <li>我是142
+                <ul>
+                    <li>我是l421</li>
+                    <li>我是1422</li>
+                    <li>我是1423</li>
+                </ul>
+            </li>
+            <li>我是143</li>
+        </ul>
+    </li>
+    <li>我是老五</li>
+</ul>
+<script type="text/javascript">
+    var ul1=document.getElementById("ul1")
+    var li3=document.getElementById("li3")
+    var lis=document.querySelectorAll("#ul1 li")
+    document.oncontextmenu=function(){
+        ul1.style.display="block";
+        var x = event.clientX;
+        var y = event.clientY;
+
+        //滚动条的高度，宽度
+        var z =document.body.scrollTop;
+        var a =document.body.scrollLeft;
+        // 处理边界情况
+        ul1.style.left = event.clientX +"px";
+        ul1.style.top = event.clientY  + "px";
+
+        // 阻止默认事件
+        return false;
+
+        //使用右键取消菜单
+
+
+    }
+    document.onclick=function(){
+        ul1.style.display="";
+
+    }
+    ul1.onclick=function(){
+        //取消冒泡，使用右键点击菜单好用不消失
+        event.cancelBubble=true;
+    }
+    for (var i=0;i<lis.length;i++) {
+        lis[i].onmouseover=function(){
+            var child =this.children;
+            //如果；li下有节点
+            if (child.length>0) {
+                //过滤其他标签
+                if (child[0].nodeName=="UL") {
+                    child[0].style.display="block";
+                }
+            }
+        }
+        lis[i].onmouseout=function(){
+            var child =this.children;
+            //如果；li下有节点
+            if (child.length>0) {
+                //过滤其他标签
+                if (child[0].nodeName=="UL") {
+                    child[0].style.display="none";
+                }
+            }
+        }
+    }
+
+</script>
+
+
+</body>
+</html>

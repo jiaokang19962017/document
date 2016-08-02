@@ -1,0 +1,170 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>放大镜效果练习</title>
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        /*主容器*/
+        .con-FangDa{
+            width: 300px;
+            height: 550px;
+
+            background-color: cyan;
+        }
+        /*正常容器*/
+        .con-fangDaIMg{
+            width: 300px;
+            height: 450px;
+            position: relative;
+            background-color: #454545;
+        }
+        .con-fangDaIMg > img{
+            width: 100%;
+            height:100%;
+            display: block;
+        }
+        /*滑块*/
+        .magnifyingBegin{
+            width: 100px;
+            height: 100px;
+            left: 0;
+            top: 0;
+            background-color: #454545;
+            opacity: 0.5;
+            position: absolute;
+            cursor: move;
+            display: none;
+        }
+        /*放大镜显示区域*/
+        .magnifyingShow{
+            width: 300px;
+            height: 300px;
+            display: none;
+            position: absolute;
+            right: -300px;
+            top: 0;
+            overflow: hidden;
+            background-color: #454545;
+        }
+        .magnifyingShow > img{
+            width: 900px;
+            height: 1350px;
+            margin-left:0;
+            margin-top: 0;
+        }
+        /*设置选择图片容器*/
+        .con-FangDa-ImgList{
+            list-style: none;
+        }
+        .con-FangDa-ImgList > li{
+            width: 50px;
+            height: 50px;
+            float: left;
+            margin: 4px 0 0 4px;
+            cursor: pointer;
+            border: 2px solid #454545;
+            background-color: #454545;
+        }
+        .con-FangDa-ImgList > li:first-child{
+            margin-left: 0;
+        }
+        .con-FangDa-ImgList > li > img{
+            width: 100%;
+            height: 100%;
+        }
+        .con-FangDa-ImgList > .active{
+            border-color: red;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+<body>
+
+
+<div class="con-FangDa" id="fangdajing">
+
+    <div class="con-fangDaIMg">
+        <img src="/uploads/rs/304/hownr3so/bb.jpg"><!-- 正常现实的图片 -->
+        <div class="magnifyingBegin"></div><!-- 滑块 -->
+        <div class="magnifyingShow"><!-- 放大镜显示的图片 -->
+            <img src="/uploads/rs/304/hownr3so/bb.jpg">
+        </div>
+
+    </div>
+
+    <ul class="con-FangDa-ImgList"><!-- 图片显示列表 -->
+        <li class="active"><img src="/uploads/rs/304/hownr3so/bb.jpg"></li>
+        <li><img src="/uploads/rs/304/hownr3so/a.jpg"></li>
+        <li><img src="/uploads/rs/304/hownr3so/bb.jpg"></li>
+        <li><img src="/uploads/rs/304/hownr3so/a.jpg"></li>
+        <li><img src="/uploads/rs/304/hownr3so/bb.jpg"></li>
+    </ul>
+
+</div>
+
+</body>
+</html>
+<script id="jquery_182" type="text/javascript" class="library" src="../js/jquery-1.9.1.js"></script>
+<script src="../js/sandbox/jquery-plugins/jquery.colorbox-min.js"></script>
+<script type="text/javascript">
+    $(function(){
+
+        $.fn.magnifying = function(){
+            var that = $(this),
+                    $imgCon = that.find('.con-fangDaIMg'),//正常图片容器
+                    $Img = $imgCon.find('img'),//正常图片，还有放大图片集合
+                    $Drag = that.find('.magnifyingBegin'),//拖动滑动容器
+                    $show = that.find('.magnifyingShow'),//放大镜显示区域
+                    $showIMg = $show.find('img'),//放大镜图片
+                    $ImgList = that.find('.con-FangDa-ImgList > li >img'),
+                    multiple = $show.width()/$Drag.width();//倍数
+
+            $imgCon.mousemove(function(e){
+                $Drag.css('display','block');
+                $show.css('display','block');
+                //获取坐标的两种方法
+                // var iX = e.clientX - this.offsetLeft - $Drag.width()/2,
+                // 	iY = e.clientY - this.offsetTop - $Drag.height()/2,
+                var iX = e.pageX - $(this).offset().left - $Drag.width()/2,
+                        iY = e.pageY - $(this).offset().top - $Drag.height()/2,
+                        MaxX = $imgCon.width()-$Drag.width(),
+                        MaxY = $imgCon.height()-$Drag.height();
+                /*这一部分可代替下面部分，判断最大最小值
+                 var DX = iX < MaxX ? iX > 0 ? iX : 0 : MaxX,
+                 DY = iY < MaxY ? iY > 0 ? iY : 0 : MaxY;
+                 $Drag.css({left:DX+'px',top:DY+'px'});
+                 $showIMg.css({marginLeft:-3*DX+'px',marginTop:-3*DY+'px'});*/
+
+                iX = iX > 0 ? iX : 0;
+                iX = iX < MaxX ? iX : MaxX;
+                iY = iY > 0 ? iY : 0;
+                iY = iY < MaxY ? iY : MaxY;
+                $Drag.css({left:iX+'px',top:iY+'px'});
+                $showIMg.css({marginLeft:-multiple*iX+'px',marginTop:-multiple*iY+'px'});
+                //return false;
+            });
+            $imgCon.mouseout(function(){
+                $Drag.css('display','none');
+                $show.css('display','none');
+                //return false;
+            });
+
+            $ImgList.click(function(){
+                var NowSrc = $(this).attr('src');
+                $Img.attr('src',NowSrc);
+                $(this).parent().addClass('active').siblings().removeClass('active');
+            });
+        }
+
+        $("#fangdajing").magnifying();
+
+
+    });
+</script>

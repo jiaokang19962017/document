@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        .wrapper_bg {
+            width: 100%;
+            height: 100%;
+            top: 0;
+            z-index: 90;
+            opacity: 0.4;
+            filter: alpha(opacity=40);
+            background: #000000;
+            position: absolute;
+        }
+
+        .wrapper {
+            width: 450px;
+            height: 250px;
+            position: fixed;
+            left: 50%;
+            top: 25%;
+            margin-left: -125px;
+            z-index: 100;
+            background: #fff;
+            border-radius: 10px;
+            font-family: 'Microsoft YaHei';
+            color: #888;
+            font-size: 14px;
+            min-height: 150px;
+        }
+
+        .wrapper .focus {
+            position: relative;
+            height: 100%;
+            width: 100%;
+        }
+
+        .wrapper .w_btn {
+            display: inline-block;
+            border-radius: 5px;
+            padding: 5px 20px;
+            text-decoration: none;
+            color: #fff;
+            min-width: 30px;
+            cursor: pointer;
+        }
+
+        .wrapper .w_btn_blue {
+            background: #43B8EA;
+        }
+
+        .wrapper .w_btn_green {
+            background: #6DBB86;
+        }
+
+        .wrapper .w_blue {
+            color: #5DC2EB;
+        }
+
+        .wrapper .w_close {
+            color: #fff;
+            position: absolute;
+            right: 11px;
+            top: 5px;
+            cursor: pointer;
+        }
+
+        .wrapper .w_strong {
+            font-weight: bold;
+        }
+
+        .wrapper .w_title {
+            display: inline-block;
+            height: 30px;
+            line-height: 30px;
+            width: 100%;
+            background: #8DD2D2;
+            color: #fff;
+            text-indent: 15px;
+        }
+
+        .wrapper .w_content {
+            text-indent: 2em;
+            padding: 10px 20px;
+            line-height: 25px;
+            display: inline-block;
+            height: 60%;
+            width: 90%;
+        }
+
+        .wrapper ul {
+            list-style: none;
+            position: absolute;
+            top: 165px;
+        }
+
+        .wrapper ul li {
+            display: inline-block;
+            margin-left: 25px;
+        }
+
+        .wrapper .focus .btn_cont {
+            position: absolute;
+            left: 50%;
+            bottom: 10px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+<div id="lingjiang"
+     style="display: inline-block;height: 30px;width: 150px;line-height: 30px;text-align: center;background: #6DBB86;border-radius: 5px;color: #fff;font-family: '微软雅黑';cursor: pointer;">
+    现在去领奖
+</div>
+<div id="lingjiang1"
+     style="display: inline-block;height: 30px;width: 150px;line-height: 30px;text-align: center;background: #6DBB86;border-radius: 5px;color: #fff;font-family: '微软雅黑';cursor: pointer;">
+    现在去领奖
+</div>
+<div id="lingjiang2"
+     style="display: inline-block;height: 30px;width: 150px;line-height: 30px;text-align: center;background: #6DBB86;border-radius: 5px;color: #fff;font-family: '微软雅黑';cursor: pointer;">
+    点我呀~
+</div>
+<div id="table_list"></div>
+</body>
+</html>
+<script type="text/javascript" src="../js/jquery-1.9.1.js"></script>
+<script>
+
+
+    (function($) {
+        /*=1 alert弹出框=*/
+        $.extend({
+            alert:function(options){
+                var o = {
+                    bClose:true,//是否显示关闭按钮
+                    sTitle:'温馨提示',//提示
+                    sTitleBgColor:'#8DD2D2',//提示标题背景色
+                    sContent:'',//内容
+                    iWidth:'400px',//宽度
+                    iHeight:'200px',//高度
+                    sBtnCon:'确定',//确定按钮内容
+                    sBtnOkColor:'#6DBB86',//确定按钮
+                }
+                var o = $.extend(o,options);
+                var sHtml = '<div class="wrapper_bg"></div>'
+                        + '<div class="wrapper">'
+                        + '<div class="focus">'
+                        + '<span class="w_title">'+ o.sTitle +'</span>'
+                        + '<div class="w_content">' + o.sContent + '</div>';
+
+                if(o.bClose){
+                    sHtml +=  '<span id="box_close" class="w_close" >关闭</span>'
+                            + '<div class="btn_cont"><span id="box_queding"  class="w_btn w_btn_green">'+o.sBtnCon+'</span></div>';
+                }
+
+                sHtml +=  '</div>'
+                        + '</div>';
+                $("body").append(sHtml);
+                //进入效果添加 --start
+                //$(".wrapper").hide();
+                //$(".wrapper").fadeIn().animate({top:'200px',},'10');
+                //进入效果添加 --end
+                $(".wrapper").css({
+                    width: o.iWidth,
+                    height: o.iHeight,
+                    marginLeft: (-parseInt(o.iWidth)/2)+'px',
+                });
+                $(".wrapper .w_title").css({
+                    background: o.sTitleBgColor,
+                });
+                $(".wrapper .w_btn").css({
+                    marginLeft: (-parseInt($(".wrapper .w_btn").width())/2)+'px',
+                    background: o.sBtnOkColor,
+                });
+
+                function btnNo(){
+                    $(".wrapper_bg").remove();
+                    $(".wrapper").remove();
+                }
+                $("#box_close").click(function(){btnNo();});
+                $("#box_queding").click(function(){btnNo();});
+            }
+        });
+        /*=2 confirm确认框=*/
+        $.extend({
+            confirm:function(options){
+                o =        {
+                    bClose:true,//是否显示关闭按钮
+                    sTitle:'',//提示
+                    sContent:'',//内容
+                    iWidth:'400px',//宽度
+                    iHeight:'200px',//高度
+                    sBtnOk:'确定',//确定按钮
+                    sBtnQuxiao:'取消',//取消按钮
+                    sBtnOkColor:'#6DBB86',//确定按钮颜色
+                    sBtnQuxiaoColor:'#00a2e8',//取消按钮颜色
+                    fnOk:'',
+                    fnOn:'',
+                };
+                var o = $.extend(o,options);
+                var sHtml = '<div class="wrapper_bg"></div>'
+                        + '<div class="wrapper">'
+                        + '<div class="focus">'
+                        + '<span class="w_title">'+ o.sTitle +'</span>'
+                        + '<div class="w_content">' + o.sContent + '</div>';
+
+                if(o.bClose){
+                    sHtml +=  '<span id="box_close" class="w_close">关闭</span>'
+                            + '<div class="btn_cont"><span id="box_queding" class="w_btn w_btn_green" style="margin-right: 10px;">'+o.sBtnOk+'</span>'
+                            + '<span id="box_quxiao" class="w_btn w_btn_blue">'+o.sBtnQuxiao+'</span></div>';
+                }
+                sHtml +=  '</div>'
+                        + '</div>';
+                $("body").append(sHtml);
+                $(".wrapper").css({
+                    width: o.iWidth,
+                    height: o.iHeight,
+                    marginLeft: (-parseInt(o.iWidth)/2)+'px',
+                });
+                $("#box_queding").css({
+                    background: o.sBtnOkColor,
+                });
+
+                $(".wrapper .focus .btn_cont").css({
+                    marginLeft: (-parseInt($(".wrapper .focus .btn_cont").width())/2)+'px',
+                });
+
+                function btnNo(){
+                    $(".wrapper_bg").remove();
+                    $(".wrapper").remove();
+                }
+                $("#box_close").click(function(){btnNo();});
+                $("#box_queding").click(function(){btnNo();o.fnOk&&o.fnOk();});
+                $("#box_quxiao").click(function(){btnNo();o.fnOn&&o.fnOn();});
+            }
+        });
+    })(jQuery);
+
+    $("#lingjiang2").click(function () {
+        $("#lingjiang2").table();
+    });
+    $("#lingjiang").click(function () {
+        $.alert({
+            sTitle: '恭喜恭喜',
+            sTitleBgColor: '',
+            sContent: '您中大奖啦~  赶紧去领取吧',
+            sBtnCon: '马上就去啦~嘿嘿',
+            sBtnOkColor: '',
+        });
+    });
+    $("#lingjiang1").click(function () {
+        $.confirm({
+            sTitle: '恭喜恭喜',
+            sContent: '您确定要去领奖吗？',
+            sBtnOk: '现在就去啦~嘿嘿',
+            sBtnQuxiao: '不想去呢',
+            sBtnOkColor: '',
+            sBtnQuxiaoColor: '',
+            fnOk: function () {
+                $.alert({sContent: '已经领取！'});
+            },
+        });
+    });
+
+
+
+
+
+
+</script>

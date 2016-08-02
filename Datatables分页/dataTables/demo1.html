@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="./jquery.dataTables.css">
+
+    <!-- jQuery -->
+    <script type="text/javascript" charset="utf8" src="../jquery-1.9.1.js"></script>
+
+    <!-- DataTables -->
+    <script type="text/javascript" charset="utf8" src="../jquery.dataTables.js"></script>
+
+</head>
+<body>
+<table id="table_id" class="display">
+    <thead>
+    <tr>
+        <th>Column 1</th>
+        <th>Column 2</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Row 1 Data 1</td>
+        <td>Row 1 Data 2</td>
+    </tr>
+    <tr>
+        <td>Row 2 Data 1</td>
+        <td>Row 2 Data 2</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+<script>
+
+    //初始化Datatables
+    $(document).ready( function () {
+        $('#table_id').DataTable();
+    } );
+</script>
+</html>

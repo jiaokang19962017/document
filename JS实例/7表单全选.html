@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        div {
+            margin: 100px auto;
+            padding: 10px;
+            /*border: 1px solid #E44072;*/
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        div p {
+            /*border-top: 1px solid #E44072;*/
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+<div>
+
+    爱好: <input type="checkbox" name="hobby" value="吃饭"/>
+    吃饭: <input type="checkbox" name="hobby" value="睡觉"/>
+    睡觉: <input type="checkbox" name="hobby" value="打豆豆"/>
+    打豆豆: <input type="checkbox" name="hobby" value="麻将"/>麻将
+    <p>全选/不选 <input type="checkbox" name="select"/></p>
+</div>
+
+</body>
+</html>
+<script type="text/javascript">
+    var o_select = document.getElementsByName("select")[0];
+    var o_hobby=document.getElementsByName("hobby");
+    o_select.onclick=function(){
+        for(var i=0;i<o_hobby.length;i++){
+            o_hobby[i].checked=this.checked;
+
+        }
+        if(this.checked){
+            this.previousSibling.nodeValue="全选"
+        }else{
+            this.previousSibling.nodeValue="不选"
+
+        }
+    }
+
+</script>

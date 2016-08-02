@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+//    function qSort(a){
+//        if(a.length===0){//递归的停止条件
+//            return a
+//        }
+//        var p=a[0];//基准点
+//        var left=[];//比基准点小的放左边
+//        var right=[];//比基准点大的放右边
+//        for(var i=1;i<a.length;i++){
+//            if(p>a[i]){
+//                left.push(a[i])
+//            }else{
+//                right.push(a[i])
+//            }
+//        }
+//        return qSort(left).concat([p],qSort(right))
+//
+//    }
+//
+//    var ary=[7,7,9,6,4,2,11,5,8,0,3];
+//    console.log(qSort(ary));
+
+
+
+
+
+
+
+var ary=[7,7,9,6,4,2,11,5,8,0,3];
+    function qSort(a){
+        if(a.length===0){
+            return a
+        }
+        var p=a[0];
+        var left=[];
+        var right=[];
+        for(var i=1;i<a.length;i++){
+            if(p>a[i]){
+                left.push(a[i])
+            }else{
+                right.push(a[i])
+            }
+        }
+        return qSort(left).concat([p],qSort(right))
+
+    }
+console.log(qSort(ary));
+
+
+
+
+</script>

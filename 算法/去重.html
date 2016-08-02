@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script type="text/javascript">
+    var ary=[1,2,3,4,5,6,7,8,9,33];
+    var ary2=[2,3,4,5,22,3,33,4,5,8];
+    var a=ary.concat(ary2) ;
+    var del={};
+
+//    a.forEach(function(index,aa){
+//        console.log(index)
+//    });
+
+
+
+    del.delAry=function (ary){
+        var Repeat=[]; //提取重复项
+        var Delete=[];  //去除重复项
+        for(var i=0;i<ary.length;i++){
+            if(Repeat.indexOf(ary[i]) == -1){
+
+                Repeat.push(ary[i]);
+            }else{
+                if(Delete.indexOf(ary[i]) == -1){
+                    Delete.push(ary[i]);
+                }
+
+            }
+
+        }
+
+        return ({Repeat:Repeat,Delete:Delete} )
+
+
+    }
+
+
+     console.log((del.delAry(a).Delete.sort(function(a,b){return a-b}))); //提取重复项
+     console.log((del.delAry(a).Repeat.sort(function(a,b){return a-b})));//去除重复项
+
+
+
+
+
+//    _______________________________
+//        var ary=[1,2,3,4,5,6,7,8,9,33];
+//        var ary2=[2,3,4,5,22,3,33,4,5,8];
+//        var a=ary.concat(ary2) ;
+//        var x=[];
+//        var c=[];
+//        for(var i=0;i<a.length;i++){
+//            if(c.indexOf(a[i]) == -1){  //去重
+//
+//                c.push(a[i]);
+//            }else{
+//                if(x.indexOf(a[i]) == -1){ //提取重复项
+//                    x.push(a[i]);
+//                }
+//
+//            }
+//        }
+//
+//
+//        console.log(x);
+//        console.log(c);
+
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    //    var ary=[1,2,3,4,5,6,7,8,9,33];
+    //    var ary2=[2,3,4,5,22,3,33,4,5,8];
+    //    var a=ary.concat(ary2) ;
+    //    var x={};
+    //    var c=[];
+    //    for(var i=0;i<a.length;i++){
+    //        if(typeof x[a[i]] == "undefined"){
+    //            x[a[i]] = a[i];
+    //        }else{
+    //            if(c.indexOf(a[i]) == -1){
+    //                c.push(a[i]);
+    //            }
+    //        }
+    //
+    //    }
+    //
+    //
+    //    //    console.log(x)
+    //    console.log(c)
+
+
+
+//for (i = 0, j = 0; i < 10, j < 6; i++, j++)
+//
+//{
+//
+//    value = i + j;
+//
+//}
+//
+//alert(value)  //10，条件代码，中间逗号，一后面为主，故循环继续执行到5+5。
+
+
+//var handle = function (a) {
+//
+//    var b = 3;
+//
+//    var tmp = function (a) {
+//
+//        b = a + b;
+//
+//        return tmp;
+//
+//    }
+//
+//    tmp.toString= function () {
+//
+//        return b;
+//
+//
+//
+//    }
+//
+//    return tmp;
+//
+//}
+//
+//alert(handle(4)(5)(6))  ;//14
+
+
+//if (!("a" in window))
+//
+//{
+//
+//    var a=1
+//
+//}
+//
+//alert(a)
+//    //  undefined，js引擎声明提前，if(){} ,不成代码块，undefined属于window故a=1不执行。 跟es6 的let不同。
+
+
+//alert([]=="")//   true     "" [}== 自动转型 都为false==false
+</script>
