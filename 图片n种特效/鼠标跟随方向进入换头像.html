@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>RunJS</title>
+    <style type="text/css">
+        .demo{
+            display: block;
+            width: 190px;
+            height: 190px;
+            position: absolute;
+            left: 50%;
+            top:50%;
+            margin-left: -95px;
+            margin-top: -95px;
+            overflow: hidden;
+            background: url(http://sandbox.runjs.cn/uploads/rs/41/sv6mxxlx/chenyouxi-oclock.jpg) no-repeat;
+            background-position: bottom left;
+        }
+    </style>
+</head>
+<body>
+<div class="demo"></div>
+</body>
+</html>
+<script id="jquery_183" type="text/javascript" class="library" src="../js/jquery-1.9.1.js"></script>
+
+<script type="text/javascript">
+    $(function(){
+        var dx = $('.demo').offset().left;
+        var dy = $('.demo').offset().top;
+        var dWidth = $('.demo').innerWidth()/2;
+        var dHeight = $('.demo').innerHeight()/2;
+//        console.log(dWidth,dHeight);
+//        console.log('dx: '+dx,'dy: '+dy);
+
+        $('.demo').mousemove(function(e){
+            var x = e.clientX-dx;
+            var y = e.clientY-dy;
+//            console.log(x,y);
+            if(x<dWidth && y<dHeight){
+                if(y<dHeight/2){
+                    $('.demo').css("background-position","0px -1330px");
+                }else if(y>dHeight/2){
+                    $('.demo').css("background-position","0px -1520px");
+                }
+            }else if(x>dWidth/2 && x<(dWidth+dWidth/2) && y<dHeight){
+                $('.demo').css("background-position","0px -1710px");
+            }else if(x>dWidth && y<dHeight){
+                if(y<dHeight/2){
+                    $('.demo').css("background-position","0px -1900px");
+                }else if(y>dHeight/2){
+                    $('.demo').css("background-position","0px -2092px");
+                }
+            }else if(x<dWidth && y>dHeight/2 && y<(dHeight+dHeight/2)){
+                $('.demo').css("background-position","0px -1140px");
+            }else if(x>dWidth/2 && x<(dWidth+dWidth/2) && y>dHeight/2 && y<(dHeight+dHeight/2)){
+                $('.demo').css("background-position","bottom left");
+            }else if(x>dWidth && y>dHeight/2 && y<(dHeight+dHeight/2)){
+                $('.demo').css("background-position","0px 0px");
+            }else if(x<dWidth && y>dHeight){
+                if(y<(dHeight+dHeight/2)){
+                    $('.demo').css("background-position","0px -950px");
+                }else if(y>(dHeight+dHeight/2)){
+                    $('.demo').css("background-position","0px -758px");
+                }
+            }else if(x>dWidth && x<(dWidth+dWidth/2) && y>dHeight){
+                $('.demo').css("background-position","0px -570px");
+            }else if(x>dWidth && y>dHeight){
+                if(y<(dHeight+dHeight/2)){
+                    $('.demo').css("background-position","0px -188px");
+                }else if(y>(dHeight+dHeight/2)){
+                    $('.demo').css("background-position","0px -380px");
+                }
+            }
+        });
+    })
+
+
+    /*
+     左上:x<95, y<95
+     中上:x=95, y<95
+     右上:x>95, y<95
+
+     左中:x<95, y=95
+     中中:x=95, y=95
+     右中:x>95, y=95
+
+     左下:x<95, y>95
+     中下:x=95, y>95
+     右下:x>95, y>95
+     */
+</script>
