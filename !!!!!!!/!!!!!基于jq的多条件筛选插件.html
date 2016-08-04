@@ -1,0 +1,207 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>多条件筛选插件</title>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <style>
+        body, div, ul, li {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            font: 14px/30px arial, "微软雅黑";
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        #wrap {
+            width: 1000px;
+            height: auto;
+            margin: 0 auto;
+        }
+
+        #wraptit li, #wrapcon li {
+            width: 100%;
+            height: 40px;
+            line-height: 40px;
+            border-bottom: dotted 1px #999999;
+            clear: both
+        }
+
+        #wraptit li .yxz, #wrapcon li span {
+            width: 100px;
+            padding-right: 10px;
+            text-align: right;
+            display: block;
+            float: left;
+            color: #666;
+            font-weight: bold;
+        }
+
+        #slide {
+            width: 90px;
+            height: 30px;
+            background: #06F;
+            border: none;
+            display: block;
+            float: right;
+            margin-top: 5px;
+            color: #fff;
+            border-radius: 3px;
+        }
+
+        #wrapcon li a {
+            padding: 0 10px;
+            cursor: pointer;
+            display: block;
+            float: left;
+        }
+
+        #wrapcon li a:hover {
+            color: #06F;
+        }
+
+        #wraptit li div {
+            padding: 3px 10px;
+            float: left;
+            border: solid 1px #999999;
+            border-radius: 3px;
+            height: 22px;
+            line-height: 22px;
+            margin: 5px 10px 0 0;
+            cursor: pointer;
+        }
+
+        #wraptit li div:hover {
+            border: solid 1px red;
+            color: red;
+        }
+
+        #wraptit li div span {
+            padding: 0 3px;
+            color: red;
+            font-size: 12px;
+        }
+
+        button, input[type="button"] {
+            outline: none;
+            display: block;
+            float: left;
+            margin-top: 6px;
+        }
+
+        input[type="text"] {
+            width: 150px;
+            height: 24px;
+            border: solid 1px #999999;
+            border-radius: 3px;
+            display: block;
+            float: left;
+            margin-top: 6px;
+        }
+
+        input[type="button"] {
+            width: 60px;
+            height: 26px;
+            background: #333;
+            border-radius: 3px;
+            border: none;
+            margin-left: 15px;
+            color: #fff;
+        }
+
+        .hide {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div id="wrap">
+    <ul id="wraptit">
+        <li><span class="yxz">已选择条件：</span>
+
+            <div class="hangye hide">行业：<a></a><span>X</span></div>
+            <div class="leibie hide">类别：<a></a><span>X</span></div>
+            <div class="khmc hide">客户名称：<a></a><span>X</span></div>
+            <div class="cpmc  hide">产品名称：<a></a><span>X</span></div>
+            <button id="slide">收起筛选</button>
+        </li>
+    </ul>
+    <ul id="wrapcon">
+        <li class="hy"><span>行业：</span><a class="hy0">IT</a><a class="hy1">工程</a><a class="hy2">房地产</a><a
+                class="hy3">医疗</a><a class="hy4">教育</a><a class="hy5">农业</a><a class="hy0">运输</a></li>
+        <li class="lb"><span>类别：</span><a class="lb0">普通职员</a><a class="lb1">中层管理</a><a class="lb2">高层管理</a><a
+                class="lb3">老板</a></li>
+        <li class="kh"><span>客户名称：</span><input id="kh_name" type="text" maxlength="10"/><input id="khbtn" type="button"
+                                                                                                value="确认"/></li>
+        <li class="cp"><span>产品名称：</span><input id="cp_name" type="text" maxlength="10"/><input id="cpbtn" type="button"
+                                                                                                value="确认"/></li>
+    </ul>
+</div>
+<script>
+    window.onload = function () {
+        for (i = 0; i < $(".hy a").length; i++) {
+            fzsc("hy" + i, "hangye");
+        }
+        for (i = 0; i < $(".lb a").length; i++) {
+            fzsc("lb" + i, "leibie");
+        }
+        $("#khbtn").click(function () {
+            var value = $("#kh_name").val();
+            if (!value == "" || value == null) {
+                $(".khmc a").text(value);
+                $(".khmc").removeClass("hide");
+                $(this).parent().hide();
+            }
+        });
+        $("#cpbtn").click(function () {
+            var value = $("#cp_name").val();
+            if (!value == "" || value == null) {
+                $(".cpmc a").text(value);
+                $(".cpmc").removeClass("hide");
+                $(this).parent().hide();
+            }
+        });
+        $(".hangye").click(function () {
+            $(this).addClass("hide");
+            $(".hy").show();
+        });
+        $(".leibie").click(function () {
+            $(this).addClass("hide");
+            $(".lb").show();
+        });
+        $(".khmc").click(function () {
+            $(this).addClass("hide");
+            $(".kh").show();
+            $("#kh_name").select();
+        });
+        $(".cpmc").click(function () {
+            $(this).addClass("hide");
+            $(".cp").show();
+            $("#cp_name").select();
+        });
+        $("#slide").click(function () {
+            $("#wrapcon").slideToggle();
+            if ($(this).text() == "收起筛选") {
+                $(this).text("展开筛选");
+            }
+            else {
+                $(this).text("收起筛选");
+            }
+        });
+    }
+    function fzsc(ele1, ele2) {
+        $("." + ele1).click(function () {
+            var text = $(this).text();
+            $(this).parent().hide();
+            $("." + ele2).children("a").text(text);
+            $("." + ele2).removeClass("hide");
+        });
+    }
+
+</script>
+</body>
+</html>
