@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>模拟新浪微博首页滚动效果</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul, li {
+            list-style-type: none;
+        }
+
+        body {
+            font-size: 13px;
+            background-color: #999999;
+        }
+
+        #con {
+            width: 700px;
+            height: 400px;
+            margin: 10px auto;
+            position: relative;
+            border: 1px #666 solid;
+            background-color: #FFFFFF;
+            overflow: hidden;
+        }
+
+        #con ul {
+            position: absolute;
+            margin: 10px;
+            top: 0;
+            left: 0;
+            padding: 0;
+        }
+
+        #con ul li {
+            width: 100%;
+            border-bottom: 1px #333333 dotted;
+            padding: 20px 0;
+            overflow: hidden;
+        }
+
+        #con ul li a {
+            float: left;
+            border: 1px #333333 solid;
+            padding: 2px;
+        }
+
+        #con ul li p {
+            margin-left: 68px;
+            line-height: 1.5;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+<div id="con">
+    <ul>
+        <li><a href="#"><img src="http://tp3.sinaimg.cn/1696357270/50/1282628065/1"/></a>
+
+            <p class="vright">第一最好不相见，如此便可不相恋。第二最好不相知，如此便可不相</p>
+        </li>
+        <li><a href="#"><img src="http://tp3.sinaimg.cn/1696357270/50/1282628065/1"/></a>
+
+            <p class="vright">第一最好不相见，如此便可不相恋。第二
+            </p>
+        </li>
+        <li><a href="#"><img src="http://tp3.sinaimg.cn/1696357270/50/1282628065/1"/></a>
+
+            <p class="vright">
+                第一最好不相见，教科书所说教科书所说的思想道德教育在现今社会一点也体现不出，先进的特色社会主义啊，你何时才能拯救现今社会啊的思想教科书所说的思想道德教育在现今社会一点也体现不出，先进的特色社会主义啊，你何时 </p>
+        </li>
+        <li><a href="#"><img src="http://tp3.sinaimg.cn/1696357270/50/1282628065/1"/></a>
+
+            <p class="vright">第一最好不相见，如此便可不相恋。第二最好不相知，如此便可生死作相思。abc </p>
+        </li>
+    </ul>
+</div>
+</body>
+</html>
+<script id="jquery_183" type="text/javascript" class="library" src="../js/jquery-1.9.1.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+        var scrtime;
+        $("#con").hover(function () {
+            clearInterval(scrtime);
+
+        }, function () {
+
+            scrtime = setInterval(function () {
+                var $ul = $("#con ul");
+                var liHeight = $ul.find("li:last").height();
+                $ul.animate({marginTop: liHeight + 40 + "px"}, 1000, function () {
+
+                    $ul.find("li:last").prependTo($ul)
+                    $ul.find("li:first").hide();
+                    $ul.css({marginTop: 0});
+                    $ul.find("li:first").fadeIn(600);
+                });
+            }, 3000);
+
+        }).trigger("mouseleave");
+    });
+</script>
