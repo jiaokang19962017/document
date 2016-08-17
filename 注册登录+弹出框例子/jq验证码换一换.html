@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>换一换</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link href="" rel="stylesheet">
+    <style type="text/css">
+        body{padding:0;margin:0;}
+        ul{padding:0;margin:0;}
+        .box{ width:600px;height: auto;margin:0 auto; }
+        .box>div{margin-top: 15px;font-size: 18px}
+        .box .code-box .code{font-size: 22px;color: #f00;}
+        .box .code-box .huan{font-size: 18px;cursor: pointer;}
+        .box .input input{width: 200px;height: 28px;}
+        .button{text-align: center;width: 80px;height: 30px;background: #FF3333;line-height: 30px;color: #fff;cursor: pointer;border-radius: 5px}
+        .change{color:#f00;font-size:16px;display: none;}
+    </style>
+</head>
+<body>
+<div class="box">
+    <div class="code-box">
+        <span>验证码</span>
+        <span class="code"></span>
+        <span class="huan">换一张</span>
+    </div>
+    <div class="input">
+        <span>输入验证码</span>
+        <input type="text" id="code" placeholder="输入验证码">
+        <span class="change">验证码为空</span>
+    </div>
+    <div class="button">提交</div>
+</div>
+<script type="text/javascript" src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
+<script type="text/javascript">
+    $(function(){
+        $(".huan").on("click",createCode)
+        createCode()//一打开页面就先加载一张验证码出来
+    })
+    var code;//定义一个全局验证码
+    function createCode(){
+        var selectChar = new Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9,'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');//所有候选组成验证码的字符，也可以用中文的
+        code = '';
+        var codeLength=5;
+        var codeContent = $(".code");
+        for(var i=0;i<codeLength;i++){
+            var charIndex =Math.floor(Math.random()*selectChar.length);//随机数
+            //alert(charIndex)
+            code +=selectChar[charIndex];//一张验证码有五个字符组成
+            codeContent.html(code);//显示验证码
+        }
+    }
+
+    $(".button").on("click",function(){
+        var Code = $("#code").val();
+        if(Code.length <=0){
+            $(".change").show();
+        }else if(Code !=code){
+            $(".change").show().html("验证码有误");
+            createCode()//如果输入的验证码有误就刷新验证码
+        }else{
+            $(".change").html("验证码正确");
+
+        }
+    })
+
+</script>
+</body>
+</html>
